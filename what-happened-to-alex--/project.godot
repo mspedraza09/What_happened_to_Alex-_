@@ -12,7 +12,7 @@ config_version=5
 
 config/name="What_happened_to_Alex_?"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://game/assets/icon.svg"
 
 [physics]
 
