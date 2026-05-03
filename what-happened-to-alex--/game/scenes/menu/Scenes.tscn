@@ -1,9 +1,121 @@
 [gd_scene format=3 uid="uid://b85ndaoo7igkq"]
 
+[ext_resource path="res://game/scripts/system/LoginRegister.gd" type="Script" id=1]
+
 [node name="Scenes" type="Control" unique_id=1796176517]
+script = ExtResource( 1 )
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.03, 0.06, 0.12, 1)
+
+[node name="PhoneFrame" type="Panel" parent="."]
+rect_min_size = Vector2( 540, 520 )
+anchors_preset = 7
+margin_left = 180.0
+margin_top = 120.0
+margin_right = 740.0
+margin_bottom = 660.0
+
+[node name="PhoneFrameBackground" type="ColorRect" parent="PhoneFrame"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.08, 0.12, 0.22, 1)
+
+[node name="PhoneTopBar" type="ColorRect" parent="PhoneFrame"]
+rect_min_size = Vector2( 0, 42 )
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 42.0
+color = Color(0.07, 0.10, 0.18, 1)
+
+[node name="TopBarLabel" type="Label" parent="PhoneFrame/PhoneTopBar"]
+text = "SECURITY CHAT"
+align = "center"
+valign = "center"
+theme_override_colors/font_color = Color(0.8, 0.92, 1, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PhoneFrame"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 60.0
+margin_right = -24.0
+margin_bottom = -24.0
+custom_constants/separation = 12
+
+[node name="Title" type="Label" parent="PhoneFrame/VBoxContainer"]
+text = "Seguridad Digital"
+theme_override_colors/font_color = Color(0.82, 0.96, 1, 1)
+theme_override_font_size = 28
+align = "center"
+size_flags_horizontal = 3
+
+[node name="Subtitle" type="Label" parent="PhoneFrame/VBoxContainer"]
+text = "Resuelve puzles desde un celular mientras descubres mensajes de ciberacoso"
+autowrap = true
+theme_override_colors/font_color = Color(0.7, 0.85, 1, 0.88)
+theme_override_font_size = 14
+align = "center"
+size_flags_horizontal = 3
+
+[node name="Form" type="VBoxContainer" parent="PhoneFrame/VBoxContainer"]
+custom_constants/separation = 8
+size_flags_horizontal = 3
+
+[node name="UsernameLabel" type="Label" parent="PhoneFrame/VBoxContainer/Form"]
+text = "Usuario"
+theme_override_colors/font_color = Color(0.74, 0.88, 1, 1)
+
+[node name="UsernameLineEdit" type="LineEdit" parent="PhoneFrame/VBoxContainer/Form"]
+placeholder_text = "Nombre de usuario"
+
+[node name="PasswordLabel" type="Label" parent="PhoneFrame/VBoxContainer/Form"]
+text = "Contraseña"
+theme_override_colors/font_color = Color(0.74, 0.88, 1, 1)
+
+[node name="PasswordLineEdit" type="LineEdit" parent="PhoneFrame/VBoxContainer/Form"]
+placeholder_text = "Contraseña"
+secret = true
+
+[node name="ButtonContainer" type="HBoxContainer" parent="PhoneFrame/VBoxContainer"]
+custom_constants/separation = 10
+size_flags_horizontal = 3
+
+[node name="LoginButton" type="Button" parent="PhoneFrame/VBoxContainer/ButtonContainer"]
+text = "Iniciar sesión"
+
+[node name="RegisterButton" type="Button" parent="PhoneFrame/VBoxContainer/ButtonContainer"]
+text = "Registrarse"
+
+[node name="MessageLabel" type="Label" parent="PhoneFrame/VBoxContainer"]
+text = ""
+wrap = true
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.6, 0.6, 1)
+
+[node name="WelcomeLabel" type="Label" parent="PhoneFrame/VBoxContainer"]
+text = ""
+visible = false
+horizontal_alignment = 1
+vertical_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.8, 1, 0.8, 1)
+theme_override_font_size = 18
