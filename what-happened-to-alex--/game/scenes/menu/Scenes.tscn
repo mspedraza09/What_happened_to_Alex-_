@@ -17,15 +17,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.03, 0.06, 0.12, 1)
 
-[node name="Glow" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.12, 0.18, 0.32, 0.6)
-blend_mode = 1
-
 [node name="PhoneFrame" type="Panel" parent="."]
 rect_min_size = Vector2( 540, 520 )
 anchors_preset = 7
@@ -33,9 +24,15 @@ margin_left = 180.0
 margin_top = 120.0
 margin_right = 740.0
 margin_bottom = 660.0
-custom_styles/panel = SubResource( 1 )
 
-[node name="PhoneTopBar" type="Panel" parent="PhoneFrame"]
+[node name="PhoneFrameBackground" type="ColorRect" parent="PhoneFrame"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.08, 0.12, 0.22, 1)
+
+[node name="PhoneTopBar" type="ColorRect" parent="PhoneFrame"]
 rect_min_size = Vector2( 0, 42 )
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,7 +41,7 @@ margin_left = 0.0
 margin_top = 0.0
 margin_right = 0.0
 margin_bottom = 42.0
-custom_styles/panel = SubResource( 4 )
+color = Color(0.07, 0.10, 0.18, 1)
 
 [node name="TopBarLabel" type="Label" parent="PhoneFrame/PhoneTopBar"]
 text = "SECURITY CHAT"
@@ -62,12 +59,11 @@ margin_top = 60.0
 margin_right = -24.0
 margin_bottom = -24.0
 custom_constants/separation = 12
-custom_constants/scroll_snap = 0
 
 [node name="Title" type="Label" parent="PhoneFrame/VBoxContainer"]
 text = "Seguridad Digital"
 theme_override_colors/font_color = Color(0.82, 0.96, 1, 1)
-theme_override_font_size = 30
+theme_override_font_size = 28
 align = "center"
 size_flags_horizontal = 3
 
@@ -89,10 +85,6 @@ theme_override_colors/font_color = Color(0.74, 0.88, 1, 1)
 
 [node name="UsernameLineEdit" type="LineEdit" parent="PhoneFrame/VBoxContainer/Form"]
 placeholder_text = "Nombre de usuario"
-custom_styles/normal = SubResource( 2 )
-custom_styles/focus = SubResource( 2 )
-theme_override_colors/font_color = Color(0.97, 0.97, 0.97, 1)
-theme_override_colors/placeholder_color = Color(0.6, 0.75, 0.95, 0.7)
 
 [node name="PasswordLabel" type="Label" parent="PhoneFrame/VBoxContainer/Form"]
 text = "Contraseña"
@@ -101,10 +93,6 @@ theme_override_colors/font_color = Color(0.74, 0.88, 1, 1)
 [node name="PasswordLineEdit" type="LineEdit" parent="PhoneFrame/VBoxContainer/Form"]
 placeholder_text = "Contraseña"
 secret = true
-custom_styles/normal = SubResource( 2 )
-custom_styles/focus = SubResource( 2 )
-theme_override_colors/font_color = Color(0.97, 0.97, 0.97, 1)
-theme_override_colors/placeholder_color = Color(0.6, 0.75, 0.95, 0.7)
 
 [node name="ButtonContainer" type="HBoxContainer" parent="PhoneFrame/VBoxContainer"]
 custom_constants/separation = 10
@@ -112,17 +100,9 @@ size_flags_horizontal = 3
 
 [node name="LoginButton" type="Button" parent="PhoneFrame/VBoxContainer/ButtonContainer"]
 text = "Iniciar sesión"
-custom_styles/normal = SubResource( 3 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/hover = SubResource( 3 )
-theme_override_colors/font_color = Color(0.98, 0.98, 0.98, 1)
 
 [node name="RegisterButton" type="Button" parent="PhoneFrame/VBoxContainer/ButtonContainer"]
 text = "Registrarse"
-custom_styles/normal = SubResource( 3 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/hover = SubResource( 3 )
-theme_override_colors/font_color = Color(0.98, 0.98, 0.98, 1)
 
 [node name="MessageLabel" type="Label" parent="PhoneFrame/VBoxContainer"]
 text = ""
@@ -139,55 +119,3 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.8, 1, 0.8, 1)
 theme_override_font_size = 18
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color(0.04, 0.08, 0.14, 0.95)
-border_color = Color(0.28, 0.56, 0.98, 0.9)
-border_width = 2.5
-corner_radius_top_left = 30.0
-corner_radius_top_right = 30.0
-corner_radius_bottom_left = 30.0
-corner_radius_bottom_right = 30.0
-content_margin_left = 0
-content_margin_right = 0
-content_margin_top = 0
-content_margin_bottom = 0
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color(0.08, 0.11, 0.20, 1)
-border_color = Color(0.35, 0.65, 1, 0.8)
-border_width = 1.8
-corner_radius_top_left = 14.0
-corner_radius_top_right = 14.0
-corner_radius_bottom_left = 14.0
-corner_radius_bottom_right = 14.0
-content_margin_left = 12
-content_margin_right = 12
-content_margin_top = 10
-content_margin_bottom = 10
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color(0.17, 0.30, 0.58, 1)
-border_color = Color(0.5, 0.85, 1, 1)
-border_width = 1.8
-corner_radius_top_left = 14.0
-corner_radius_top_right = 14.0
-corner_radius_bottom_left = 14.0
-corner_radius_bottom_right = 14.0
-content_margin_left = 14
-content_margin_right = 14
-content_margin_top = 10
-content_margin_bottom = 10
-
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color(0.07, 0.10, 0.18, 1)
-border_color = Color(0.22, 0.44, 0.82, 0.9)
-border_width = 1.2
-corner_radius_top_left = 20.0
-corner_radius_top_right = 20.0
-corner_radius_bottom_left = 0.0
-corner_radius_bottom_right = 0.0
-content_margin_left = 0
-content_margin_right = 0
-content_margin_top = 0
-content_margin_bottom = 0
