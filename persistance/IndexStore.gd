@@ -20,10 +20,9 @@ func load(hash_table: HashTable) -> bool:
 	f.close()
 	if content.is_empty():
 		return false
-	var result = JSON.parse_string(content)
-	if result.error != OK:
+	var pairs = JSON.parse_string(content)
+	if pairs == null:
 		return false
-	var pairs: Array = result.result
 	for pair in pairs:
 		if pair.size() >= 2:
 			hash_table.put(pair[0], pair[1])

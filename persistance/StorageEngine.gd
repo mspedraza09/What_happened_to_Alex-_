@@ -42,7 +42,10 @@ func stats() -> Dictionary:
 	return hash_table.stats()
 
 func _hash_password(password: String) -> String:
-	var digest = Crypto.digest(Crypto.HASH_SHA256, password.to_utf8())
+	var ctx = HashingContext.new()
+	ctx.start(HashingContext.HASH_SHA256)
+	ctx.update(password.to_utf8_buffer())
+	var digest = ctx.finish()
 	return digest.hex_encode()
 
 func register_user(username: String, password: String) -> bool:
@@ -54,7 +57,7 @@ func register_user(username: String, password: String) -> bool:
 		return false
 	save("user", key, {
 		"password": _hash_password(password),
-		"created_at": OS.get_unix_time()
+		"created_at": Time.get_unix_time_from_system()
 	})
 	return true
 

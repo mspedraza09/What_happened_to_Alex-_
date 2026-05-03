@@ -33,9 +33,9 @@ func read_at(offset: int) -> Variant:
 	if line.is_empty():
 		return null
 	var result = JSON.parse_string(line)
-	if result.error != OK:
+	if result == null:
 		return null
-	return result.result
+	return result
 
 func iter_all() -> Array:
 	var results: Array = []
@@ -48,7 +48,7 @@ func iter_all() -> Array:
 		if line.is_empty():
 			continue
 		var result = JSON.parse_string(line)
-		if result.error == OK:
-			results.append([offset, result.result])
+		if result != null:
+			results.append([offset, result])
 	f.close()
 	return results
