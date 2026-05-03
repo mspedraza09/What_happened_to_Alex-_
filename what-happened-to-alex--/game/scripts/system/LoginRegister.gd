@@ -4,12 +4,12 @@ const MAIN_SCENE_PATH: String = "res://game/scenes/apps/AppMensjae.tscn"
 
 var engine: StorageEngine
 
-@onready var username_input = $Panel/VBoxContainer/UsernameLineEdit
-@onready var password_input = $Panel/VBoxContainer/PasswordLineEdit
-@onready var message_label = $Panel/VBoxContainer/MessageLabel
-@onready var welcome_label = $Panel/VBoxContainer/WelcomeLabel
-@onready var login_button = $Panel/VBoxContainer/ButtonContainer/LoginButton
-@onready var register_button = $Panel/VBoxContainer/ButtonContainer/RegisterButton
+@onready var username_input = $PhoneFrame/VBoxContainer/Form/UsernameLineEdit
+@onready var password_input = $PhoneFrame/VBoxContainer/Form/PasswordLineEdit
+@onready var message_label = $PhoneFrame/VBoxContainer/MessageLabel
+@onready var welcome_label = $PhoneFrame/VBoxContainer/WelcomeLabel
+@onready var login_button = $PhoneFrame/VBoxContainer/ButtonContainer/LoginButton
+@onready var register_button = $PhoneFrame/VBoxContainer/ButtonContainer/RegisterButton
 
 func _ready() -> void:
 	engine = StorageEngine.new("user://save_data")
