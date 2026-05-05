@@ -11,8 +11,6 @@
 [ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_48_14 p.m..png" id=9]
 [ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_50_57 p.m..png" id=10]
 
-# Para usar tus imágenes reales en la galería, importa los archivos en game/assets/ y cambia texture = ExtResource(2) por el id del recurso de cada imagen.
-
 [node name="Pantalla" type="Control"]
 layout_mode = 3
 anchors_preset = 15

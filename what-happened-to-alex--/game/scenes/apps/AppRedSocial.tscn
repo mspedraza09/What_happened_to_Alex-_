@@ -3,8 +3,6 @@
 [ext_resource type="Texture2D" path="res://game/assets/icon.svg" id=1]
 [ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_17 p.m..png" id=2]
 
-# Para usar una imagen real en la publicación, cambia texture = ExtResource(2) por el id de tu imagen importada.
-
 [node name="Pantalla" type="Control"]
 layout_mode = 3
 anchors_preset = 15
