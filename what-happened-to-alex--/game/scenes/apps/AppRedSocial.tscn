@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://app_red_social_01"]
 
-[ext_resource type="Texture2D" path="res://game/assets/icon.svg" id=1]
-[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_17 p.m..png" id=2]
+[ext_resource type="Texture2D" path="res://game/assets/Telefono_01-removebg-preview.png" id="1_phone"]
+[ext_resource type="Texture2D" path="res://game/assets/post_twitter.png" id="2_post"]
+[ext_resource type="Texture2D" path="res://game/assets/alex_silhouette.png" id="3_alex"]
+[ext_resource type="Texture2D" path="res://game/assets/parque_noche.png" id="4_parque"]
 
 [node name="Pantalla" type="Control"]
 layout_mode = 3
@@ -17,7 +19,7 @@ offset_left = 112.0
 offset_top = -72.0
 offset_right = 995.0
 offset_bottom = 722.0
-texture = ExtResource(2)
+texture = ExtResource("1_phone")
 z_index = 10
 
 [node name="AppContainer" type="Control" parent="."]
@@ -27,33 +29,37 @@ offset_top = 30.0
 offset_right = 800.0
 offset_bottom = 680.0
 
-[node name="AppBG" type="ColorRect" parent="AppContainer"]
-layout_mode = 0
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color(0.05, 0.07, 0.16, 0.92)
-z_index = -1
-
 [node name="TopBar" type="ColorRect" parent="AppContainer"]
 layout_mode = 0
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 490.0
 offset_bottom = 48.0
-color = Color(0.07, 0.09, 0.18, 1.0)
+color = Color(0.05, 0.07, 0.14, 1.0)
 
 [node name="AppTitle" type="Label" parent="AppContainer/TopBar"]
 layout_mode = 0
 offset_left = 0.0
 offset_top = 0.0
-offset_right = 490.0
+offset_right = 350.0
 offset_bottom = 48.0
 text = "AlexNet"
 horizontal_alignment = 1
 vertical_alignment = 1
-theme_override_font_sizes/font_size = 16
-theme_override_colors/font_color = Color(0.5, 0.85, 1.0, 1.0)
+theme_override_font_sizes/font_size = 17
+theme_override_colors/font_color = Color(0.45, 0.80, 1.0, 1.0)
+
+[node name="TopBarTime" type="Label" parent="AppContainer/TopBar"]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 0.0
+offset_right = 490.0
+offset_bottom = 48.0
+text = "21:47"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.5, 0.5, 0.6, 1.0)
 
 [node name="Feed" type="ScrollContainer" parent="AppContainer"]
 layout_mode = 0
@@ -63,196 +69,132 @@ offset_right = 490.0
 offset_bottom = 650.0
 
 [node name="PostList" type="VBoxContainer" parent="AppContainer/Feed"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 0.0
-size_flags_horizontal = 3
-
-[node name="NewPost" type="PanelContainer" parent="AppContainer/Feed/PostList"]
 layout_mode = 2
 size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 90)
-
-[node name="NewPostBG" type="ColorRect" parent="AppContainer/Feed/PostList/NewPost"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color(0.11, 0.14, 0.26, 1.0)
-
-[node name="NewPostContent" type="VBoxContainer" parent="AppContainer/Feed/PostList/NewPost"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="NewPostInput" type="TextEdit" parent="AppContainer/Feed/PostList/NewPost/NewPostContent"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 60)
-placeholder_text = "Escribe una publicación sencilla..."
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.88, 0.88, 0.95, 1.0)
-
-[node name="PublishBtn" type="Button" parent="AppContainer/Feed/PostList/NewPost/NewPostContent"]
-layout_mode = 2
-text = "Publicar"
-flat = true
-theme_override_font_sizes/font_size = 11
-size_flags_horizontal = 3
+theme_override_constants/separation = 2
 
 [node name="Post1" type="PanelContainer" parent="AppContainer/Feed/PostList"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PostBG1" type="ColorRect" parent="AppContainer/Feed/PostList/Post1"]
-layout_mode = 0
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color(0.10, 0.13, 0.22, 1.0)
-
 [node name="PostContent1" type="VBoxContainer" parent="AppContainer/Feed/PostList/Post1"]
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 6
 
 [node name="UserRow1" type="HBoxContainer" parent="AppContainer/Feed/PostList/Post1/PostContent1"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
-[node name="Avatar1" type="ColorRect" parent="AppContainer/Feed/PostList/Post1/PostContent1/UserRow1"]
+[node name="Avatar1" type="TextureRect" parent="AppContainer/Feed/PostList/Post1/PostContent1/UserRow1"]
 layout_mode = 2
-custom_minimum_size = Vector2(28, 28)
-color = Color(0.3, 0.6, 0.9, 1.0)
+custom_minimum_size = Vector2(32, 32)
+expand_mode = 1
+stretch_mode = 6
+texture = ExtResource("3_alex")
 
-[node name="Username1" type="Label" parent="AppContainer/Feed/PostList/Post1/PostContent1/UserRow1"]
+[node name="UserInfo1" type="VBoxContainer" parent="AppContainer/Feed/PostList/Post1/PostContent1/UserRow1"]
 layout_mode = 2
-text = "@alex_r"
+
+[node name="Username1" type="Label" parent="AppContainer/Feed/PostList/Post1/PostContent1/UserRow1/UserInfo1"]
+layout_mode = 2
+text = "@whathappenedtoalex"
 theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.5, 0.85, 1.0, 1.0)
+theme_override_colors/font_color = Color(0.45, 0.80, 1.0, 1.0)
 
-[node name="Time1" type="Label" parent="AppContainer/Feed/PostList/Post1/PostContent1/UserRow1"]
+[node name="Time1" type="Label" parent="AppContainer/Feed/PostList/Post1/PostContent1/UserRow1/UserInfo1"]
 layout_mode = 2
-text = "2h"
+text = "20/11 · 21:47"
 theme_override_font_sizes/font_size = 10
-theme_override_colors/font_color = Color(0.5, 0.5, 0.6, 1.0)
-size_flags_horizontal = 3
-horizontal_alignment = 2
+theme_override_colors/font_color = Color(0.45, 0.45, 0.55, 1.0)
 
 [node name="PostText1" type="Label" parent="AppContainer/Feed/PostList/Post1/PostContent1"]
 layout_mode = 2
-text = "¿Alguien más siente que sus fotos desaparecen solas? 😟"
+text = "Una pregunta.\nUn chico desaparecido.\nAyúdanos a encontrar las respuestas.\n#WhatHappenedToAlex"
 autowrap_mode = 3
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.88, 0.88, 0.95, 1.0)
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.90, 0.90, 0.95, 1.0)
+
+[node name="PostImage1" type="TextureRect" parent="AppContainer/Feed/PostList/Post1/PostContent1"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 160)
+size_flags_horizontal = 3
+expand_mode = 1
+stretch_mode = 6
+texture = ExtResource("2_post")
 
 [node name="LikeRow1" type="HBoxContainer" parent="AppContainer/Feed/PostList/Post1/PostContent1"]
 layout_mode = 2
-
-[node name="LikeBtn1" type="Button" parent="AppContainer/Feed/PostList/Post1/PostContent1/LikeRow1"]
-layout_mode = 2
-text = "❤ 14"
-flat = true
-theme_override_font_sizes/font_size = 11
+theme_override_constants/separation = 16
 
 [node name="CommentBtn1" type="Button" parent="AppContainer/Feed/PostList/Post1/PostContent1/LikeRow1"]
 layout_mode = 2
-text = "💬 3"
+text = "💬 23"
 flat = true
 theme_override_font_sizes/font_size = 11
 
-[node name="CommentSection1" type="VBoxContainer" parent="AppContainer/Feed/PostList/Post1/PostContent1"]
+[node name="RetweetBtn1" type="Button" parent="AppContainer/Feed/PostList/Post1/PostContent1/LikeRow1"]
 layout_mode = 2
-theme_override_constants/separation = 2
-
-[node name="CommentTitle1" type="Label" parent="AppContainer/Feed/PostList/Post1/PostContent1/CommentSection1"]
-layout_mode = 2
-text = "Comentarios"
+text = "🔁 87"
+flat = true
 theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.55, 0.75, 1.0, 1.0)
 
-[node name="Comment1A" type="Label" parent="AppContainer/Feed/PostList/Post1/PostContent1/CommentSection1"]
+[node name="LikeBtn1" type="Button" parent="AppContainer/Feed/PostList/Post1/PostContent1/LikeRow1"]
 layout_mode = 2
-text = "@marta: Yo también noté lo mismo."
-autowrap_mode = 3
-theme_override_font_sizes/font_size = 10
-theme_override_colors/font_color = Color(0.82, 0.84, 0.92, 1.0)
-
-[node name="Comment1B" type="Label" parent="AppContainer/Feed/PostList/Post1/PostContent1/CommentSection1"]
-layout_mode = 2
-text = "@daniel: Tal vez se haya archivado sin querer."
-autowrap_mode = 3
-theme_override_font_sizes/font_size = 10
-theme_override_colors/font_color = Color(0.82, 0.84, 0.92, 1.0)
+text = "❤ 312"
+flat = true
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1.0, 0.35, 0.45, 1.0)
 
 [node name="Post2" type="PanelContainer" parent="AppContainer/Feed/PostList"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PostBG2" type="ColorRect" parent="AppContainer/Feed/PostList/Post2"]
-layout_mode = 0
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color(0.10, 0.13, 0.22, 1.0)
-
 [node name="PostContent2" type="VBoxContainer" parent="AppContainer/Feed/PostList/Post2"]
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 6
 
 [node name="UserRow2" type="HBoxContainer" parent="AppContainer/Feed/PostList/Post2/PostContent2"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="Avatar2" type="ColorRect" parent="AppContainer/Feed/PostList/Post2/PostContent2/UserRow2"]
 layout_mode = 2
-custom_minimum_size = Vector2(28, 28)
+custom_minimum_size = Vector2(32, 32)
 color = Color(0.9, 0.4, 0.5, 1.0)
 
-[node name="Username2" type="Label" parent="AppContainer/Feed/PostList/Post2/PostContent2/UserRow2"]
+[node name="UserInfo2" type="VBoxContainer" parent="AppContainer/Feed/PostList/Post2/PostContent2/UserRow2"]
+layout_mode = 2
+
+[node name="Username2" type="Label" parent="AppContainer/Feed/PostList/Post2/PostContent2/UserRow2/UserInfo2"]
 layout_mode = 2
 text = "@camila_m"
 theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.5, 0.85, 1.0, 1.0)
+theme_override_colors/font_color = Color(0.45, 0.80, 1.0, 1.0)
 
-[node name="Time2" type="Label" parent="AppContainer/Feed/PostList/Post2/PostContent2/UserRow2"]
+[node name="Time2" type="Label" parent="AppContainer/Feed/PostList/Post2/PostContent2/UserRow2/UserInfo2"]
 layout_mode = 2
-text = "5h"
+text = "hace 5h"
 theme_override_font_sizes/font_size = 10
-theme_override_colors/font_color = Color(0.5, 0.5, 0.6, 1.0)
-size_flags_horizontal = 3
-horizontal_alignment = 2
+theme_override_colors/font_color = Color(0.45, 0.45, 0.55, 1.0)
 
 [node name="PostText2" type="Label" parent="AppContainer/Feed/PostList/Post2/PostContent2"]
 layout_mode = 2
-text = "Nuevo día, nueva playlist 🎵 ¿Qué están escuchando?"
+text = "Noche en el parque otra vez. Hay algo raro en el ambiente hoy..."
 autowrap_mode = 3
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.88, 0.88, 0.95, 1.0)
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.90, 0.90, 0.95, 1.0)
 
 [node name="PostImage2" type="TextureRect" parent="AppContainer/Feed/PostList/Post2/PostContent2"]
 layout_mode = 2
-custom_minimum_size = Vector2(0, 80)
-texture = ExtResource(3)
-expand = true
-stretch_mode = 2
-# Cambia este texture por ExtResource(3) cuando quieras usar la imagen importada actualmente en la app.
-
-[node name="ImageLabel2" type="Label" parent="AppContainer/Feed/PostList/Post2/PostContent2/PostImage2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = "[imagen]"
-horizontal_alignment = 1
-vertical_alignment = 1
-theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.5, 0.5, 0.6, 1.0)
+custom_minimum_size = Vector2(0, 140)
+size_flags_horizontal = 3
+expand_mode = 1
+stretch_mode = 6
+texture = ExtResource("4_parque")
 
 [node name="LikeRow2" type="HBoxContainer" parent="AppContainer/Feed/PostList/Post2/PostContent2"]
 layout_mode = 2
-
-[node name="LikeBtn2" type="Button" parent="AppContainer/Feed/PostList/Post2/PostContent2/LikeRow2"]
-layout_mode = 2
-text = "❤ 42"
-flat = true
-theme_override_font_sizes/font_size = 11
+theme_override_constants/separation = 16
 
 [node name="CommentBtn2" type="Button" parent="AppContainer/Feed/PostList/Post2/PostContent2/LikeRow2"]
 layout_mode = 2
@@ -260,82 +202,60 @@ text = "💬 8"
 flat = true
 theme_override_font_sizes/font_size = 11
 
-[node name="CommentSection2" type="VBoxContainer" parent="AppContainer/Feed/PostList/Post2/PostContent2"]
+[node name="RetweetBtn2" type="Button" parent="AppContainer/Feed/PostList/Post2/PostContent2/LikeRow2"]
 layout_mode = 2
-theme_override_constants/separation = 2
-
-[node name="CommentTitle2" type="Label" parent="AppContainer/Feed/PostList/Post2/PostContent2/CommentSection2"]
-layout_mode = 2
-text = "Comentarios"
+text = "🔁 5"
+flat = true
 theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.55, 0.75, 1.0, 1.0)
 
-[node name="Comment2A" type="Label" parent="AppContainer/Feed/PostList/Post2/PostContent2/CommentSection2"]
+[node name="LikeBtn2" type="Button" parent="AppContainer/Feed/PostList/Post2/PostContent2/LikeRow2"]
 layout_mode = 2
-text = "@luis: Buena playlist, cuéntanos cuál es tu canción favorita."
-autowrap_mode = 3
-theme_override_font_sizes/font_size = 10
-theme_override_colors/font_color = Color(0.82, 0.84, 0.92, 1.0)
-
-[node name="Comment2B" type="Label" parent="AppContainer/Feed/PostList/Post2/PostContent2/CommentSection2"]
-layout_mode = 2
-text = "@ana: Me encanta ese estilo."
-autowrap_mode = 3
-theme_override_font_sizes/font_size = 10
-theme_override_colors/font_color = Color(0.82, 0.84, 0.92, 1.0)
+text = "❤ 42"
+flat = true
+theme_override_font_sizes/font_size = 11
 
 [node name="Post3" type="PanelContainer" parent="AppContainer/Feed/PostList"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PostBG3" type="ColorRect" parent="AppContainer/Feed/PostList/Post3"]
-layout_mode = 0
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color(0.10, 0.13, 0.22, 1.0)
-
 [node name="PostContent3" type="VBoxContainer" parent="AppContainer/Feed/PostList/Post3"]
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 6
 
 [node name="UserRow3" type="HBoxContainer" parent="AppContainer/Feed/PostList/Post3/PostContent3"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="Avatar3" type="ColorRect" parent="AppContainer/Feed/PostList/Post3/PostContent3/UserRow3"]
 layout_mode = 2
-custom_minimum_size = Vector2(28, 28)
+custom_minimum_size = Vector2(32, 32)
 color = Color(0.4, 0.8, 0.5, 1.0)
 
-[node name="Username3" type="Label" parent="AppContainer/Feed/PostList/Post3/PostContent3/UserRow3"]
+[node name="UserInfo3" type="VBoxContainer" parent="AppContainer/Feed/PostList/Post3/PostContent3/UserRow3"]
+layout_mode = 2
+
+[node name="Username3" type="Label" parent="AppContainer/Feed/PostList/Post3/PostContent3/UserRow3/UserInfo3"]
 layout_mode = 2
 text = "@daniel_q"
 theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.5, 0.85, 1.0, 1.0)
+theme_override_colors/font_color = Color(0.45, 0.80, 1.0, 1.0)
 
-[node name="Time3" type="Label" parent="AppContainer/Feed/PostList/Post3/PostContent3/UserRow3"]
+[node name="Time3" type="Label" parent="AppContainer/Feed/PostList/Post3/PostContent3/UserRow3/UserInfo3"]
 layout_mode = 2
-text = "1d"
+text = "hace 1d"
 theme_override_font_sizes/font_size = 10
-theme_override_colors/font_color = Color(0.5, 0.5, 0.6, 1.0)
-size_flags_horizontal = 3
-horizontal_alignment = 2
+theme_override_colors/font_color = Color(0.45, 0.45, 0.55, 1.0)
 
 [node name="PostText3" type="Label" parent="AppContainer/Feed/PostList/Post3/PostContent3"]
 layout_mode = 2
-text = "nadie sabe nada de Alex? lleva días sin conectarse..."
+text = "nadie sabe nada de Alex? lleva días sin conectarse... alguien lo vio?"
 autowrap_mode = 3
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(1.0, 0.75, 0.4, 1.0)
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(1.0, 0.78, 0.35, 1.0)
 
 [node name="LikeRow3" type="HBoxContainer" parent="AppContainer/Feed/PostList/Post3/PostContent3"]
 layout_mode = 2
-
-[node name="LikeBtn3" type="Button" parent="AppContainer/Feed/PostList/Post3/PostContent3/LikeRow3"]
-layout_mode = 2
-text = "❤ 7"
-flat = true
-theme_override_font_sizes/font_size = 11
+theme_override_constants/separation = 16
 
 [node name="CommentBtn3" type="Button" parent="AppContainer/Feed/PostList/Post3/PostContent3/LikeRow3"]
 layout_mode = 2
@@ -343,26 +263,14 @@ text = "💬 12"
 flat = true
 theme_override_font_sizes/font_size = 11
 
-[node name="CommentSection3" type="VBoxContainer" parent="AppContainer/Feed/PostList/Post3/PostContent3"]
+[node name="RetweetBtn3" type="Button" parent="AppContainer/Feed/PostList/Post3/PostContent3/LikeRow3"]
 layout_mode = 2
-theme_override_constants/separation = 2
-
-[node name="CommentTitle3" type="Label" parent="AppContainer/Feed/PostList/Post3/PostContent3/CommentSection3"]
-layout_mode = 2
-text = "Comentarios"
+text = "🔁 3"
+flat = true
 theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.55, 0.75, 1.0, 1.0)
 
-[node name="Comment3A" type="Label" parent="AppContainer/Feed/PostList/Post3/PostContent3/CommentSection3"]
+[node name="LikeBtn3" type="Button" parent="AppContainer/Feed/PostList/Post3/PostContent3/LikeRow3"]
 layout_mode = 2
-text = "@sara: Ojalá Alex esté bien."
-autowrap_mode = 3
-theme_override_font_sizes/font_size = 10
-theme_override_colors/font_color = Color(0.82, 0.84, 0.92, 1.0)
-
-[node name="Comment3B" type="Label" parent="AppContainer/Feed/PostList/Post3/PostContent3/CommentSection3"]
-layout_mode = 2
-text = "@marco: A veces no responde cuando está ocupado."
-autowrap_mode = 3
-theme_override_font_sizes/font_size = 10
-theme_override_colors/font_color = Color(0.82, 0.84, 0.92, 1.0)
+text = "❤ 7"
+flat = true
+theme_override_font_sizes/font_size = 11
