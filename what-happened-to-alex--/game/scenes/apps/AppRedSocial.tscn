@@ -1,10 +1,7 @@
 [gd_scene format=3 uid="uid://app_red_social_01"]
 
-[ext_resource type="Texture2D" uid="uid://cg7n1qp7tcpfs" path="res://game/assets/Telefono_01-removebg-preview.png" id=1]
-
-[ext_resource type="Texture2D" uid="uid://icon_01" path="res://game/assets/icon.svg" id=2]
-
-[ext_resource type="Texture2D" uid="uid://red_img_01" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_17 p.m..png" id=3]
+[ext_resource type="Texture2D" path="res://game/assets/icon.svg" id=1]
+[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_17 p.m..png" id=2]
 
 # Para usar una imagen real en la publicación, cambia texture = ExtResource(2) por el id de tu imagen importada.
 
@@ -22,7 +19,7 @@ offset_left = 112.0
 offset_top = -72.0
 offset_right = 995.0
 offset_bottom = 722.0
-texture = ExtResource(3)
+texture = ExtResource(2)
 z_index = 10
 
 [node name="AppContainer" type="Control" parent="."]

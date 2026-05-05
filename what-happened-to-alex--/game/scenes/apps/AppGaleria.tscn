@@ -1,18 +1,15 @@
 [gd_scene format=3 uid="uid://app_galeria_01"]
 
-[ext_resource type="Texture2D" uid="uid://cg7n1qp7tcpfs" path="res://game/assets/Telefono_01-removebg-preview.png" id=1]
-
-[ext_resource type="Texture2D" uid="uid://icon_01" path="res://game/assets/icon.svg" id=2]
-
-[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_07 p.m..png" id=3]
-[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_17 p.m..png" id=4]
-[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_23 p.m..png" id=5]
-[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_27 p.m..png" id=6]
-[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_30 p.m..png" id=7]
-[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_35 p.m..png" id=8]
-[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_39 p.m..png" id=9]
-[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_48_14 p.m..png" id=10]
-[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_50_57 p.m..png" id=11]
+[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_07 p.m..png" id=1]
+[ext_resource type="Texture2D" path="res://game/assets/icon.svg" id=2]
+[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_17 p.m..png" id=3]
+[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_23 p.m..png" id=4]
+[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_27 p.m..png" id=5]
+[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_30 p.m..png" id=6]
+[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_35 p.m..png" id=7]
+[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_13_39 p.m..png" id=8]
+[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_48_14 p.m..png" id=9]
+[ext_resource type="Texture2D" path="res://game/assets/ChatGPT Image 5 may 2026, 02_50_57 p.m..png" id=10]
 
 # Para usar tus imágenes reales en la galería, importa los archivos en game/assets/ y cambia texture = ExtResource(2) por el id del recurso de cada imagen.
 
@@ -216,6 +213,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource(11)
+texture = ExtResource(10)
 expand = true
 stretch_mode = 2
