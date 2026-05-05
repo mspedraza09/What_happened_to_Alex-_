@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ChatDatos" format=3 uid="uid://xmrx2ys5po1"]
+
+[ext_resource type="Texture2D" uid="uid://c8dirl274lo6y" path="res://game/assets/icon.svg" id="1_0jv8y"]
+[ext_resource type="Script" uid="uid://cffteeyhsdf2u" path="res://game/scenes/apps/chat_datos.gd" id="1_itftq"]
+
+[resource]
+script = ExtResource("1_itftq")
+nombre_usuario = "Juan"
+foto_perfil = ExtResource("1_0jv8y")
+nivel = 1
+mensajes = Array[Dictionary]([{
+"Alex": "¿Cómo estás?",
+"Sender": "Hola"
+}])
+metadata/_custom_type_script = "uid://cffteeyhsdf2u"

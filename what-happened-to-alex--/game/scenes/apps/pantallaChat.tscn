@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://xfal32u8u3k1"]
+
+[ext_resource type="Script" uid="uid://b5hisqlseij3w" path="res://game/scenes/apps/pantalla_chat.gd" id="1_oi6i8"]
+[ext_resource type="Texture2D" uid="uid://c8dirl274lo6y" path="res://game/assets/icon.svg" id="2_5vr5m"]
+[ext_resource type="Script" uid="uid://csq4exlqs2bny" path="res://game/scenes/apps/v_box_container.gd" id="3_5vr5m"]
+
+[node name="PantallaChat" type="Control" unique_id=1050344654]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oi6i8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1035847222]
+layout_mode = 0
+offset_right = 451.0
+offset_bottom = 61.0
+
+[node name="Button" type="Button" parent="HBoxContainer" unique_id=1720277064]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "🡸"
+
+[node name="FotoPerfil" type="TextureRect" parent="HBoxContainer" unique_id=376620915]
+layout_mode = 2
+texture = ExtResource("2_5vr5m")
+expand_mode = 2
+
+[node name="nombre_usuario" type="Label" parent="HBoxContainer" unique_id=1190824278]
+layout_mode = 2
+text = "Marí"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=65193281]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 64.0
+offset_right = 302.0
+offset_bottom = 535.0
+
+[node name="ContenedorMensajes" type="VBoxContainer" parent="ScrollContainer" unique_id=460344091]
+layout_mode = 2
+script = ExtResource("3_5vr5m")
