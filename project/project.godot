@@ -1,0 +1,27 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []\n;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="What_happened_to_Alex_?"
+config/features=PackedStringArray("4.6", "Forward Plus")
+config/icon="res://game/assets/icon.svg"
+run/main_scene="res://game/scenes/menu/Scenes.tscn"
+
+[autoload]
+
+GameManager="*res://game/scripts/system/GameManager.gd"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
