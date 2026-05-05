@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://app_galeria_01"]
 
-[ext_resource type="Texture2D" path="res://game/assets/Telefono_01-removebg-preview.png" id="1_phone"]
+[ext_resource type="Texture2D" path="res://game/assets/Telefono_01_transparent.png" id="1_phone"]
 [ext_resource type="Texture2D" path="res://game/assets/cafe_telefono.png" id="2_cafe"]
 [ext_resource type="Texture2D" path="res://game/assets/parque_noche.png" id="3_parque"]
 [ext_resource type="Texture2D" path="res://game/assets/puerta_17.png" id="4_puerta"]
@@ -29,16 +29,16 @@ z_index = 10
 
 [node name="AppContainer" type="Control" parent="."]
 layout_mode = 0
-offset_left = 310.0
-offset_top = 30.0
-offset_right = 800.0
-offset_bottom = 680.0
+offset_left = 396.0
+offset_top = 50.0
+offset_right = 711.0
+offset_bottom = 625.0
 
 [node name="TopBar" type="ColorRect" parent="AppContainer"]
 layout_mode = 0
 offset_left = 0.0
 offset_top = 0.0
-offset_right = 490.0
+offset_right = 315.0
 offset_bottom = 48.0
 color = Color(0.05, 0.07, 0.14, 1.0)
 
@@ -58,7 +58,7 @@ theme_override_colors/font_color = Color(0.82, 0.95, 1.0, 1.0)
 layout_mode = 0
 offset_left = 370.0
 offset_top = 0.0
-offset_right = 490.0
+offset_right = 315.0
 offset_bottom = 48.0
 text = "9 fotos"
 horizontal_alignment = 1
@@ -70,8 +70,8 @@ theme_override_colors/font_color = Color(0.45, 0.60, 0.75, 1.0)
 layout_mode = 0
 offset_left = 0.0
 offset_top = 50.0
-offset_right = 490.0
-offset_bottom = 650.0
+offset_right = 315.0
+offset_bottom = 575.0
 
 [node name="GridContainer" type="GridContainer" parent="AppContainer/ScrollArea"]
 layout_mode = 2
@@ -82,7 +82,7 @@ theme_override_constants/v_separation = 3
 
 [node name="Thumb1" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
 layout_mode = 2
-custom_minimum_size = Vector2(155, 130)
+custom_minimum_size = Vector2(100, 110)
 size_flags_horizontal = 3
 
 [node name="ThumbImg1" type="TextureRect" parent="AppContainer/ScrollArea/GridContainer/Thumb1"]
@@ -98,7 +98,7 @@ texture = ExtResource("2_cafe")
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 color = Color(0.0, 0.0, 0.0, 0.55)
 
@@ -106,7 +106,7 @@ color = Color(0.0, 0.0, 0.0, 0.55)
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 text = "café favorito"
 horizontal_alignment = 1
@@ -116,7 +116,7 @@ theme_override_colors/font_color = Color(0.9, 0.9, 1.0, 1.0)
 
 [node name="Thumb2" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
 layout_mode = 2
-custom_minimum_size = Vector2(155, 130)
+custom_minimum_size = Vector2(100, 110)
 size_flags_horizontal = 3
 
 [node name="ThumbImg2" type="TextureRect" parent="AppContainer/ScrollArea/GridContainer/Thumb2"]
@@ -132,7 +132,7 @@ texture = ExtResource("3_parque")
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 color = Color(0.0, 0.0, 0.0, 0.55)
 
@@ -140,7 +140,7 @@ color = Color(0.0, 0.0, 0.0, 0.55)
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 text = "parque noche"
 horizontal_alignment = 1
@@ -150,7 +150,7 @@ theme_override_colors/font_color = Color(0.9, 0.9, 1.0, 1.0)
 
 [node name="Thumb3" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
 layout_mode = 2
-custom_minimum_size = Vector2(155, 130)
+custom_minimum_size = Vector2(100, 110)
 size_flags_horizontal = 3
 
 [node name="ThumbImg3" type="TextureRect" parent="AppContainer/ScrollArea/GridContainer/Thumb3"]
@@ -166,7 +166,7 @@ texture = ExtResource("4_puerta")
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 color = Color(0.0, 0.0, 0.0, 0.55)
 
@@ -174,7 +174,7 @@ color = Color(0.0, 0.0, 0.0, 0.55)
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 text = "puerta #17"
 horizontal_alignment = 1
@@ -184,7 +184,7 @@ theme_override_colors/font_color = Color(0.9, 0.9, 1.0, 1.0)
 
 [node name="Thumb4" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
 layout_mode = 2
-custom_minimum_size = Vector2(155, 130)
+custom_minimum_size = Vector2(100, 110)
 size_flags_horizontal = 3
 
 [node name="ThumbImg4" type="TextureRect" parent="AppContainer/ScrollArea/GridContainer/Thumb4"]
@@ -200,7 +200,7 @@ texture = ExtResource("5_pasillo")
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 color = Color(0.0, 0.0, 0.0, 0.55)
 
@@ -208,7 +208,7 @@ color = Color(0.0, 0.0, 0.0, 0.55)
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 text = "pasillo"
 horizontal_alignment = 1
@@ -218,7 +218,7 @@ theme_override_colors/font_color = Color(0.9, 0.9, 1.0, 1.0)
 
 [node name="Thumb5" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
 layout_mode = 2
-custom_minimum_size = Vector2(155, 130)
+custom_minimum_size = Vector2(100, 110)
 size_flags_horizontal = 3
 
 [node name="ThumbImg5" type="TextureRect" parent="AppContainer/ScrollArea/GridContainer/Thumb5"]
@@ -234,7 +234,7 @@ texture = ExtResource("6_libreta")
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 color = Color(0.0, 0.0, 0.0, 0.55)
 
@@ -242,7 +242,7 @@ color = Color(0.0, 0.0, 0.0, 0.55)
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 text = "notas 19/11"
 horizontal_alignment = 1
@@ -252,7 +252,7 @@ theme_override_colors/font_color = Color(0.9, 0.9, 1.0, 1.0)
 
 [node name="Thumb6" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
 layout_mode = 2
-custom_minimum_size = Vector2(155, 130)
+custom_minimum_size = Vector2(100, 110)
 size_flags_horizontal = 3
 
 [node name="ThumbImg6" type="TextureRect" parent="AppContainer/ScrollArea/GridContainer/Thumb6"]
@@ -268,7 +268,7 @@ texture = ExtResource("7_alex")
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 color = Color(0.0, 0.0, 0.0, 0.55)
 
@@ -276,7 +276,7 @@ color = Color(0.0, 0.0, 0.0, 0.55)
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 text = "Alex · ciudad"
 horizontal_alignment = 1
@@ -286,7 +286,7 @@ theme_override_colors/font_color = Color(0.9, 0.9, 1.0, 1.0)
 
 [node name="Thumb7" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
 layout_mode = 2
-custom_minimum_size = Vector2(155, 130)
+custom_minimum_size = Vector2(100, 110)
 size_flags_horizontal = 3
 
 [node name="ThumbImg7" type="TextureRect" parent="AppContainer/ScrollArea/GridContainer/Thumb7"]
@@ -302,7 +302,7 @@ texture = ExtResource("8_telefcam")
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 color = Color(0.0, 0.0, 0.0, 0.55)
 
@@ -310,7 +310,7 @@ color = Color(0.0, 0.0, 0.0, 0.55)
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 text = "20/11 · 21:47"
 horizontal_alignment = 1
@@ -320,7 +320,7 @@ theme_override_colors/font_color = Color(1.0, 0.85, 0.4, 1.0)
 
 [node name="Thumb8" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
 layout_mode = 2
-custom_minimum_size = Vector2(155, 130)
+custom_minimum_size = Vector2(100, 110)
 size_flags_horizontal = 3
 
 [node name="ThumbImg8" type="TextureRect" parent="AppContainer/ScrollArea/GridContainer/Thumb8"]
@@ -336,7 +336,7 @@ texture = ExtResource("9_chat")
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 color = Color(0.0, 0.0, 0.0, 0.55)
 
@@ -344,7 +344,7 @@ color = Color(0.0, 0.0, 0.0, 0.55)
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 text = "chat · Marta"
 horizontal_alignment = 1
@@ -354,7 +354,7 @@ theme_override_colors/font_color = Color(0.9, 0.9, 1.0, 1.0)
 
 [node name="Thumb9" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
 layout_mode = 2
-custom_minimum_size = Vector2(155, 130)
+custom_minimum_size = Vector2(100, 110)
 size_flags_horizontal = 3
 
 [node name="ThumbBG9" type="ColorRect" parent="AppContainer/ScrollArea/GridContainer/Thumb9"]
@@ -379,7 +379,7 @@ theme_override_font_sizes/font_size = 26
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 color = Color(0.0, 0.0, 0.0, 0.7)
 
@@ -387,7 +387,7 @@ color = Color(0.0, 0.0, 0.0, 0.7)
 layout_mode = 0
 offset_left = 0.0
 offset_top = 100.0
-offset_right = 155.0
+offset_right = 100.0
 offset_bottom = 130.0
 text = "eliminada"
 horizontal_alignment = 1
