@@ -1,0 +1,486 @@
+[gd_scene format=3 uid="uid://menu_principal_01"]
+
+[ext_resource type="Texture2D" path="res://game/assets/Telefono_01_transparent.png" id="1_phone"]
+[ext_resource type="Texture2D" path="res://game/assets/chat_marta.png" id="2_mensajes"]
+[ext_resource type="Texture2D" path="res://game/assets/post_twitter.png" id="3_redsocial"]
+[ext_resource type="Texture2D" path="res://game/assets/parque_noche.png" id="4_galeria"]
+[ext_resource type="Script" path="res://game/scripts/system/MenuPrincipal.gd" id="5_menu"]
+
+; ── Raíz ──────────────────────────────────────────────────────────────────────
+[node name="MenuPrincipal" type="Control"]
+script = ExtResource("5_menu")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+; ── Fondo ─────────────────────────────────────────────────────────────────────
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.04, 0.06, 0.13, 1.0)
+
+; ── Contenedor centrado del teléfono ─────────────────────────────────────────
+[node name="PhoneRoot" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -310.0
+offset_right = 175.0
+offset_bottom = 310.0
+
+; ── Marco del teléfono encima de todo ─────────────────────────────────────────
+[node name="PhoneTexture" type="TextureRect" parent="PhoneRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("1_phone")
+expand_mode = 1
+stretch_mode = 5
+z_index = 10
+
+; ── Área de pantalla ─────────────────────────────────────────────────────────
+[node name="ScreenArea" type="Control" parent="PhoneRoot"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 42.0
+offset_right = 295.0
+offset_bottom = 563.0
+
+; Fondo pantalla
+[node name="ScreenBG" type="ColorRect" parent="PhoneRoot/ScreenArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.06, 0.08, 0.16, 1.0)
+
+; ── Status bar ────────────────────────────────────────────────────────────────
+[node name="StatusBar" type="ColorRect" parent="PhoneRoot/ScreenArea"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 240.0
+offset_bottom = 28.0
+color = Color(0.04, 0.06, 0.12, 1.0)
+
+[node name="StatusTime" type="Label" parent="PhoneRoot/ScreenArea/StatusBar"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 0.0
+offset_right = 80.0
+offset_bottom = 28.0
+text = "21:47"
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(0.85, 0.85, 0.9, 1.0)
+
+[node name="StatusIcons" type="Label" parent="PhoneRoot/ScreenArea/StatusBar"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 0.0
+offset_right = 240.0
+offset_bottom = 28.0
+text = "▲ WiFi 🔋"
+horizontal_alignment = 2
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 8
+theme_override_colors/font_color = Color(0.75, 0.75, 0.85, 1.0)
+
+; ── Header del menú ───────────────────────────────────────────────────────────
+[node name="MenuHeader" type="ColorRect" parent="PhoneRoot/ScreenArea"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 28.0
+offset_right = 240.0
+offset_bottom = 72.0
+color = Color(0.05, 0.07, 0.15, 1.0)
+
+[node name="WelcomeText" type="Label" parent="PhoneRoot/ScreenArea/MenuHeader"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 0.0
+offset_right = 228.0
+offset_bottom = 24.0
+text = "Bienvenido"
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.55, 0.70, 0.90, 1.0)
+
+[node name="HeaderTitle" type="Label" parent="PhoneRoot/ScreenArea/MenuHeader"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 22.0
+offset_right = 228.0
+offset_bottom = 44.0
+text = "Teléfono de Alex"
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.85, 0.93, 1.0, 1.0)
+
+; ── Scroll con las apps ───────────────────────────────────────────────────────
+[node name="AppsScroll" type="ScrollContainer" parent="PhoneRoot/ScreenArea"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 72.0
+offset_right = 240.0
+offset_bottom = 494.0
+horizontal_scroll_mode = 0
+
+[node name="AppsList" type="VBoxContainer" parent="PhoneRoot/ScreenArea/AppsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+; ── App: Mensajes ─────────────────────────────────────────────────────────────
+[node name="AppMensajes" type="Button" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 110)
+size_flags_horizontal = 3
+flat = true
+name = "AppMensajes"
+
+[node name="AppBG_Mensajes" type="ColorRect" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppMensajes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.08, 0.12, 0.22, 1.0)
+mouse_filter = 2
+
+[node name="AppThumb_Mensajes" type="TextureRect" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppMensajes"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 100.0
+offset_bottom = 110.0
+texture = ExtResource("2_mensajes")
+expand_mode = 1
+stretch_mode = 6
+mouse_filter = 2
+
+[node name="AppOverlay_Mensajes" type="ColorRect" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppMensajes"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 100.0
+offset_bottom = 110.0
+color = Color(0.0, 0.0, 0.0, 0.45)
+mouse_filter = 2
+
+[node name="AppInfo_Mensajes" type="VBoxContainer" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppMensajes"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 12.0
+offset_right = 234.0
+offset_bottom = 98.0
+theme_override_constants/separation = 4
+mouse_filter = 2
+
+[node name="AppIcon_Mensajes" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppMensajes/AppInfo_Mensajes"]
+layout_mode = 2
+text = "💬"
+theme_override_font_sizes/font_size = 22
+mouse_filter = 2
+
+[node name="AppName_Mensajes" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppMensajes/AppInfo_Mensajes"]
+layout_mode = 2
+text = "Mensajes"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.90, 0.93, 1.0, 1.0)
+mouse_filter = 2
+
+[node name="AppDesc_Mensajes" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppMensajes/AppInfo_Mensajes"]
+layout_mode = 2
+text = "Conversaciones recientes"
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(0.55, 0.65, 0.80, 1.0)
+mouse_filter = 2
+
+[node name="AppNotif_Mensajes" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppMensajes/AppInfo_Mensajes"]
+layout_mode = 2
+text = "● 1 no leído"
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(1.0, 0.55, 0.55, 1.0)
+mouse_filter = 2
+
+[node name="Separator1" type="ColorRect" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 1)
+color = Color(0.15, 0.20, 0.35, 1.0)
+
+; ── App: Red Social ───────────────────────────────────────────────────────────
+[node name="AppRedSocial" type="Button" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 110)
+size_flags_horizontal = 3
+flat = true
+
+[node name="AppBG_RedSocial" type="ColorRect" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppRedSocial"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.08, 0.10, 0.20, 1.0)
+mouse_filter = 2
+
+[node name="AppThumb_RedSocial" type="TextureRect" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppRedSocial"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 100.0
+offset_bottom = 110.0
+texture = ExtResource("3_redsocial")
+expand_mode = 1
+stretch_mode = 6
+mouse_filter = 2
+
+[node name="AppOverlay_RedSocial" type="ColorRect" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppRedSocial"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 100.0
+offset_bottom = 110.0
+color = Color(0.0, 0.0, 0.0, 0.45)
+mouse_filter = 2
+
+[node name="AppInfo_RedSocial" type="VBoxContainer" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppRedSocial"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 12.0
+offset_right = 234.0
+offset_bottom = 98.0
+theme_override_constants/separation = 4
+mouse_filter = 2
+
+[node name="AppIcon_RedSocial" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppRedSocial/AppInfo_RedSocial"]
+layout_mode = 2
+text = "📡"
+theme_override_font_sizes/font_size = 22
+mouse_filter = 2
+
+[node name="AppName_RedSocial" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppRedSocial/AppInfo_RedSocial"]
+layout_mode = 2
+text = "AlexNet"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.90, 0.93, 1.0, 1.0)
+mouse_filter = 2
+
+[node name="AppDesc_RedSocial" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppRedSocial/AppInfo_RedSocial"]
+layout_mode = 2
+text = "Publicaciones y actividad reciente"
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(0.55, 0.65, 0.80, 1.0)
+mouse_filter = 2
+
+[node name="AppNotif_RedSocial" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppRedSocial/AppInfo_RedSocial"]
+layout_mode = 2
+text = "● #WhatHappenedToAlex"
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(0.45, 0.75, 1.0, 1.0)
+mouse_filter = 2
+
+[node name="Separator2" type="ColorRect" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 1)
+color = Color(0.15, 0.20, 0.35, 1.0)
+
+; ── App: Galería ──────────────────────────────────────────────────────────────
+[node name="AppGaleria" type="Button" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 110)
+size_flags_horizontal = 3
+flat = true
+
+[node name="AppBG_Galeria" type="ColorRect" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppGaleria"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.08, 0.10, 0.18, 1.0)
+mouse_filter = 2
+
+[node name="AppThumb_Galeria" type="TextureRect" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppGaleria"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 100.0
+offset_bottom = 110.0
+texture = ExtResource("4_galeria")
+expand_mode = 1
+stretch_mode = 6
+mouse_filter = 2
+
+[node name="AppOverlay_Galeria" type="ColorRect" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppGaleria"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 100.0
+offset_bottom = 110.0
+color = Color(0.0, 0.0, 0.0, 0.45)
+mouse_filter = 2
+
+[node name="AppInfo_Galeria" type="VBoxContainer" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppGaleria"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 12.0
+offset_right = 234.0
+offset_bottom = 98.0
+theme_override_constants/separation = 4
+mouse_filter = 2
+
+[node name="AppIcon_Galeria" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppGaleria/AppInfo_Galeria"]
+layout_mode = 2
+text = "🖼"
+theme_override_font_sizes/font_size = 22
+mouse_filter = 2
+
+[node name="AppName_Galeria" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppGaleria/AppInfo_Galeria"]
+layout_mode = 2
+text = "Galería"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.90, 0.93, 1.0, 1.0)
+mouse_filter = 2
+
+[node name="AppDesc_Galeria" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppGaleria/AppInfo_Galeria"]
+layout_mode = 2
+text = "9 fotos · 1 eliminada"
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(0.55, 0.65, 0.80, 1.0)
+mouse_filter = 2
+
+[node name="AppNotif_Galeria" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppGaleria/AppInfo_Galeria"]
+layout_mode = 2
+text = "● foto eliminada el 20/11"
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(1.0, 0.55, 0.55, 1.0)
+mouse_filter = 2
+
+[node name="Separator3" type="ColorRect" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 1)
+color = Color(0.15, 0.20, 0.35, 1.0)
+
+; ── Placeholder apps bloqueadas ───────────────────────────────────────────────
+[node name="AppBloqueada1" type="PanelContainer" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 70)
+size_flags_horizontal = 3
+
+[node name="AppBloqueadaBG1" type="ColorRect" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppBloqueada1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.06, 0.08, 0.14, 1.0)
+
+[node name="AppBloqueadaRow1" type="HBoxContainer" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppBloqueada1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_right = -12.0
+theme_override_constants/separation = 12
+
+[node name="LockIcon1" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppBloqueada1/AppBloqueadaRow1"]
+layout_mode = 2
+text = "🔒"
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 18
+
+[node name="LockInfo1" type="VBoxContainer" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppBloqueada1/AppBloqueadaRow1"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="LockName1" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppBloqueada1/AppBloqueadaRow1/LockInfo1"]
+layout_mode = 2
+text = "Notas privadas"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.45, 0.50, 0.60, 1.0)
+
+[node name="LockDesc1" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppBloqueada1/AppBloqueadaRow1/LockInfo1"]
+layout_mode = 2
+text = "Bloqueado — resuelve el puzle anterior"
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(0.35, 0.40, 0.50, 1.0)
+
+[node name="Separator4" type="ColorRect" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 1)
+color = Color(0.15, 0.20, 0.35, 1.0)
+
+[node name="AppBloqueada2" type="PanelContainer" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 70)
+size_flags_horizontal = 3
+
+[node name="AppBloqueadaBG2" type="ColorRect" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppBloqueada2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.06, 0.08, 0.14, 1.0)
+
+[node name="AppBloqueadaRow2" type="HBoxContainer" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppBloqueada2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_right = -12.0
+theme_override_constants/separation = 12
+
+[node name="LockIcon2" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppBloqueada2/AppBloqueadaRow2"]
+layout_mode = 2
+text = "🔒"
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 18
+
+[node name="LockInfo2" type="VBoxContainer" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppBloqueada2/AppBloqueadaRow2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="LockName2" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppBloqueada2/AppBloqueadaRow2/LockInfo2"]
+layout_mode = 2
+text = "Correos"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.45, 0.50, 0.60, 1.0)
+
+[node name="LockDesc2" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/AppBloqueada2/AppBloqueadaRow2/LockInfo2"]
+layout_mode = 2
+text = "Bloqueado — resuelve el puzle anterior"
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(0.35, 0.40, 0.50, 1.0)
+
+; ── Nav bar inferior ──────────────────────────────────────────────────────────
+[node name="NavBar" type="ColorRect" parent="PhoneRoot/ScreenArea"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 494.0
+offset_right = 240.0
+offset_bottom = 521.0
+color = Color(0.04, 0.06, 0.12, 1.0)
+
+[node name="NavHome" type="Label" parent="PhoneRoot/ScreenArea/NavBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "⬤"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(0.5, 0.5, 0.6, 1.0)
