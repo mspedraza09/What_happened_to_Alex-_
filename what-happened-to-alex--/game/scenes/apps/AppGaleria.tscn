@@ -1,0 +1,396 @@
+[gd_scene format=3 uid="uid://app_galeria_01"]
+
+[ext_resource type="Texture2D" path="res://game/assets/Telefono_01_transparent.png" id="1_phone"]
+[ext_resource type="Texture2D" path="res://game/assets/cafe_telefono.png" id="2_cafe"]
+[ext_resource type="Texture2D" path="res://game/assets/parque_noche.png" id="3_parque"]
+[ext_resource type="Texture2D" path="res://game/assets/puerta_17.png" id="4_puerta"]
+[ext_resource type="Texture2D" path="res://game/assets/pasillo_cuarto.png" id="5_pasillo"]
+[ext_resource type="Texture2D" path="res://game/assets/libreta_claves.png" id="6_libreta"]
+[ext_resource type="Texture2D" path="res://game/assets/alex_silhouette.png" id="7_alex"]
+[ext_resource type="Texture2D" path="res://game/assets/telefono_camara.png" id="8_telefcam"]
+[ext_resource type="Texture2D" path="res://game/assets/chat_marta.png" id="9_chat"]
+
+[node name="Pantalla" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 112.0
+offset_top = -72.0
+offset_right = 995.0
+offset_bottom = 722.0
+texture = ExtResource("1_phone")
+z_index = 10
+
+[node name="AppContainer" type="Control" parent="."]
+layout_mode = 0
+offset_left = 396.0
+offset_top = 50.0
+offset_right = 711.0
+offset_bottom = 625.0
+
+[node name="TopBar" type="ColorRect" parent="AppContainer"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 315.0
+offset_bottom = 48.0
+color = Color(0.05, 0.07, 0.14, 1.0)
+
+[node name="AppTitle" type="Label" parent="AppContainer/TopBar"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 370.0
+offset_bottom = 48.0
+text = "Galería  •  Recuerdos"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 15
+theme_override_colors/font_color = Color(0.82, 0.95, 1.0, 1.0)
+
+[node name="AlbumCount" type="Label" parent="AppContainer/TopBar"]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 0.0
+offset_right = 315.0
+offset_bottom = 48.0
+text = "9 fotos"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.45, 0.60, 0.75, 1.0)
+
+[node name="ScrollArea" type="ScrollContainer" parent="AppContainer"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 50.0
+offset_right = 315.0
+offset_bottom = 575.0
+
+[node name="GridContainer" type="GridContainer" parent="AppContainer/ScrollArea"]
+layout_mode = 2
+columns = 3
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 3
+theme_override_constants/v_separation = 3
+
+[node name="Thumb1" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 110)
+size_flags_horizontal = 3
+
+[node name="ThumbImg1" type="TextureRect" parent="AppContainer/ScrollArea/GridContainer/Thumb1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 1
+stretch_mode = 6
+texture = ExtResource("2_cafe")
+
+[node name="ThumbOverlay1" type="ColorRect" parent="AppContainer/ScrollArea/GridContainer/Thumb1"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+color = Color(0.0, 0.0, 0.0, 0.55)
+
+[node name="ThumbCaption1" type="Label" parent="AppContainer/ScrollArea/GridContainer/Thumb1"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+text = "café favorito"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(0.9, 0.9, 1.0, 1.0)
+
+[node name="Thumb2" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 110)
+size_flags_horizontal = 3
+
+[node name="ThumbImg2" type="TextureRect" parent="AppContainer/ScrollArea/GridContainer/Thumb2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 1
+stretch_mode = 6
+texture = ExtResource("3_parque")
+
+[node name="ThumbOverlay2" type="ColorRect" parent="AppContainer/ScrollArea/GridContainer/Thumb2"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+color = Color(0.0, 0.0, 0.0, 0.55)
+
+[node name="ThumbCaption2" type="Label" parent="AppContainer/ScrollArea/GridContainer/Thumb2"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+text = "parque noche"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(0.9, 0.9, 1.0, 1.0)
+
+[node name="Thumb3" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 110)
+size_flags_horizontal = 3
+
+[node name="ThumbImg3" type="TextureRect" parent="AppContainer/ScrollArea/GridContainer/Thumb3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 1
+stretch_mode = 6
+texture = ExtResource("4_puerta")
+
+[node name="ThumbOverlay3" type="ColorRect" parent="AppContainer/ScrollArea/GridContainer/Thumb3"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+color = Color(0.0, 0.0, 0.0, 0.55)
+
+[node name="ThumbCaption3" type="Label" parent="AppContainer/ScrollArea/GridContainer/Thumb3"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+text = "puerta #17"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(0.9, 0.9, 1.0, 1.0)
+
+[node name="Thumb4" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 110)
+size_flags_horizontal = 3
+
+[node name="ThumbImg4" type="TextureRect" parent="AppContainer/ScrollArea/GridContainer/Thumb4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 1
+stretch_mode = 6
+texture = ExtResource("5_pasillo")
+
+[node name="ThumbOverlay4" type="ColorRect" parent="AppContainer/ScrollArea/GridContainer/Thumb4"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+color = Color(0.0, 0.0, 0.0, 0.55)
+
+[node name="ThumbCaption4" type="Label" parent="AppContainer/ScrollArea/GridContainer/Thumb4"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+text = "pasillo"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(0.9, 0.9, 1.0, 1.0)
+
+[node name="Thumb5" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 110)
+size_flags_horizontal = 3
+
+[node name="ThumbImg5" type="TextureRect" parent="AppContainer/ScrollArea/GridContainer/Thumb5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 1
+stretch_mode = 6
+texture = ExtResource("6_libreta")
+
+[node name="ThumbOverlay5" type="ColorRect" parent="AppContainer/ScrollArea/GridContainer/Thumb5"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+color = Color(0.0, 0.0, 0.0, 0.55)
+
+[node name="ThumbCaption5" type="Label" parent="AppContainer/ScrollArea/GridContainer/Thumb5"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+text = "notas 19/11"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(0.9, 0.9, 1.0, 1.0)
+
+[node name="Thumb6" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 110)
+size_flags_horizontal = 3
+
+[node name="ThumbImg6" type="TextureRect" parent="AppContainer/ScrollArea/GridContainer/Thumb6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 1
+stretch_mode = 6
+texture = ExtResource("7_alex")
+
+[node name="ThumbOverlay6" type="ColorRect" parent="AppContainer/ScrollArea/GridContainer/Thumb6"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+color = Color(0.0, 0.0, 0.0, 0.55)
+
+[node name="ThumbCaption6" type="Label" parent="AppContainer/ScrollArea/GridContainer/Thumb6"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+text = "Alex · ciudad"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(0.9, 0.9, 1.0, 1.0)
+
+[node name="Thumb7" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 110)
+size_flags_horizontal = 3
+
+[node name="ThumbImg7" type="TextureRect" parent="AppContainer/ScrollArea/GridContainer/Thumb7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 1
+stretch_mode = 6
+texture = ExtResource("8_telefcam")
+
+[node name="ThumbOverlay7" type="ColorRect" parent="AppContainer/ScrollArea/GridContainer/Thumb7"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+color = Color(0.0, 0.0, 0.0, 0.55)
+
+[node name="ThumbCaption7" type="Label" parent="AppContainer/ScrollArea/GridContainer/Thumb7"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+text = "20/11 · 21:47"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(1.0, 0.85, 0.4, 1.0)
+
+[node name="Thumb8" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 110)
+size_flags_horizontal = 3
+
+[node name="ThumbImg8" type="TextureRect" parent="AppContainer/ScrollArea/GridContainer/Thumb8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 1
+stretch_mode = 6
+texture = ExtResource("9_chat")
+
+[node name="ThumbOverlay8" type="ColorRect" parent="AppContainer/ScrollArea/GridContainer/Thumb8"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+color = Color(0.0, 0.0, 0.0, 0.55)
+
+[node name="ThumbCaption8" type="Label" parent="AppContainer/ScrollArea/GridContainer/Thumb8"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+text = "chat · Marta"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(0.9, 0.9, 1.0, 1.0)
+
+[node name="Thumb9" type="PanelContainer" parent="AppContainer/ScrollArea/GridContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 110)
+size_flags_horizontal = 3
+
+[node name="ThumbBG9" type="ColorRect" parent="AppContainer/ScrollArea/GridContainer/Thumb9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.04, 0.04, 0.07, 1.0)
+
+[node name="ThumbIcon9" type="Label" parent="AppContainer/ScrollArea/GridContainer/Thumb9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -30.0
+text = "🔒"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 26
+
+[node name="ThumbOverlay9" type="ColorRect" parent="AppContainer/ScrollArea/GridContainer/Thumb9"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+color = Color(0.0, 0.0, 0.0, 0.7)
+
+[node name="ThumbCaption9" type="Label" parent="AppContainer/ScrollArea/GridContainer/Thumb9"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 130.0
+text = "eliminada"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(1.0, 0.35, 0.35, 1.0)
