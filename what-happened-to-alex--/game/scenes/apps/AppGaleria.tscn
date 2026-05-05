@@ -42,9 +42,20 @@ offset_right = 315.0
 offset_bottom = 48.0
 color = Color(0.05, 0.07, 0.14, 1.0)
 
+[node name="BackButton" type="Button" parent="AppContainer/TopBar"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 6.0
+offset_right = 44.0
+offset_bottom = 42.0
+text = "←"
+flat = true
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.65, 0.80, 1.0, 1.0)
+
 [node name="AppTitle" type="Label" parent="AppContainer/TopBar"]
 layout_mode = 0
-offset_left = 0.0
+offset_left = 44.0
 offset_top = 0.0
 offset_right = 370.0
 offset_bottom = 48.0

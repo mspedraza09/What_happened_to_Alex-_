@@ -1,21 +1,19 @@
 extends "res://game/scripts/apps/BaseApp.gd"
 
 # App Red Social — se desbloquea en Fase 2+
-# Narrativa: comentarios de ciberacoso con apodo censurado hacia Alex
-# El jugador debe reconstruir el apodo y obtener la pista 3.
-#
-# El apodo aparece varias veces con letras faltantes: "_ L E X"
-# El jugador completa la palabra "ALEX" y se guarda como pista 3.
+# Estructura real de la escena: AppContainer/TopBar/BackButton
+#                               AppContainer/Feed/PostList/...
+# El jugador reconstruye el apodo censurado y obtiene la pista 3.
 
-@onready var panel_apodo    := $PhoneRoot/ScreenArea/AppContent/Feed/PanelApodo
-@onready var input_apodo    := $PhoneRoot/ScreenArea/AppContent/Feed/PanelApodo/InputApodo
-@onready var btn_confirmar  := $PhoneRoot/ScreenArea/AppContent/Feed/PanelApodo/BtnConfirmar
-@onready var label_resultado := $PhoneRoot/ScreenArea/AppContent/Feed/PanelApodo/LabelResultado
+@onready var btn_confirmar  := $AppContainer/Feed/PostList/Post3/PostContent3/BtnConfirmar
+@onready var input_apodo    := $AppContainer/Feed/PostList/Post3/PostContent3/InputApodo
+@onready var label_resultado := $AppContainer/Feed/PostList/Post3/PostContent3/LabelResultado
 
 const APODO_CORRECTO := "ALEX"
-const PISTA_3        := "EX"   # Fragmento que aporta a la contraseña final
+const PISTA_3        := "EX"
 
 func _on_app_ready() -> void:
+	# BackButton ya es manejado por BaseApp via _find_back_button()
 	if btn_confirmar:
 		btn_confirmar.pressed.connect(_verificar_apodo)
 
