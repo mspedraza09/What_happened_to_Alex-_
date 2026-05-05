@@ -315,7 +315,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.0, 0.0, 0.0, 0.72)
-visible = true
+visible = false
 mouse_filter = 2
 
 [node name="LockIcon" type="Label" parent="PhoneRoot/ScreenArea/AppsScroll/AppsList/BtnRedSocial/OverlayLock"]

@@ -10,7 +10,10 @@
 [ext_resource type="Texture2D" path="res://game/assets/telefono_camara.png" id="8_telefcam"]
 [ext_resource type="Texture2D" path="res://game/assets/chat_marta.png" id="9_chat"]
 
+[ext_resource type="Script" path="res://game/scripts/apps/AppGaleria_nav.gd" id="99_nav"]
+
 [node name="Pantalla" type="Control"]
+script = ExtResource("99_nav")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

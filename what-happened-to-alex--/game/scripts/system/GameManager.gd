@@ -64,7 +64,7 @@ func is_app_desbloqueada(app_id: String) -> bool:
 		"archivos":   return true          # Siempre activa
 		"galeria":    return true          # Siempre activa
 		"buscador":   return true          # Siempre activa
-		"redsocial":  return fase >= 2     # Se desbloquea al completar fase 1
+		"redsocial":  return true          # Siempre activa
 		"notas":      return fase >= 2     # Se desbloquea al completar fase 1
 		"diario":     return is_diario_desbloqueado()
 	return false
