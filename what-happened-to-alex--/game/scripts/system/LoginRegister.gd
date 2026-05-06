@@ -44,7 +44,7 @@ func _on_register_pressed() -> void:
 		_show_message("Completa todos los campos.")
 		return
 	if engine.register_user(username, password):
-		engine.save("progress", "progress:fase", 0)
+		engine.save("progress", "progress:%s:fase" % username, 0)
 		_show_message("Registro exitoso. Ya puedes iniciar sesión.")
 	else:
 		_show_message("El usuario ya existe o hay datos inválidos.")

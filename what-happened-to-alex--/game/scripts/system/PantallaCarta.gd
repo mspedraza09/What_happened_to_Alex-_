@@ -86,7 +86,7 @@ func _pin_correcto() -> void:
 		lbl.add_theme_color_override("font_color", Color(0.40, 1.0, 0.55, 1.0))
 	feedback.text = "Acceso concedido."
 	feedback.add_theme_color_override("font_color", Color(0.40, 1.0, 0.55, 1.0))
-	GameManager.engine.save("progress", "progress:pin_resuelto", true)
+	GameManager.set_pin_resuelto()
 	var tween := create_tween()
 	tween.tween_interval(1.2)
 	tween.tween_callback(_ir_al_menu)

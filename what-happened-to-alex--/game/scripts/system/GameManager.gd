@@ -4,10 +4,10 @@ extends Node
 # GameManager — Autoload singleton
 # Claves en el StorageEngine:
 #   "session:usuario_actual"       → String (username del jugador activo)
-#   "progress:fase"                → int   (0–5)
-#   "progress:pista1/2/3"          → String
-#   "progress:diario_desbloqueado" → bool
-#   "progress:pin_resuelto"        → bool
+#   "progress:{usuario}:fase"      → int   (0–5)
+#   "progress:{usuario}:pista1/2/3" → String
+#   "progress:{usuario}:diario_desbloqueado" → bool
+#   "progress:{usuario}:pin_resuelto" → bool
 # ─────────────────────────────────────────────────────────────────────────────
 
 var engine: StorageEngine
@@ -37,25 +37,41 @@ func hay_sesion_activa() -> bool:
 # ── Progreso ──────────────────────────────────────────────────────────────────
 
 func get_fase() -> int:
-	var f = engine.get_data("progress:fase")
+	var usuario = get_usuario_activo()
+	if usuario.is_empty():
+		return 0
+	var key = "progress:%s:fase" % usuario
+	var f = engine.get_data(key)
 	if f == null:
 		return 0
 	return int(f)
 
 func get_pista(numero: int) -> String:
-	var p = engine.get_data("progress:pista%d" % numero)
+	var usuario = get_usuario_activo()
+	if usuario.is_empty():
+		return ""
+	var key = "progress:%s:pista%d" % [usuario, numero]
+	var p = engine.get_data(key)
 	if p == null:
 		return ""
 	return str(p)
 
 func is_diario_desbloqueado() -> bool:
-	var d = engine.get_data("progress:diario_desbloqueado")
+	var usuario = get_usuario_activo()
+	if usuario.is_empty():
+		return false
+	var key = "progress:%s:diario_desbloqueado" % usuario
+	var d = engine.get_data(key)
 	if d == null:
 		return false
 	return bool(d)
 
 func is_pin_resuelto() -> bool:
-	var p = engine.get_data("progress:pin_resuelto")
+	var usuario = get_usuario_activo()
+	if usuario.is_empty():
+		return false
+	var key = "progress:%s:pin_resuelto" % usuario
+	var p = engine.get_data(key)
 	if p == null:
 		return false
 	return bool(p)
@@ -63,14 +79,33 @@ func is_pin_resuelto() -> bool:
 # ── Escritura ─────────────────────────────────────────────────────────────────
 
 func set_fase(nueva_fase: int) -> void:
-	engine.save("progress", "progress:fase", nueva_fase)
+	var usuario = get_usuario_activo()
+	if usuario.is_empty():
+		return
+	var key = "progress:%s:fase" % usuario
+	engine.save("progress", key, nueva_fase)
 	fase_cambiada.emit(nueva_fase)
 
 func set_pista(numero: int, valor: String) -> void:
-	engine.save("progress", "progress:pista%d" % numero, valor)
+	var usuario = get_usuario_activo()
+	if usuario.is_empty():
+		return
+	var key = "progress:%s:pista%d" % [usuario, numero]
+	engine.save("progress", key, valor)
 
 func desbloquear_diario() -> void:
-	engine.save("progress", "progress:diario_desbloqueado", true)
+	var usuario = get_usuario_activo()
+	if usuario.is_empty():
+		return
+	var key = "progress:%s:diario_desbloqueado" % usuario
+	engine.save("progress", key, true)
+
+func set_pin_resuelto() -> void:
+	var usuario = get_usuario_activo()
+	if usuario.is_empty():
+		return
+	var key = "progress:%s:pin_resuelto" % usuario
+	engine.save("progress", key, true)
 
 # ── Desbloqueo de apps ────────────────────────────────────────────────────────
 
