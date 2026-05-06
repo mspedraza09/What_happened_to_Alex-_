@@ -1,6 +1,6 @@
 extends Control
 
-const MENU_SCENE_PATH: String = "res://game/scenes/menu/MenuPrincipal.tscn"
+const MENU_SCENE_PATH: String = "res://game/scenes/menu/PantallaCarta.tscn"
 
 var engine: StorageEngine
 
