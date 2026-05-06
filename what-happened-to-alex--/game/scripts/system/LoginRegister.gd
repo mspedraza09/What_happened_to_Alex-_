@@ -1,6 +1,7 @@
 extends Control
 
-const MENU_SCENE_PATH: String = "res://game/scenes/menu/PantallaCarta.tscn"
+const CARTA_PATH := "res://game/scenes/menu/PantallaCarta.tscn"
+const MENU_PATH  := "res://game/scenes/menu/MenuPrincipal.tscn"
 
 var engine: StorageEngine
 
@@ -13,6 +14,13 @@ var engine: StorageEngine
 
 func _ready() -> void:
 	engine = StorageEngine.new("user://save_data")
+
+	# Si ya hay sesión activa, saltar directamente a donde corresponde
+	if GameManager.hay_sesion_activa():
+		var usuario: String = GameManager.get_usuario_activo()
+		_ir_siguiente(usuario)
+		return
+
 	login_button.pressed.connect(_on_login_pressed)
 	register_button.pressed.connect(_on_register_pressed)
 
@@ -23,6 +31,7 @@ func _on_login_pressed() -> void:
 		_show_message("Completa todos los campos.")
 		return
 	if engine.authenticate_user(username, password):
+		GameManager.iniciar_sesion(username)
 		_show_welcome_transition(username)
 	else:
 		_show_message("Usuario o contraseña incorrectos.")
@@ -35,7 +44,6 @@ func _on_register_pressed() -> void:
 		_show_message("Completa todos los campos.")
 		return
 	if engine.register_user(username, password):
-		# Inicializar progreso del jugador en fase 0
 		engine.save("progress", "progress:fase", 0)
 		_show_message("Registro exitoso. Ya puedes iniciar sesión.")
 	else:
@@ -53,8 +61,13 @@ func _show_welcome_transition(username: String) -> void:
 	register_button.disabled = true
 	var tween := create_tween()
 	tween.tween_property(welcome_label, "modulate:a", 1.0, 0.4)
-	tween.tween_interval(0.8)
-	tween.tween_property(welcome_label, "modulate:a", 0.0, 0.4)
+	tween.tween_interval(0.6)
+	tween.tween_property(welcome_label, "modulate:a", 0.0, 0.3)
 	await tween.finished
-	if get_tree().change_scene_to_file(MENU_SCENE_PATH) != OK:
-		_show_message("No se pudo cargar el menú.")
+	_ir_siguiente(username)
+
+func _ir_siguiente(username: String) -> void:
+	if GameManager.is_pin_resuelto():
+		get_tree().change_scene_to_file.call_deferred(MENU_PATH)
+	else:
+		get_tree().change_scene_to_file.call_deferred(CARTA_PATH)
