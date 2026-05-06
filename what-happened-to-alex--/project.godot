@@ -14,6 +14,10 @@ config/name="What_happened_to_Alex_?"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://game/assets/icon.svg"
 
+[autoload]
+
+Global="*uid://dgki31conksdg"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

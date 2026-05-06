@@ -3,12 +3,14 @@ extends Control
 @export var ultimo_mensaje: String = "Hola..."
 @export var foto_perfil: Texture2D
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	%nombre_usuario.text = nombre_usuario
 	if foto_perfil:
 		%FotoRect.texture = foto_perfil
-	
+	if Global.chat_actual != null:
+		preparar_chat(Global.chat_actual)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,6 +29,9 @@ func preparar_chat(datos: ChatDatos):
 	for msg in datos.mensajes:
 		var burbuja = Label.new() # O una escena de "Burbuja" más bonita
 		burbuja.text = msg["text"]
+		burbuja.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		if msg["sender"] == "Alex":
 			burbuja.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		else:
+			burbuja.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		%ContenedorMensajes.add_child(burbuja)

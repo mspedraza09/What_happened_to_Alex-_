@@ -1,9 +1,6 @@
 [gd_scene format=3 uid="uid://dhyj4on5d02s1"]
 
-[node name="Global" type="Control" unique_id=2033558930]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[ext_resource type="Script" uid="uid://dgki31conksdg" path="res://game/scenes/apps/global.gd" id="1_vimch"]
+
+[node name="Global" type="Node" unique_id=118410802]
+script = ExtResource("1_vimch")

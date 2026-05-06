@@ -7,8 +7,8 @@ signal chat_seleccionado(nombre)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	%Label.text = nombre_usuario
-	%Label2.text = ultimo_mensaje
+	%usuario.text = nombre_usuario
+	%ultimo_mensaje.text = ultimo_mensaje
 	if foto_perfil:
 		%FotoRect.texture = foto_perfil
 
