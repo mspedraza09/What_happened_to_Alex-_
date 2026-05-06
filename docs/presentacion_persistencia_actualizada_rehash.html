@@ -1,0 +1,830 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Persistencia Alex · Corregida</title><style>
+
+:root{--bg:#05070d;--panel:#0b1220;--panel2:#111827;--line:#1e293b;--text:#e5e7eb;--muted:#94a3b8;--green:#7CFFB2;--cyan:#67E8F9;--pink:#F472B6;--yellow:#FDE68A;--orange:#FDBA74;--purple:#C084FC;--blue:#93C5FD;}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at top left,#172554,transparent 35%),linear-gradient(135deg,#05070d,#020617 70%);font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Arial;color:var(--text);overflow:hidden}.slide{display:none;width:100vw;height:100vh;padding:30px 38px;grid-template-rows:auto 1fr auto;gap:12px;position:relative}.slide.active{display:grid}.bg-grid:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(103,232,249,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(103,232,249,.055) 1px,transparent 1px);background-size:30px 30px;mask-image:linear-gradient(to bottom,black,transparent 92%);pointer-events:none}.glow{position:absolute;right:-90px;top:-130px;width:390px;height:390px;background:radial-gradient(circle,rgba(124,255,178,.18),transparent 65%);filter:blur(10px)}header,main,footer{position:relative;z-index:1}.kicker{text-transform:uppercase;letter-spacing:.18em;color:var(--cyan);font-weight:900;font-size:12px;margin-bottom:6px}h1{font-size:34px;line-height:1.02;margin:0;font-weight:950;letter-spacing:-.04em}h1 span{color:var(--green)}h2{font-size:21px;margin:0 0 10px;color:#fff}h3{font-size:23px;margin:0 0 10px;color:var(--green)}p{font-size:17px;line-height:1.42;color:#cbd5e1;margin:0 0 12px}code:not(pre code){background:#020617;border:1px solid #334155;color:var(--green);padding:.08rem .34rem;border-radius:8px}.cover main,.full{display:grid;align-items:center}.hero{max-width:1000px}.hero p{font-size:23px}.terminal{margin-top:18px;background:#020617;border:1px solid rgba(124,255,178,.24);border-radius:18px;padding:17px 20px;font-size:19px;font-family:ui-monospace,Menlo,Consolas,monospace;color:#d1fae5;box-shadow:0 18px 60px rgba(0,0,0,.40)}.terminal em{color:var(--green);font-style:normal;font-weight:900;margin-right:8px}.two{display:grid;grid-template-columns:.29fr .71fr;gap:18px;min-height:0}.flow{display:grid;grid-template-columns:1fr 38px 1fr 38px 1fr;gap:12px;align-items:stretch}.flow>div,.grid3>div,.summary,.explain{background:linear-gradient(135deg,rgba(15,23,42,.92),rgba(17,24,39,.72));border:1px solid rgba(103,232,249,.20);border-radius:22px;padding:20px;box-shadow:0 20px 70px rgba(0,0,0,.27)}.flow span{display:grid;place-items:center;font-size:34px;color:var(--green);font-weight:950}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.explain{border-left:2px solid rgba(124,255,178,.6);align-self:start}.codecard{min-height:0;background:#020617;border:1px solid rgba(103,232,249,.24);border-radius:20px;overflow:hidden;box-shadow:0 22px 70px rgba(0,0,0,.45)}.bar{height:34px;background:linear-gradient(90deg,#111827,#0f172a);display:flex;gap:8px;align-items:center;padding:0 12px;border-bottom:1px solid rgba(148,163,184,.16)}.bar b{width:10px;height:10px;border-radius:50%;display:block}.bar b:nth-child(1){background:#fb7185}.bar b:nth-child(2){background:#fde68a}.bar b:nth-child(3){background:#7cffb2}.bar span{margin-left:8px;color:#94a3b8;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}.code{margin:0;padding:14px 16px;max-height:calc(100vh - 190px);overflow:auto;color:#dbeafe;font-size:12.1px;line-height:1.42;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;tab-size:4;white-space:pre}.small .code{max-height:calc(100vh - 190px);font-size:10.7px;line-height:1.34}.ln{color:#475569;user-select:none;margin-right:10px}.kw{color:#F472B6;font-weight:800}.type{color:#67E8F9;font-weight:700}.str{color:#FDE68A}.num{color:#FDBA74}.op{color:#C084FC}.comment{color:#7CFFB2;font-style:italic}.consttok{color:#93C5FD;font-weight:800}.summary{max-width:1040px;margin:auto}.summary p{font-size:22px}.progress{width:200px;height:4px;background:#1e293b;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--green),var(--cyan),var(--pink))}footer{display:flex;justify-content:space-between;align-items:center;color:#64748b;font-size:13px}.count{font-family:ui-monospace,monospace;color:#94a3b8}@media(max-width:900px){.slide{padding:22px}.two,.flow,.grid3{grid-template-columns:1fr}.flow span{display:none}h1{font-size:28px}p{font-size:15px}.code,.small .code{max-height:50vh;font-size:10px}}@media print{body{overflow:visible;background:#05070d}.slide{display:grid;page-break-after:always}.progress,footer{display:none}.code,.small .code{max-height:none}}
+
+</style></head><body><section class="slide bg-grid cover">
+<div class="glow"></div>
+<header><div class="kicker">flujo del sistema</div><h1>Persistencia + <span>systems</span><br>What Happened to Alex</h1></header>
+<main><div class="hero">
+<p>El flujo del proyecto conecta la interfaz del jugador con un sistema de guardado propio. El jugador se registra o inicia sesión, el progreso se guarda por usuario y las escenas consultan ese estado para desbloquear pistas, apps y el diario.</p>
+<div class="terminal"><em>$</em> Login/Register → StorageEngine → data.log + index.bin → GameManager → Apps → Pistas → Diario</div>
+</div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><section class="slide bg-grid ">
+<div class="glow"></div>
+<header><div class="kicker">mapa general</div><h1>Arquitectura del guardado</h1></header>
+<main><div class="flow"><div><h3>Escenas system</h3><p>LoginRegister, GameManager, MenuPrincipal y PantallaCarta piden guardar o leer sesión, fase, pistas y PIN.</p></div><span>→</span><div><h3>StorageEngine</h3><p>Es la API central: save, get_data, delete, register_user y authenticate_user.</p></div><span>→</span><div><h3>Archivos</h3><p>data.log almacena registros JSON. index.bin guarda el índice key → offset.</p></div></div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><section class="slide bg-grid ">
+<div class="glow"></div>
+<header><div class="kicker">flujo persistente</div><h1>Ciclo: guardar, leer y recuperar</h1></header>
+<main><div class="grid3"><div><h3>Guardar</h3><p>Se agrega una línea JSON al final de data.log y se guarda su offset.</p></div><div><h3>Leer</h3><p>La HashTable resuelve la clave a un offset y RecordStore lee esa línea exacta.</p></div><div><h3>Recuperar</h3><p>Si index.bin está dañado, Recovery reconstruye el índice recorriendo todo el log.</p></div></div><div class="terminal"><em>clave</em> progress:alex:fase → offset 184 → {"data":2}</div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><section class="slide bg-grid ">
+<div class="glow"></div>
+<header><div class="kicker">persistencia · núcleo</div><h1>StorageEngine: inicialización</h1></header>
+<main><div class="two">
+<aside class="explain"><h2>StorageEngine.gd</h2><p>Inicializa carpeta, log, índice y tabla hash. Si el índice no se puede cargar, reconstruye desde data.log.</p></aside>
+<div class="codecard "><div class="bar"><b></b><b></b><b></b><span>StorageEngine.gd</span></div><pre class="code"><code><span class="ln">01</span> <span class="kw">class_name</span> <span class="type">StorageEngine</span> <span class="comment"># clase principal del sistema de persistencia</span>
+<span class="ln">02</span> <span class="kw">extends</span> RefCounted
+<span class="ln">03</span> 
+<span class="ln">04</span> <span class="kw">var</span> record_store<span class="op">:</span> <span class="type">RecordStore</span> <span class="comment"># maneja el archivo data.log</span>
+<span class="ln">05</span> <span class="kw">var</span> index_store<span class="op">:</span> <span class="type">IndexStore</span> <span class="comment"># maneja el archivo index.bin</span>
+<span class="ln">06</span> <span class="kw">var</span> hash_table<span class="op">:</span> <span class="type">HashTable</span> <span class="comment"># índice en memoria para buscar offsets</span>
+<span class="ln">07</span> 
+<span class="ln">08</span> <span class="kw">func</span> _init<span class="op">(</span>data_dir<span class="op">:</span> <span class="type">String</span> <span class="op">=</span> <span class="str">&quot;user://save_data&quot;</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">09</span> 	<span class="type">DirAccess</span><span class="op">.</span>make_dir_recursive_absolute<span class="op">(</span>data_dir<span class="op">)</span> <span class="comment"># crea la carpeta si no existe</span>
+<span class="ln">10</span> 	record_store <span class="op">=</span> <span class="type">RecordStore</span><span class="op">.</span>new<span class="op">(</span>data_dir <span class="op">+</span> <span class="str">&quot;/data.log&quot;</span><span class="op">)</span> <span class="comment"># prepara el archivo principal de registros</span>
+<span class="ln">11</span> 	index_store  <span class="op">=</span> <span class="type">IndexStore</span><span class="op">.</span>new<span class="op">(</span>data_dir <span class="op">+</span> <span class="str">&quot;/index.bin&quot;</span><span class="op">)</span>
+<span class="ln">12</span> 	hash_table   <span class="op">=</span> <span class="type">HashTable</span><span class="op">.</span>new<span class="op">(</span><span class="op">)</span>
+<span class="ln">13</span> 	<span class="kw">if</span> <span class="kw">not</span> index_store<span class="op">.</span>load<span class="op">(</span>hash_table<span class="op">)</span><span class="op">:</span> <span class="comment"># intenta cargar el índice persistido</span>
+<span class="ln">14</span> 		<span class="kw">var</span> recovery <span class="op">=</span> <span class="type">Recovery</span><span class="op">.</span>new<span class="op">(</span>record_store<span class="op">,</span> index_store<span class="op">)</span> <span class="comment"># crea el recuperador si falla el índice</span>
+<span class="ln">15</span> 		recovery<span class="op">.</span>rebuild<span class="op">(</span>hash_table<span class="op">)</span> <span class="comment"># reconstruye el índice desde data.log</span>
+<span class="ln">16</span> 
+<span class="ln">17</span> <span class="kw">func</span> save<span class="op">(</span>record_type<span class="op">:</span> <span class="type">String</span><span class="op">,</span> key<span class="op">:</span> <span class="type">String</span><span class="op">,</span> data<span class="op">:</span> <span class="type">Variant</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span> <span class="comment"># guarda o actualiza un dato</span></code></pre></div>
+</div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><section class="slide bg-grid ">
+<div class="glow"></div>
+<header><div class="kicker">persistencia · núcleo</div><h1>StorageEngine: save, get_data y delete</h1></header>
+<main><div class="two">
+<aside class="explain"><h2>StorageEngine.gd</h2><p>Estas funciones son el corazón del sistema: guardar actualiza log + hash + índice; leer usa offsets; delete agrega un tombstone y actualiza index.bin.</p></aside>
+<div class="codecard "><div class="bar"><b></b><b></b><b></b><span>StorageEngine.gd</span></div><pre class="code"><code><span class="ln">01</span> 	hash_table<span class="op">.</span>put<span class="op">(</span>key<span class="op">,</span> offset<span class="op">)</span> <span class="comment"># actualiza la clave en memoria</span>
+<span class="ln">02</span> 	index_store<span class="op">.</span>save<span class="op">(</span>hash_table<span class="op">)</span> <span class="comment"># guarda el índice actualizado</span>
+<span class="ln">03</span> 
+<span class="ln">04</span> <span class="kw">func</span> get_data<span class="op">(</span>key<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">Variant</span><span class="op">:</span> <span class="comment"># recupera un dato por clave</span>
+<span class="ln">05</span> 	<span class="kw">var</span> offset<span class="op">:</span> <span class="type">int</span> <span class="op">=</span> hash_table<span class="op">.</span>get_offset<span class="op">(</span>key<span class="op">)</span>
+<span class="ln">06</span> 	<span class="kw">if</span> offset <span class="op">==</span> <span class="op">-</span><span class="num">1</span><span class="op">:</span> <span class="comment"># detecta clave inexistente</span>
+<span class="ln">07</span> 		<span class="kw">return</span> <span class="kw">null</span>
+<span class="ln">08</span> 	<span class="kw">var</span> record <span class="op">=</span> record_store<span class="op">.</span>read_at<span class="op">(</span>offset<span class="op">)</span> <span class="comment"># lee el registro en data.log</span>
+<span class="ln">09</span> 	<span class="kw">if</span> record <span class="op">==</span> <span class="kw">null</span><span class="op">:</span>
+<span class="ln">10</span> 		<span class="kw">return</span> <span class="kw">null</span>
+<span class="ln">11</span> 	<span class="kw">return</span> record<span class="op">.</span>get<span class="op">(</span><span class="str">&quot;data&quot;</span><span class="op">,</span> <span class="kw">null</span><span class="op">)</span>
+<span class="ln">12</span> 
+<span class="ln">13</span> <span class="kw">func</span> delete<span class="op">(</span>key<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">bool</span><span class="op">:</span>
+<span class="ln">14</span> 	<span class="kw">var</span> offset<span class="op">:</span> <span class="type">int</span> <span class="op">=</span> hash_table<span class="op">.</span>get_offset<span class="op">(</span>key<span class="op">)</span>
+<span class="ln">15</span> 	<span class="kw">if</span> offset <span class="op">!=</span> <span class="op">-</span><span class="num">1</span><span class="op">:</span>
+<span class="ln">16</span> 		record_store<span class="op">.</span>append<span class="op">(</span><span class="str">&quot;delete&quot;</span><span class="op">,</span> key<span class="op">,</span> <span class="kw">null</span><span class="op">)</span> <span class="comment"># agrega tombstone al log</span>
+<span class="ln">17</span> 		<span class="kw">var</span> removed<span class="op">:</span> <span class="type">bool</span> <span class="op">=</span> hash_table<span class="op">.</span>delete<span class="op">(</span>key<span class="op">)</span>
+<span class="ln">18</span> 		<span class="kw">if</span> removed<span class="op">:</span>
+<span class="ln">19</span> 			index_store<span class="op">.</span>save<span class="op">(</span>hash_table<span class="op">)</span> <span class="comment"># guarda el índice actualizado</span>
+<span class="ln">20</span> 		<span class="kw">return</span> removed
+<span class="ln">21</span> 	<span class="kw">return</span> <span class="kw">false</span>
+<span class="ln">22</span> 
+<span class="ln">23</span> <span class="kw">func</span> stats<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">Dictionary</span><span class="op">:</span>
+<span class="ln">24</span> 	<span class="kw">return</span> hash_table<span class="op">.</span>stats<span class="op">(</span><span class="op">)</span>
+<span class="ln">25</span> 
+<span class="ln">26</span> <span class="kw">func</span> _hash_password<span class="op">(</span>password<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">String</span><span class="op">:</span> <span class="comment"># genera hash SHA-256</span>
+<span class="ln">27</span> 	<span class="kw">var</span> ctx <span class="op">=</span> <span class="type">HashingContext</span><span class="op">.</span>new<span class="op">(</span><span class="op">)</span></code></pre></div>
+</div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><section class="slide bg-grid ">
+<div class="glow"></div>
+<header><div class="kicker">persistencia · usuarios</div><h1>StorageEngine: usuarios y contraseña</h1></header>
+<main><div class="two">
+<aside class="explain"><h2>StorageEngine.gd</h2><p>Registra usuarios con contraseña hasheada y autentica comparando hashes, no contraseñas en texto plano.</p></aside>
+<div class="codecard "><div class="bar"><b></b><b></b><b></b><span>StorageEngine.gd</span></div><pre class="code"><code><span class="ln">01</span> 	ctx<span class="op">.</span>update<span class="op">(</span>password<span class="op">.</span>to_utf8_buffer<span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="comment"># procesa la contraseña como bytes</span>
+<span class="ln">02</span> 	<span class="kw">var</span> digest <span class="op">=</span> ctx<span class="op">.</span>finish<span class="op">(</span><span class="op">)</span>
+<span class="ln">03</span> 	<span class="kw">return</span> digest<span class="op">.</span>hex_encode<span class="op">(</span><span class="op">)</span> <span class="comment"># devuelve el hash en hexadecimal</span>
+<span class="ln">04</span> 
+<span class="ln">05</span> <span class="kw">func</span> register_user<span class="op">(</span>username<span class="op">:</span> <span class="type">String</span><span class="op">,</span> password<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">bool</span><span class="op">:</span> <span class="comment"># registra un usuario nuevo</span>
+<span class="ln">06</span> 	username <span class="op">=</span> username<span class="op">.</span>strip_edges<span class="op">(</span><span class="op">)</span>
+<span class="ln">07</span> 	<span class="kw">if</span> username<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span> <span class="kw">or</span> password<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">08</span> 		<span class="kw">return</span> <span class="kw">false</span>
+<span class="ln">09</span> 	<span class="kw">var</span> key<span class="op">:</span> <span class="type">String</span> <span class="op">=</span> <span class="str">&quot;user:%s&quot;</span> <span class="op">%</span> username
+<span class="ln">10</span> 	<span class="kw">if</span> get_data<span class="op">(</span>key<span class="op">)</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">:</span>
+<span class="ln">11</span> 		<span class="kw">return</span> <span class="kw">false</span>
+<span class="ln">12</span> 	save<span class="op">(</span><span class="str">&quot;user&quot;</span><span class="op">,</span> key<span class="op">,</span> <span class="op">{</span> <span class="comment"># persiste el usuario</span>
+<span class="ln">13</span> 		<span class="str">&quot;password&quot;</span><span class="op">:</span> _hash_password<span class="op">(</span>password<span class="op">)</span><span class="op">,</span> <span class="comment"># guarda hash, no texto plano</span>
+<span class="ln">14</span> 		<span class="str">&quot;created_at&quot;</span><span class="op">:</span> Time<span class="op">.</span>get_unix_time_from_system<span class="op">(</span><span class="op">)</span> <span class="comment"># registra fecha de creación</span>
+<span class="ln">15</span> 	<span class="op">}</span><span class="op">)</span>
+<span class="ln">16</span> 	<span class="kw">return</span> <span class="kw">true</span>
+<span class="ln">17</span> 
+<span class="ln">18</span> <span class="kw">func</span> authenticate_user<span class="op">(</span>username<span class="op">:</span> <span class="type">String</span><span class="op">,</span> password<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">bool</span><span class="op">:</span> <span class="comment"># valida inicio de sesión</span>
+<span class="ln">19</span> 	username <span class="op">=</span> username<span class="op">.</span>strip_edges<span class="op">(</span><span class="op">)</span>
+<span class="ln">20</span> 	<span class="kw">if</span> username<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span> <span class="kw">or</span> password<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">21</span> 		<span class="kw">return</span> <span class="kw">false</span>
+<span class="ln">22</span> 	<span class="kw">var</span> key<span class="op">:</span> <span class="type">String</span> <span class="op">=</span> <span class="str">&quot;user:%s&quot;</span> <span class="op">%</span> username
+<span class="ln">23</span> 	<span class="kw">var</span> stored <span class="op">=</span> get_data<span class="op">(</span>key<span class="op">)</span> <span class="comment"># recupera datos del usuario</span>
+<span class="ln">24</span> 	<span class="kw">if</span> stored <span class="op">==</span> <span class="kw">null</span><span class="op">:</span>
+<span class="ln">25</span> 		<span class="kw">return</span> <span class="kw">false</span>
+<span class="ln">26</span> 	<span class="kw">return</span> stored<span class="op">.</span>get<span class="op">(</span><span class="str">&quot;password&quot;</span><span class="op">,</span> <span class="str">&quot;&quot;</span><span class="op">)</span> <span class="op">==</span> _hash_password<span class="op">(</span>password<span class="op">)</span> <span class="comment"># compara hashes</span></code></pre></div>
+</div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><section class="slide bg-grid ">
+<div class="glow"></div>
+<header><div class="kicker">persistencia · archivo principal</div><h1>RecordStore: data.log append-only</h1></header>
+<main><div class="two">
+<aside class="explain"><h2>RecordStore.gd</h2><p>Controla data.log. Es append-only: cada cambio agrega una nueva línea JSON y devuelve el offset donde quedó.</p></aside>
+<div class="codecard small"><div class="bar"><b></b><b></b><b></b><span>RecordStore.gd</span></div><pre class="code"><code><span class="ln">01</span> <span class="kw">class_name</span> <span class="type">RecordStore</span> <span class="comment"># clase del log de registros</span>
+<span class="ln">02</span> <span class="kw">extends</span> RefCounted
+<span class="ln">03</span> 
+<span class="ln">04</span> <span class="kw">var</span> filepath<span class="op">:</span> <span class="type">String</span>
+<span class="ln">05</span> 
+<span class="ln">06</span> <span class="kw">func</span> _init<span class="op">(</span>path<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">07</span> 	filepath <span class="op">=</span> path
+<span class="ln">08</span> 	<span class="kw">if</span> <span class="kw">not</span> <span class="type">FileAccess</span><span class="op">.</span>file_exists<span class="op">(</span>filepath<span class="op">)</span><span class="op">:</span>
+<span class="ln">09</span> 		<span class="kw">var</span> f <span class="op">=</span> <span class="type">FileAccess</span><span class="op">.</span>open<span class="op">(</span>filepath<span class="op">,</span> <span class="type">FileAccess</span><span class="op">.</span><span class="consttok">WRITE</span><span class="op">)</span>
+<span class="ln">10</span> 		f<span class="op">.</span>close<span class="op">(</span><span class="op">)</span>
+<span class="ln">11</span> 
+<span class="ln">12</span> <span class="kw">func</span> append<span class="op">(</span>record_type<span class="op">:</span> <span class="type">String</span><span class="op">,</span> key<span class="op">:</span> <span class="type">String</span><span class="op">,</span> data<span class="op">:</span> <span class="type">Variant</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">int</span><span class="op">:</span> <span class="comment"># agrega un registro al final</span>
+<span class="ln">13</span> 	<span class="kw">var</span> record<span class="op">:</span> <span class="type">Dictionary</span> <span class="op">=</span> <span class="op">{</span> <span class="comment"># estructura que se guardará</span>
+<span class="ln">14</span> 		<span class="str">&quot;type&quot;</span><span class="op">:</span> record_type<span class="op">,</span> <span class="comment"># categoría del registro</span>
+<span class="ln">15</span> 		<span class="str">&quot;key&quot;</span><span class="op">:</span> key<span class="op">,</span> <span class="comment"># clave del dato</span>
+<span class="ln">16</span> 		<span class="str">&quot;data&quot;</span><span class="op">:</span> data <span class="comment"># contenido guardado</span>
+<span class="ln">17</span> 	<span class="op">}</span>
+<span class="ln">18</span> 	<span class="kw">var</span> line<span class="op">:</span> <span class="type">String</span> <span class="op">=</span> <span class="consttok">JSON</span><span class="op">.</span>stringify<span class="op">(</span>record<span class="op">)</span> <span class="op">+</span> <span class="str">&quot;\n&quot;</span> <span class="comment"># convierte el registro en JSON por línea</span>
+<span class="ln">19</span> 	<span class="kw">var</span> f <span class="op">=</span> <span class="type">FileAccess</span><span class="op">.</span>open<span class="op">(</span>filepath<span class="op">,</span> <span class="type">FileAccess</span><span class="op">.</span><span class="consttok">READ_WRITE</span><span class="op">)</span>
+<span class="ln">20</span> 	f<span class="op">.</span>seek_end<span class="op">(</span><span class="op">)</span> <span class="comment"># mueve el cursor al final</span>
+<span class="ln">21</span> 	<span class="kw">var</span> offset<span class="op">:</span> <span class="type">int</span> <span class="op">=</span> f<span class="op">.</span>get_position<span class="op">(</span><span class="op">)</span> <span class="comment"># guarda posición de cada registro</span>
+<span class="ln">22</span> 	f<span class="op">.</span>store_string<span class="op">(</span>line<span class="op">)</span> <span class="comment"># escribe la línea en data.log</span>
+<span class="ln">23</span> 	f<span class="op">.</span>close<span class="op">(</span><span class="op">)</span>
+<span class="ln">24</span> 	<span class="kw">return</span> offset <span class="comment"># devuelve el offset del registro</span>
+<span class="ln">25</span> 
+<span class="ln">26</span> <span class="kw">func</span> read_at<span class="op">(</span>offset<span class="op">:</span> <span class="type">int</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">Variant</span><span class="op">:</span> <span class="comment"># lee un registro desde su offset</span>
+<span class="ln">27</span> 	<span class="kw">if</span> <span class="kw">not</span> <span class="type">FileAccess</span><span class="op">.</span>file_exists<span class="op">(</span>filepath<span class="op">)</span><span class="op">:</span>
+<span class="ln">28</span> 		<span class="kw">return</span> <span class="kw">null</span>
+<span class="ln">29</span> 	<span class="kw">var</span> f <span class="op">=</span> <span class="type">FileAccess</span><span class="op">.</span>open<span class="op">(</span>filepath<span class="op">,</span> <span class="type">FileAccess</span><span class="op">.</span><span class="consttok">READ</span><span class="op">)</span>
+<span class="ln">30</span> 	f<span class="op">.</span>seek<span class="op">(</span>offset<span class="op">)</span> <span class="comment"># se posiciona en la línea buscada</span>
+<span class="ln">31</span> 	<span class="kw">var</span> line<span class="op">:</span> <span class="type">String</span> <span class="op">=</span> f<span class="op">.</span>get_line<span class="op">(</span><span class="op">)</span> <span class="comment"># obtiene una línea JSON</span>
+<span class="ln">32</span> 	f<span class="op">.</span>close<span class="op">(</span><span class="op">)</span>
+<span class="ln">33</span> 	<span class="kw">if</span> line<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">34</span> 		<span class="kw">return</span> <span class="kw">null</span>
+<span class="ln">35</span> 	<span class="kw">var</span> result <span class="op">=</span> <span class="consttok">JSON</span><span class="op">.</span>parse_string<span class="op">(</span>line<span class="op">)</span>
+<span class="ln">36</span> 	<span class="kw">if</span> result <span class="op">==</span> <span class="kw">null</span><span class="op">:</span>
+<span class="ln">37</span> 		<span class="kw">return</span> <span class="kw">null</span>
+<span class="ln">38</span> 	<span class="kw">return</span> result
+<span class="ln">39</span> 
+<span class="ln">40</span> <span class="kw">func</span> iter_all<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">Array</span><span class="op">:</span> <span class="comment"># recorre todo el log</span>
+<span class="ln">41</span> 	<span class="kw">var</span> results<span class="op">:</span> <span class="type">Array</span> <span class="op">=</span> <span class="op">[</span><span class="op">]</span>
+<span class="ln">42</span> 	<span class="kw">if</span> <span class="kw">not</span> <span class="type">FileAccess</span><span class="op">.</span>file_exists<span class="op">(</span>filepath<span class="op">)</span><span class="op">:</span>
+<span class="ln">43</span> 		<span class="kw">return</span> results
+<span class="ln">44</span> 	<span class="kw">var</span> f <span class="op">=</span> <span class="type">FileAccess</span><span class="op">.</span>open<span class="op">(</span>filepath<span class="op">,</span> <span class="type">FileAccess</span><span class="op">.</span><span class="consttok">READ</span><span class="op">)</span>
+<span class="ln">45</span> 	<span class="kw">while</span> <span class="kw">not</span> f<span class="op">.</span>eof_reached<span class="op">(</span><span class="op">)</span><span class="op">:</span> <span class="comment"># avanza hasta el final del archivo</span>
+<span class="ln">46</span> 		<span class="kw">var</span> offset<span class="op">:</span> <span class="type">int</span> <span class="op">=</span> f<span class="op">.</span>get_position<span class="op">(</span><span class="op">)</span> <span class="comment"># guarda posición de cada registro</span>
+<span class="ln">47</span> 		<span class="kw">var</span> line<span class="op">:</span> <span class="type">String</span> <span class="op">=</span> f<span class="op">.</span>get_line<span class="op">(</span><span class="op">)</span> <span class="comment"># obtiene una línea JSON</span>
+<span class="ln">48</span> 		<span class="kw">if</span> line<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">49</span> 			<span class="kw">continue</span>
+<span class="ln">50</span> 		<span class="kw">var</span> result <span class="op">=</span> <span class="consttok">JSON</span><span class="op">.</span>parse_string<span class="op">(</span>line<span class="op">)</span>
+<span class="ln">51</span> 		<span class="kw">if</span> result <span class="op">!=</span> <span class="kw">null</span><span class="op">:</span>
+<span class="ln">52</span> 			results<span class="op">.</span>append<span class="op">(</span><span class="op">[</span>offset<span class="op">,</span> result<span class="op">]</span><span class="op">)</span>
+<span class="ln">53</span> 	f<span class="op">.</span>close<span class="op">(</span><span class="op">)</span>
+<span class="ln">54</span> 	<span class="kw">return</span> results</code></pre></div>
+</div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><section class="slide bg-grid ">
+<div class="glow"></div>
+<header><div class="kicker">persistencia · índice</div><h1>IndexStore: index.bin</h1></header>
+<main><div class="two">
+<aside class="explain"><h2>IndexStore.gd</h2><p>Guarda y carga los pares clave-offset. Aunque el archivo se llama index.bin, el contenido se serializa como JSON.</p></aside>
+<div class="codecard small"><div class="bar"><b></b><b></b><b></b><span>IndexStore.gd</span></div><pre class="code"><code><span class="ln">01</span> <span class="kw">class_name</span> <span class="type">IndexStore</span> <span class="comment"># clase del índice persistente</span>
+<span class="ln">02</span> <span class="kw">extends</span> RefCounted
+<span class="ln">03</span> 
+<span class="ln">04</span> <span class="kw">var</span> filepath<span class="op">:</span> <span class="type">String</span>
+<span class="ln">05</span> 
+<span class="ln">06</span> <span class="kw">func</span> _init<span class="op">(</span>path<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">07</span> 	filepath <span class="op">=</span> path
+<span class="ln">08</span> 
+<span class="ln">09</span> <span class="kw">func</span> save<span class="op">(</span>hash_table<span class="op">:</span> <span class="type">HashTable</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span> <span class="comment"># guarda la tabla hash en disco</span>
+<span class="ln">10</span> 	<span class="kw">var</span> pairs<span class="op">:</span> <span class="type">Array</span> <span class="op">=</span> hash_table<span class="op">.</span>items<span class="op">(</span><span class="op">)</span> <span class="comment"># obtiene pares clave-offset</span>
+<span class="ln">11</span> 	<span class="kw">var</span> f <span class="op">=</span> <span class="type">FileAccess</span><span class="op">.</span>open<span class="op">(</span>filepath<span class="op">,</span> <span class="type">FileAccess</span><span class="op">.</span><span class="consttok">WRITE</span><span class="op">)</span>
+<span class="ln">12</span> 	f<span class="op">.</span>store_string<span class="op">(</span><span class="consttok">JSON</span><span class="op">.</span>stringify<span class="op">(</span>pairs<span class="op">)</span><span class="op">)</span> <span class="comment"># escribe el índice como JSON</span>
+<span class="ln">13</span> 	f<span class="op">.</span>close<span class="op">(</span><span class="op">)</span>
+<span class="ln">14</span> 
+<span class="ln">15</span> <span class="kw">func</span> load<span class="op">(</span>hash_table<span class="op">:</span> <span class="type">HashTable</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">bool</span><span class="op">:</span> <span class="comment"># carga índice desde disco</span>
+<span class="ln">16</span> 	<span class="kw">if</span> <span class="kw">not</span> <span class="type">FileAccess</span><span class="op">.</span>file_exists<span class="op">(</span>filepath<span class="op">)</span><span class="op">:</span>
+<span class="ln">17</span> 		<span class="kw">return</span> <span class="kw">false</span>
+<span class="ln">18</span> 	<span class="kw">var</span> f <span class="op">=</span> <span class="type">FileAccess</span><span class="op">.</span>open<span class="op">(</span>filepath<span class="op">,</span> <span class="type">FileAccess</span><span class="op">.</span><span class="consttok">READ</span><span class="op">)</span>
+<span class="ln">19</span> 	<span class="kw">var</span> content<span class="op">:</span> <span class="type">String</span> <span class="op">=</span> f<span class="op">.</span>get_as_text<span class="op">(</span><span class="op">)</span>
+<span class="ln">20</span> 	f<span class="op">.</span>close<span class="op">(</span><span class="op">)</span>
+<span class="ln">21</span> 	<span class="kw">if</span> content<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">22</span> 		<span class="kw">return</span> <span class="kw">false</span>
+<span class="ln">23</span> 	<span class="kw">var</span> pairs <span class="op">=</span> <span class="consttok">JSON</span><span class="op">.</span>parse_string<span class="op">(</span>content<span class="op">)</span>
+<span class="ln">24</span> 	<span class="kw">if</span> pairs <span class="op">==</span> <span class="kw">null</span><span class="op">:</span>
+<span class="ln">25</span> 		<span class="kw">return</span> <span class="kw">false</span>
+<span class="ln">26</span> 	<span class="kw">for</span> pair <span class="kw">in</span> pairs<span class="op">:</span>
+<span class="ln">27</span> 		<span class="kw">if</span> pair<span class="op">.</span>size<span class="op">(</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="num">2</span><span class="op">:</span>
+<span class="ln">28</span> 			hash_table<span class="op">.</span>put<span class="op">(</span>pair<span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">,</span> pair<span class="op">[</span><span class="num">1</span><span class="op">]</span><span class="op">)</span>
+<span class="ln">29</span> 	<span class="kw">return</span> <span class="kw">true</span> <span class="comment"># confirma carga correcta</span>
+<span class="ln">30</span> 
+<span class="ln">31</span> <span class="kw">func</span> exists<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">bool</span><span class="op">:</span>
+<span class="ln">32</span> 	<span class="kw">return</span> <span class="type">FileAccess</span><span class="op">.</span>file_exists<span class="op">(</span>filepath<span class="op">)</span> <span class="kw">and</span> <span class="type">FileAccess</span><span class="op">.</span>get_file_as_bytes<span class="op">(</span>filepath<span class="op">)</span><span class="op">.</span>size<span class="op">(</span><span class="op">)</span> <span class="op">&gt;</span> <span class="num">0</span></code></pre></div>
+</div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><section class="slide bg-grid ">
+<div class="glow"></div>
+<header><div class="kicker">persistencia · reparación</div><h1>Recovery: reconstrucción del índice</h1></header>
+<main><div class="two">
+<aside class="explain"><h2>Recovery.gd</h2><p>Lee todos los registros de data.log, conserva la última versión de cada clave e ignora las claves cuyo último registro sea delete.</p></aside>
+<div class="codecard small"><div class="bar"><b></b><b></b><b></b><span>Recovery.gd</span></div><pre class="code"><code><span class="ln">01</span> <span class="kw">class_name</span> <span class="type">Recovery</span> <span class="comment"># clase para reconstruir el índice</span>
+<span class="ln">02</span> <span class="kw">extends</span> RefCounted
+<span class="ln">03</span> 
+<span class="ln">04</span> <span class="kw">var</span> record_store<span class="op">:</span> <span class="type">RecordStore</span> <span class="comment"># acceso a data.log</span>
+<span class="ln">05</span> <span class="kw">var</span> index_store<span class="op">:</span> <span class="type">IndexStore</span> <span class="comment"># acceso a index.bin</span>
+<span class="ln">06</span> 
+<span class="ln">07</span> <span class="kw">func</span> _init<span class="op">(</span>rs<span class="op">:</span> <span class="type">RecordStore</span><span class="op">,</span> ist<span class="op">:</span> <span class="type">IndexStore</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">08</span> 	record_store <span class="op">=</span> rs
+<span class="ln">09</span> 	index_store <span class="op">=</span> ist
+<span class="ln">10</span> 
+<span class="ln">11</span> <span class="kw">func</span> rebuild<span class="op">(</span>hash_table<span class="op">:</span> <span class="type">HashTable</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">int</span><span class="op">:</span> <span class="comment"># reconstruye índice desde el log</span>
+<span class="ln">12</span> 	<span class="kw">var</span> temp_list<span class="op">:</span> <span class="type">Array</span> <span class="op">=</span> <span class="op">[</span><span class="op">]</span>
+<span class="ln">13</span> 	<span class="kw">for</span> entry <span class="kw">in</span> record_store<span class="op">.</span>iter_all<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">14</span> 		<span class="kw">var</span> offset<span class="op">:</span> <span class="type">int</span> <span class="op">=</span> entry<span class="op">[</span><span class="num">0</span><span class="op">]</span>
+<span class="ln">15</span> 		<span class="kw">var</span> record<span class="op">:</span> <span class="type">Dictionary</span> <span class="op">=</span> entry<span class="op">[</span><span class="num">1</span><span class="op">]</span>
+<span class="ln">16</span> 		<span class="kw">var</span> key<span class="op">:</span> <span class="type">String</span> <span class="op">=</span> record<span class="op">.</span>get<span class="op">(</span><span class="str">&quot;key&quot;</span><span class="op">,</span> <span class="str">&quot;&quot;</span><span class="op">)</span>
+<span class="ln">17</span> 		<span class="kw">var</span> record_type<span class="op">:</span> <span class="type">String</span> <span class="op">=</span> record<span class="op">.</span>get<span class="op">(</span><span class="str">&quot;type&quot;</span><span class="op">,</span> <span class="str">&quot;&quot;</span><span class="op">)</span>
+<span class="ln">18</span> 		<span class="kw">if</span> key<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">19</span> 			<span class="kw">continue</span>
+<span class="ln">20</span> 		<span class="kw">var</span> is_delete<span class="op">:</span> <span class="type">bool</span> <span class="op">=</span> <span class="op">(</span>record_type <span class="op">==</span> <span class="str">&quot;delete&quot;</span><span class="op">)</span> <span class="comment"># detecta tombstones</span>
+<span class="ln">21</span> 		<span class="kw">var</span> found<span class="op">:</span> <span class="type">bool</span> <span class="op">=</span> <span class="kw">false</span>
+<span class="ln">22</span> 		<span class="kw">for</span> i <span class="kw">in</span> range<span class="op">(</span>temp_list<span class="op">.</span>size<span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">23</span> 			<span class="kw">if</span> temp_list<span class="op">[</span>i<span class="op">]</span><span class="op">[</span><span class="num">0</span><span class="op">]</span> <span class="op">==</span> key<span class="op">:</span>
+<span class="ln">24</span> 				temp_list<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="op">[</span>key<span class="op">,</span> offset<span class="op">,</span> is_delete<span class="op">]</span>
+<span class="ln">25</span> 				found <span class="op">=</span> <span class="kw">true</span>
+<span class="ln">26</span> 				<span class="kw">break</span>
+<span class="ln">27</span> 		<span class="kw">if</span> <span class="kw">not</span> found<span class="op">:</span>
+<span class="ln">28</span> 			temp_list<span class="op">.</span>append<span class="op">(</span><span class="op">[</span>key<span class="op">,</span> offset<span class="op">,</span> is_delete<span class="op">]</span><span class="op">)</span>
+<span class="ln">29</span> 	<span class="kw">var</span> count<span class="op">:</span> <span class="type">int</span> <span class="op">=</span> <span class="num">0</span>
+<span class="ln">30</span> 	<span class="kw">for</span> item <span class="kw">in</span> temp_list<span class="op">:</span>
+<span class="ln">31</span> 		<span class="kw">if</span> <span class="kw">not</span> item<span class="op">[</span><span class="num">2</span><span class="op">]</span><span class="op">:</span>
+<span class="ln">32</span> 			hash_table<span class="op">.</span>put<span class="op">(</span>item<span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">,</span> item<span class="op">[</span><span class="num">1</span><span class="op">]</span><span class="op">)</span>
+<span class="ln">33</span> 			count <span class="op">+</span><span class="op">=</span> <span class="num">1</span>
+<span class="ln">34</span> 	index_store<span class="op">.</span>save<span class="op">(</span>hash_table<span class="op">)</span> <span class="comment"># guarda el índice reparado</span>
+<span class="ln">35</span> 	<span class="kw">return</span> count <span class="comment"># devuelve cantidad reconstruida</span></code></pre></div>
+</div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><section class="slide bg-grid ">
+<div class="glow"></div>
+<header><div class="kicker">persistencia · índice en memoria</div><h1>HashTable parte 1: buckets, hash y put</h1></header>
+<main><div class="two">
+<aside class="explain"><h2>HashTable.gd</h2><p>La tabla hash convierte claves en buckets. Si un bucket está ocupado, usa chaining con listas enlazadas y ahora también soporta rehash automático cuando el load factor supera 0.7.</p></aside>
+<div class="codecard "><div class="bar"><b></b><b></b><b></b><span>HashTable.gd</span></div><pre class="code"><code><span class="ln">01</span> <span class="kw">class_name</span> <span class="type">HashTable</span> <span class="comment"># tabla hash manual</span>
+<span class="ln">02</span> <span class="kw">extends</span> RefCounted
+<span class="ln">03</span> 
+<span class="ln">04</span> <span class="kw">var</span> buckets<span class="op">:</span> <span class="type">Array</span> <span class="comment"># arreglo de buckets</span>
+<span class="ln">05</span> <span class="kw">var</span> bucket_count<span class="op">:</span> <span class="type">int</span> <span class="comment"># tamaño de la tabla</span>
+<span class="ln">06</span> <span class="kw">var</span> size<span class="op">:</span> <span class="type">int</span>
+<span class="ln">07</span> <span class="kw">var</span> collisions<span class="op">:</span> <span class="type">int</span>
+<span class="ln">08</span> 
+<span class="ln">09</span> <span class="kw">func</span> _init<span class="op">(</span>initial_capacity<span class="op">:</span> <span class="type">int</span> <span class="op">=</span> <span class="num">64</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">10</span> 	bucket_count <span class="op">=</span> max<span class="op">(</span>initial_capacity<span class="op">,</span> <span class="num">1</span><span class="op">)</span>
+<span class="ln">11</span> 	buckets <span class="op">=</span> <span class="op">[</span><span class="op">]</span>
+<span class="ln">12</span> 	<span class="kw">for</span> i <span class="kw">in</span> range<span class="op">(</span>bucket_count<span class="op">)</span><span class="op">:</span>
+<span class="ln">13</span> 		buckets<span class="op">.</span>append<span class="op">(</span><span class="kw">null</span><span class="op">)</span>
+<span class="ln">14</span> 	size <span class="op">=</span> <span class="num">0</span>
+<span class="ln">15</span> 	collisions <span class="op">=</span> <span class="num">0</span>
+<span class="ln">16</span> 
+<span class="ln">17</span> <span class="kw">func</span> _hash<span class="op">(</span>key<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">int</span><span class="op">:</span> <span class="comment"># convierte clave en índice</span>
+<span class="ln">18</span> 	<span class="kw">return</span> abs<span class="op">(</span>key<span class="op">.</span>hash<span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%</span> bucket_count <span class="comment"># calcula bucket válido</span>
+<span class="ln">19</span> 
+<span class="ln">20</span> <span class="kw">func</span> put<span class="op">(</span>key<span class="op">:</span> <span class="type">String</span><span class="op">,</span> offset<span class="op">:</span> <span class="type">int</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span> <span class="comment"># inserta o actualiza clave</span>
+<span class="ln">21</span> 	<span class="kw">var</span> index<span class="op">:</span> <span class="type">int</span> <span class="op">=</span> _hash<span class="op">(</span>key<span class="op">)</span>
+<span class="ln">22</span> 	<span class="kw">var</span> entry <span class="op">=</span> buckets<span class="op">[</span>index<span class="op">]</span>
+<span class="ln">23</span> 	<span class="kw">if</span> entry <span class="op">==</span> <span class="kw">null</span><span class="op">:</span>
+<span class="ln">24</span> 		buckets<span class="op">[</span>index<span class="op">]</span> <span class="op">=</span> <span class="type">HashEntry</span><span class="op">.</span>new<span class="op">(</span>key<span class="op">,</span> offset<span class="op">)</span>
+<span class="ln">25</span> 		size <span class="op">+</span><span class="op">=</span> <span class="num">1</span>
+<span class="ln">26</span> 		<span class="kw">return</span>
+<span class="ln">27</span> 	<span class="kw">var</span> current <span class="op">=</span> entry
+<span class="ln">28</span> 	<span class="kw">while</span> current <span class="op">!=</span> <span class="kw">null</span><span class="op">:</span> <span class="comment"># recorre cadena de colisión</span>
+<span class="ln">29</span> 		<span class="kw">if</span> current<span class="op">.</span>key <span class="op">==</span> key<span class="op">:</span> <span class="comment"># encuentra nodo a borrar</span>
+<span class="ln">30</span> 			current<span class="op">.</span>offset <span class="op">=</span> offset <span class="comment"># conserva offset más reciente</span>
+<span class="ln">31</span> 			<span class="kw">return</span>
+<span class="ln">32</span> 		<span class="kw">if</span> current<span class="op">.</span>next <span class="op">==</span> <span class="kw">null</span><span class="op">:</span>
+<span class="ln">33</span> 			<span class="kw">break</span>
+<span class="ln">34</span> 		current <span class="op">=</span> current<span class="op">.</span>next
+<span class="ln">35</span> 	current<span class="op">.</span>next <span class="op">=</span> <span class="type">HashEntry</span><span class="op">.</span>new<span class="op">(</span>key<span class="op">,</span> offset<span class="op">)</span> <span class="comment"># agrega al final de la cadena</span>
+<span class="ln">36</span> 	collisions <span class="op">+</span><span class="op">=</span> <span class="num">1</span>
+<span class="ln">37</span> 	size <span class="op">+</span><span class="op">=</span> <span class="num">1</span>
+<span class="ln">38</span> 
+<span class="ln">39</span> <span class="kw">func</span> get_offset<span class="op">(</span>key<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">int</span><span class="op">:</span> <span class="comment"># busca offset por clave</span>
+<span class="ln">40</span> 	<span class="kw">var</span> entry <span class="op">=</span> buckets<span class="op">[</span>_hash<span class="op">(</span>key<span class="op">)</span><span class="op">]</span>
+<span class="ln">41</span> 	<span class="kw">while</span> entry <span class="op">!=</span> <span class="kw">null</span><span class="op">:</span>
+<span class="ln">42</span> 		<span class="kw">if</span> entry<span class="op">.</span>key <span class="op">==</span> key<span class="op">:</span>
+<span class="ln">43</span> 			<span class="kw">return</span> entry<span class="op">.</span>offset
+<span class="ln">44</span> 		entry <span class="op">=</span> entry<span class="op">.</span>next
+<span class="ln">45</span> 	<span class="kw">return</span> <span class="op">-</span><span class="num">1</span> <span class="comment"># indica clave no encontrada</span>
+<span class="ln">46</span> 
+<span class="ln">47</span> <span class="kw">func</span> delete<span class="op">(</span>key<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">bool</span><span class="op">:</span>
+<span class="ln">48</span> 	<span class="kw">var</span> index<span class="op">:</span> <span class="type">int</span> <span class="op">=</span> _hash<span class="op">(</span>key<span class="op">)</span></code></pre></div>
+</div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><section class="slide bg-grid ">
+<div class="glow"></div>
+<header><div class="kicker">persistencia · índice en memoria</div><h1>HashTable parte 2: buscar, borrar, exportar</h1></header>
+<main><div class="two">
+<aside class="explain"><h2>HashTable.gd</h2><p>Aquí se buscan offsets, se eliminan claves, se exportan pares y se realiza el rehash dinámico duplicando buckets y reinsertando todas las claves.</p></aside>
+<div class="codecard small"><div class="bar"><b></b><b></b><b></b><span>HashTable.gd</span></div><pre class="code"><code><span class="ln">01</span> 	<span class="kw">var</span> entry <span class="op">=</span> buckets<span class="op">[</span>index<span class="op">]</span>
+<span class="ln">02</span> 	<span class="kw">if</span> entry <span class="op">==</span> <span class="kw">null</span><span class="op">:</span>
+<span class="ln">03</span> 		<span class="kw">return</span> <span class="kw">false</span>
+<span class="ln">04</span> 	<span class="kw">if</span> entry<span class="op">.</span>key <span class="op">==</span> key<span class="op">:</span>
+<span class="ln">05</span> 		buckets<span class="op">[</span>index<span class="op">]</span> <span class="op">=</span> entry<span class="op">.</span>next
+<span class="ln">06</span> 		size <span class="op">-</span><span class="op">=</span> <span class="num">1</span>
+<span class="ln">07</span> 		<span class="kw">return</span> <span class="kw">true</span>
+<span class="ln">08</span> 	<span class="kw">var</span> previous <span class="op">=</span> entry
+<span class="ln">09</span> 	entry <span class="op">=</span> entry<span class="op">.</span>next
+<span class="ln">10</span> 	<span class="kw">while</span> entry <span class="op">!=</span> <span class="kw">null</span><span class="op">:</span>
+<span class="ln">11</span> 		<span class="kw">if</span> entry<span class="op">.</span>key <span class="op">==</span> key<span class="op">:</span>
+<span class="ln">12</span> 			previous<span class="op">.</span>next <span class="op">=</span> entry<span class="op">.</span>next
+<span class="ln">13</span> 			size <span class="op">-</span><span class="op">=</span> <span class="num">1</span>
+<span class="ln">14</span> 			<span class="kw">return</span> <span class="kw">true</span>
+<span class="ln">15</span> 		previous <span class="op">=</span> entry
+<span class="ln">16</span> 		entry <span class="op">=</span> entry<span class="op">.</span>next
+<span class="ln">17</span> 	<span class="kw">return</span> <span class="kw">false</span>
+<span class="ln">18</span> 
+<span class="ln">19</span> <span class="kw">func</span> items<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">Array</span><span class="op">:</span> <span class="comment"># exporta pares clave-offset</span>
+<span class="ln">20</span> 	<span class="kw">var</span> result<span class="op">:</span> <span class="type">Array</span> <span class="op">=</span> <span class="op">[</span><span class="op">]</span>
+<span class="ln">21</span> 	<span class="kw">for</span> bucket <span class="kw">in</span> buckets<span class="op">:</span>
+<span class="ln">22</span> 		<span class="kw">var</span> entry <span class="op">=</span> bucket
+<span class="ln">23</span> 		<span class="kw">while</span> entry <span class="op">!=</span> <span class="kw">null</span><span class="op">:</span>
+<span class="ln">24</span> 			result<span class="op">.</span>append<span class="op">(</span><span class="op">[</span>entry<span class="op">.</span>key<span class="op">,</span> entry<span class="op">.</span>offset<span class="op">]</span><span class="op">)</span>
+<span class="ln">25</span> 			entry <span class="op">=</span> entry<span class="op">.</span>next
+<span class="ln">26</span> 	<span class="kw">return</span> result
+<span class="ln">27</span> 
+<span class="ln">28</span> <span class="kw">func</span> stats<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">Dictionary</span><span class="op">:</span> <span class="comment"># devuelve métricas de la tabla</span>
+<span class="ln">29</span> 	<span class="kw">return</span> <span class="op">{</span>
+<span class="ln">30</span> 		<span class="str">&quot;size&quot;</span><span class="op">:</span> size<span class="op">,</span>
+<span class="ln">31</span> 		<span class="str">&quot;load_factor&quot;</span><span class="op">:</span> <span class="type">float</span><span class="op">(</span>size<span class="op">)</span> <span class="op">/</span> bucket_count<span class="op">,</span>
+<span class="ln">32</span> 		<span class="str">&quot;collisions&quot;</span><span class="op">:</span> collisions
+<span class="ln">33</span> 	<span class="op">}</span>
+<span class="ln">34</span> 
+<span class="ln">35</span> <span class="kw">class</span> <span class="type">HashEntry</span><span class="op">:</span>
+<span class="ln">36</span> 	<span class="kw">extends</span> RefCounted
+<span class="ln">37</span> 	<span class="kw">var</span> key<span class="op">:</span> <span class="type">String</span>
+<span class="ln">38</span> 	<span class="kw">var</span> offset<span class="op">:</span> <span class="type">int</span>
+<span class="ln">39</span> 	<span class="kw">var</span> next<span class="op">:</span> <span class="type">HashEntry</span>
+<span class="ln">40</span> 
+<span class="ln">41</span> 	<span class="kw">func</span> _init<span class="op">(</span>k<span class="op">:</span> <span class="type">String</span><span class="op">,</span> o<span class="op">:</span> <span class="type">int</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">42</span> 		key <span class="op">=</span> k
+<span class="ln">43</span> 		offset <span class="op">=</span> o
+<span class="ln">44</span> 		next <span class="op">=</span> <span class="kw">null</span></code></pre></div>
+</div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><section class="slide bg-grid ">
+<div class="glow"></div>
+<header><div class="kicker">systems · autoload</div><h1>GameManager: sesión y progreso</h1></header>
+<main><div class="two">
+<aside class="explain"><h2>GameManager.gd</h2><p>Es el centro global del juego. Guarda sesión activa y progreso por usuario usando claves como progress:{usuario}:fase.</p></aside>
+<div class="codecard small"><div class="bar"><b></b><b></b><b></b><span>GameManager.gd</span></div><pre class="code"><code><span class="ln">01</span> <span class="kw">extends</span> <span class="type">Node</span> <span class="comment"># nodo global del juego</span>
+<span class="ln">02</span> 
+<span class="ln">03</span> <span class="comment"># ─────────────────────────────────────────────────────────────────────────────</span>
+<span class="ln">04</span> <span class="comment"># GameManager — Autoload singleton</span>
+<span class="ln">05</span> <span class="comment"># Claves en el StorageEngine:</span>
+<span class="ln">06</span> <span class="comment">#   &quot;session:usuario_actual&quot;       → String (username del jugador activo)</span>
+<span class="ln">07</span> <span class="comment">#   &quot;progress:{usuario}:fase&quot;      → int   (0–5)</span>
+<span class="ln">08</span> <span class="comment">#   &quot;progress:{usuario}:pista1/2/3&quot; → String</span>
+<span class="ln">09</span> <span class="comment">#   &quot;progress:{usuario}:diario_desbloqueado&quot; → bool</span>
+<span class="ln">10</span> <span class="comment">#   &quot;progress:{usuario}:pin_resuelto&quot; → bool</span>
+<span class="ln">11</span> <span class="comment"># ─────────────────────────────────────────────────────────────────────────────</span>
+<span class="ln">12</span> 
+<span class="ln">13</span> <span class="kw">var</span> engine<span class="op">:</span> <span class="type">StorageEngine</span>
+<span class="ln">14</span> 
+<span class="ln">15</span> signal fase_cambiada<span class="op">(</span>nueva_fase<span class="op">:</span> <span class="type">int</span><span class="op">)</span>
+<span class="ln">16</span> 
+<span class="ln">17</span> <span class="kw">func</span> _ready<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">18</span> 	engine <span class="op">=</span> <span class="type">StorageEngine</span><span class="op">.</span>new<span class="op">(</span><span class="str">&quot;user://save_data&quot;</span><span class="op">)</span>
+<span class="ln">19</span> 
+<span class="ln">20</span> <span class="comment"># ── Sesión ────────────────────────────────────────────────────────────────────</span>
+<span class="ln">21</span> 
+<span class="ln">22</span> <span class="kw">func</span> get_usuario_activo<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">String</span><span class="op">:</span> <span class="comment"># obtiene usuario actual</span>
+<span class="ln">23</span> 	<span class="kw">var</span> u <span class="op">=</span> engine<span class="op">.</span>get_data<span class="op">(</span><span class="str">&quot;session:usuario_actual&quot;</span><span class="op">)</span>
+<span class="ln">24</span> 	<span class="kw">if</span> u <span class="op">==</span> <span class="kw">null</span><span class="op">:</span>
+<span class="ln">25</span> 		<span class="kw">return</span> <span class="str">&quot;&quot;</span>
+<span class="ln">26</span> 	<span class="kw">return</span> str<span class="op">(</span>u<span class="op">)</span>
+<span class="ln">27</span> 
+<span class="ln">28</span> <span class="kw">func</span> iniciar_sesion<span class="op">(</span>username<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span> <span class="comment"># guarda sesión actual</span>
+<span class="ln">29</span> 	engine<span class="op">.</span>save<span class="op">(</span><span class="str">&quot;session&quot;</span><span class="op">,</span> <span class="str">&quot;session:usuario_actual&quot;</span><span class="op">,</span> username<span class="op">)</span>
+<span class="ln">30</span> 
+<span class="ln">31</span> <span class="kw">func</span> cerrar_sesion<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span> <span class="comment"># cierra sesión</span>
+<span class="ln">32</span> 	engine<span class="op">.</span>delete<span class="op">(</span><span class="str">&quot;session:usuario_actual&quot;</span><span class="op">)</span>
+<span class="ln">33</span> 
+<span class="ln">34</span> <span class="kw">func</span> hay_sesion_activa<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">bool</span><span class="op">:</span>
+<span class="ln">35</span> 	<span class="kw">return</span> get_usuario_activo<span class="op">(</span><span class="op">)</span> <span class="op">!=</span> <span class="str">&quot;&quot;</span>
+<span class="ln">36</span> 
+<span class="ln">37</span> <span class="comment"># ── Progreso ──────────────────────────────────────────────────────────────────</span>
+<span class="ln">38</span> 
+<span class="ln">39</span> <span class="kw">func</span> get_fase<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">int</span><span class="op">:</span> <span class="comment"># consulta fase</span>
+<span class="ln">40</span> 	<span class="kw">var</span> usuario <span class="op">=</span> get_usuario_activo<span class="op">(</span><span class="op">)</span>
+<span class="ln">41</span> 	<span class="kw">if</span> usuario<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">42</span> 		<span class="kw">return</span> <span class="num">0</span>
+<span class="ln">43</span> 	<span class="kw">var</span> key <span class="op">=</span> <span class="str">&quot;progress:%s:fase&quot;</span> <span class="op">%</span> usuario
+<span class="ln">44</span> 	<span class="kw">var</span> f <span class="op">=</span> engine<span class="op">.</span>get_data<span class="op">(</span>key<span class="op">)</span>
+<span class="ln">45</span> 	<span class="kw">if</span> f <span class="op">==</span> <span class="kw">null</span><span class="op">:</span>
+<span class="ln">46</span> 		<span class="kw">return</span> <span class="num">0</span>
+<span class="ln">47</span> 	<span class="kw">return</span> <span class="type">int</span><span class="op">(</span>f<span class="op">)</span>
+<span class="ln">48</span> 
+<span class="ln">49</span> <span class="kw">func</span> get_pista<span class="op">(</span>numero<span class="op">:</span> <span class="type">int</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">String</span><span class="op">:</span> <span class="comment"># lee pista</span>
+<span class="ln">50</span> 	<span class="kw">var</span> usuario <span class="op">=</span> get_usuario_activo<span class="op">(</span><span class="op">)</span>
+<span class="ln">51</span> 	<span class="kw">if</span> usuario<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">52</span> 		<span class="kw">return</span> <span class="str">&quot;&quot;</span>
+<span class="ln">53</span> 	<span class="kw">var</span> key <span class="op">=</span> <span class="str">&quot;progress:%s:pista%d&quot;</span> <span class="op">%</span> <span class="op">[</span>usuario<span class="op">,</span> numero<span class="op">]</span>
+<span class="ln">54</span> 	<span class="kw">var</span> p <span class="op">=</span> engine<span class="op">.</span>get_data<span class="op">(</span>key<span class="op">)</span>
+<span class="ln">55</span> 	<span class="kw">if</span> p <span class="op">==</span> <span class="kw">null</span><span class="op">:</span>
+<span class="ln">56</span> 		<span class="kw">return</span> <span class="str">&quot;&quot;</span>
+<span class="ln">57</span> 	<span class="kw">return</span> str<span class="op">(</span>p<span class="op">)</span>
+<span class="ln">58</span> 
+<span class="ln">59</span> <span class="kw">func</span> is_diario_desbloqueado<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">bool</span><span class="op">:</span>
+<span class="ln">60</span> 	<span class="kw">var</span> usuario <span class="op">=</span> get_usuario_activo<span class="op">(</span><span class="op">)</span>
+<span class="ln">61</span> 	<span class="kw">if</span> usuario<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">62</span> 		<span class="kw">return</span> <span class="kw">false</span>
+<span class="ln">63</span> 	<span class="kw">var</span> key <span class="op">=</span> <span class="str">&quot;progress:%s:diario_desbloqueado&quot;</span> <span class="op">%</span> usuario
+<span class="ln">64</span> 	<span class="kw">var</span> d <span class="op">=</span> engine<span class="op">.</span>get_data<span class="op">(</span>key<span class="op">)</span>
+<span class="ln">65</span> 	<span class="kw">if</span> d <span class="op">==</span> <span class="kw">null</span><span class="op">:</span>
+<span class="ln">66</span> 		<span class="kw">return</span> <span class="kw">false</span>
+<span class="ln">67</span> 	<span class="kw">return</span> <span class="type">bool</span><span class="op">(</span>d<span class="op">)</span>
+<span class="ln">68</span> 
+<span class="ln">69</span> <span class="kw">func</span> is_pin_resuelto<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">bool</span><span class="op">:</span>
+<span class="ln">70</span> 	<span class="kw">var</span> usuario <span class="op">=</span> get_usuario_activo<span class="op">(</span><span class="op">)</span></code></pre></div>
+</div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><section class="slide bg-grid ">
+<div class="glow"></div>
+<header><div class="kicker">systems · autoload</div><h1>GameManager: pistas, diario y desbloqueos</h1></header>
+<main><div class="two">
+<aside class="explain"><h2>GameManager.gd</h2><p>Maneja pistas, contraseña final, diario desbloqueado, PIN resuelto y reglas para habilitar apps.</p></aside>
+<div class="codecard small"><div class="bar"><b></b><b></b><b></b><span>GameManager.gd</span></div><pre class="code"><code><span class="ln">01</span> 	<span class="kw">if</span> usuario<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">02</span> 		<span class="kw">return</span> <span class="kw">false</span>
+<span class="ln">03</span> 	<span class="kw">var</span> key <span class="op">=</span> <span class="str">&quot;progress:%s:pin_resuelto&quot;</span> <span class="op">%</span> usuario
+<span class="ln">04</span> 	<span class="kw">var</span> p <span class="op">=</span> engine<span class="op">.</span>get_data<span class="op">(</span>key<span class="op">)</span>
+<span class="ln">05</span> 	<span class="kw">if</span> p <span class="op">==</span> <span class="kw">null</span><span class="op">:</span>
+<span class="ln">06</span> 		<span class="kw">return</span> <span class="kw">false</span>
+<span class="ln">07</span> 	<span class="kw">return</span> <span class="type">bool</span><span class="op">(</span>p<span class="op">)</span>
+<span class="ln">08</span> 
+<span class="ln">09</span> <span class="comment"># ── Escritura ─────────────────────────────────────────────────────────────────</span>
+<span class="ln">10</span> 
+<span class="ln">11</span> <span class="kw">func</span> set_fase<span class="op">(</span>nueva_fase<span class="op">:</span> <span class="type">int</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">12</span> 	<span class="kw">var</span> usuario <span class="op">=</span> get_usuario_activo<span class="op">(</span><span class="op">)</span>
+<span class="ln">13</span> 	<span class="kw">if</span> usuario<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">14</span> 		<span class="kw">return</span>
+<span class="ln">15</span> 	<span class="kw">var</span> key <span class="op">=</span> <span class="str">&quot;progress:%s:fase&quot;</span> <span class="op">%</span> usuario
+<span class="ln">16</span> 	engine<span class="op">.</span>save<span class="op">(</span><span class="str">&quot;progress&quot;</span><span class="op">,</span> key<span class="op">,</span> nueva_fase<span class="op">)</span>
+<span class="ln">17</span> 	fase_cambiada<span class="op">.</span>emit<span class="op">(</span>nueva_fase<span class="op">)</span>
+<span class="ln">18</span> 
+<span class="ln">19</span> <span class="kw">func</span> set_pista<span class="op">(</span>numero<span class="op">:</span> <span class="type">int</span><span class="op">,</span> valor<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span> <span class="comment"># guarda pista</span>
+<span class="ln">20</span> 	<span class="kw">var</span> usuario <span class="op">=</span> get_usuario_activo<span class="op">(</span><span class="op">)</span>
+<span class="ln">21</span> 	<span class="kw">if</span> usuario<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">22</span> 		<span class="kw">return</span>
+<span class="ln">23</span> 	<span class="kw">var</span> key <span class="op">=</span> <span class="str">&quot;progress:%s:pista%d&quot;</span> <span class="op">%</span> <span class="op">[</span>usuario<span class="op">,</span> numero<span class="op">]</span>
+<span class="ln">24</span> 	engine<span class="op">.</span>save<span class="op">(</span><span class="str">&quot;progress&quot;</span><span class="op">,</span> key<span class="op">,</span> valor<span class="op">)</span>
+<span class="ln">25</span> 
+<span class="ln">26</span> <span class="kw">func</span> desbloquear_diario<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">27</span> 	<span class="kw">var</span> usuario <span class="op">=</span> get_usuario_activo<span class="op">(</span><span class="op">)</span>
+<span class="ln">28</span> 	<span class="kw">if</span> usuario<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">29</span> 		<span class="kw">return</span>
+<span class="ln">30</span> 	<span class="kw">var</span> key <span class="op">=</span> <span class="str">&quot;progress:%s:diario_desbloqueado&quot;</span> <span class="op">%</span> usuario
+<span class="ln">31</span> 	engine<span class="op">.</span>save<span class="op">(</span><span class="str">&quot;progress&quot;</span><span class="op">,</span> key<span class="op">,</span> <span class="kw">true</span><span class="op">)</span>
+<span class="ln">32</span> 
+<span class="ln">33</span> <span class="kw">func</span> set_pin_resuelto<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">34</span> 	<span class="kw">var</span> usuario <span class="op">=</span> get_usuario_activo<span class="op">(</span><span class="op">)</span>
+<span class="ln">35</span> 	<span class="kw">if</span> usuario<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">36</span> 		<span class="kw">return</span>
+<span class="ln">37</span> 	<span class="kw">var</span> key <span class="op">=</span> <span class="str">&quot;progress:%s:pin_resuelto&quot;</span> <span class="op">%</span> usuario
+<span class="ln">38</span> 	engine<span class="op">.</span>save<span class="op">(</span><span class="str">&quot;progress&quot;</span><span class="op">,</span> key<span class="op">,</span> <span class="kw">true</span><span class="op">)</span>
+<span class="ln">39</span> 
+<span class="ln">40</span> <span class="comment"># ── Desbloqueo de apps ────────────────────────────────────────────────────────</span>
+<span class="ln">41</span> 
+<span class="ln">42</span> <span class="kw">func</span> is_app_desbloqueada<span class="op">(</span>app_id<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">bool</span><span class="op">:</span> <span class="comment"># define acceso a apps</span>
+<span class="ln">43</span> 	<span class="kw">var</span> fase <span class="op">:=</span> get_fase<span class="op">(</span><span class="op">)</span>
+<span class="ln">44</span> 	<span class="kw">match</span> app_id<span class="op">:</span> <span class="comment"># reglas de desbloqueo por app</span>
+<span class="ln">45</span> 		<span class="str">&quot;mensajes&quot;</span><span class="op">:</span>  <span class="kw">return</span> <span class="kw">true</span>
+<span class="ln">46</span> 		<span class="str">&quot;archivos&quot;</span><span class="op">:</span>  <span class="kw">return</span> <span class="kw">true</span>
+<span class="ln">47</span> 		<span class="str">&quot;galeria&quot;</span><span class="op">:</span>   <span class="kw">return</span> <span class="kw">true</span>
+<span class="ln">48</span> 		<span class="str">&quot;buscador&quot;</span><span class="op">:</span>  <span class="kw">return</span> <span class="kw">true</span>
+<span class="ln">49</span> 		<span class="str">&quot;redsocial&quot;</span><span class="op">:</span> <span class="kw">return</span> <span class="kw">true</span>
+<span class="ln">50</span> 		<span class="str">&quot;notas&quot;</span><span class="op">:</span>     <span class="kw">return</span> fase <span class="op">&gt;=</span> <span class="num">2</span>
+<span class="ln">51</span> 		<span class="str">&quot;diario&quot;</span><span class="op">:</span>    <span class="kw">return</span> is_diario_desbloqueado<span class="op">(</span><span class="op">)</span>
+<span class="ln">52</span> 	<span class="kw">return</span> <span class="kw">false</span>
+<span class="ln">53</span> 
+<span class="ln">54</span> <span class="comment"># ── Contraseña final ──────────────────────────────────────────────────────────</span>
+<span class="ln">55</span> 
+<span class="ln">56</span> <span class="kw">func</span> intentar_contrasena_final<span class="op">(</span>intento<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="type">bool</span><span class="op">:</span> <span class="comment"># valida contraseña del diario</span>
+<span class="ln">57</span> 	<span class="kw">var</span> clave <span class="op">:=</span> <span class="op">(</span>get_pista<span class="op">(</span><span class="num">1</span><span class="op">)</span> <span class="op">+</span> get_pista<span class="op">(</span><span class="num">2</span><span class="op">)</span> <span class="op">+</span> get_pista<span class="op">(</span><span class="num">3</span><span class="op">)</span><span class="op">)</span><span class="op">.</span>to_lower<span class="op">(</span><span class="op">)</span><span class="op">.</span>strip_edges<span class="op">(</span><span class="op">)</span> <span class="comment"># arma clave final con pistas</span>
+<span class="ln">58</span> 	<span class="kw">if</span> intento<span class="op">.</span>to_lower<span class="op">(</span><span class="op">)</span><span class="op">.</span>strip_edges<span class="op">(</span><span class="op">)</span> <span class="op">==</span> clave<span class="op">:</span>
+<span class="ln">59</span> 		desbloquear_diario<span class="op">(</span><span class="op">)</span>
+<span class="ln">60</span> 		<span class="kw">return</span> <span class="kw">true</span>
+<span class="ln">61</span> 	<span class="kw">return</span> <span class="kw">false</span></code></pre></div>
+</div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><section class="slide bg-grid ">
+<div class="glow"></div>
+<header><div class="kicker">systems · entrada</div><h1>LoginRegister: referencias y conexión de botones</h1></header>
+<main><div class="two">
+<aside class="explain"><h2>LoginRegister.gd</h2><p>Obtiene nodos de la interfaz y conecta los botones de registrar e iniciar sesión con sus funciones.</p></aside>
+<div class="codecard "><div class="bar"><b></b><b></b><b></b><span>LoginRegister.gd</span></div><pre class="code"><code><span class="ln">01</span> <span class="kw">extends</span> <span class="type">Control</span> <span class="comment"># escena de interfaz</span>
+<span class="ln">02</span> 
+<span class="ln">03</span> <span class="kw">const</span> <span class="consttok">CARTA_PATH</span> <span class="op">:=</span> <span class="str">&quot;res://game/scenes/menu/PantallaCarta.tscn&quot;</span>
+<span class="ln">04</span> <span class="kw">const</span> <span class="consttok">MENU_PATH</span>  <span class="op">:=</span> <span class="str">&quot;res://game/scenes/menu/MenuPrincipal.tscn&quot;</span>
+<span class="ln">05</span> 
+<span class="ln">06</span> <span class="kw">var</span> engine<span class="op">:</span> <span class="type">StorageEngine</span>
+<span class="ln">07</span> 
+<span class="ln">08</span> @onready <span class="kw">var</span> username_input  <span class="op">:=</span> $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>LoginContent<span class="op">/</span>UsernameLineEdit
+<span class="ln">09</span> @onready <span class="kw">var</span> password_input  <span class="op">:=</span> $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>LoginContent<span class="op">/</span>PasswordLineEdit
+<span class="ln">10</span> @onready <span class="kw">var</span> message_label   <span class="op">:=</span> $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>LoginContent<span class="op">/</span>MessageLabel
+<span class="ln">11</span> @onready <span class="kw">var</span> welcome_label   <span class="op">:=</span> $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>LoginContent<span class="op">/</span>WelcomeLabel
+<span class="ln">12</span> @onready <span class="kw">var</span> login_button    <span class="op">:=</span> $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>LoginContent<span class="op">/</span>ButtonContainer<span class="op">/</span>LoginButton
+<span class="ln">13</span> @onready <span class="kw">var</span> register_button <span class="op">:=</span> $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>LoginContent<span class="op">/</span>ButtonContainer<span class="op">/</span>RegisterButton
+<span class="ln">14</span> 
+<span class="ln">15</span> <span class="kw">func</span> _ready<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span> <span class="comment"># conecta botones al cargar escena</span>
+<span class="ln">16</span> 	engine <span class="op">=</span> <span class="type">StorageEngine</span><span class="op">.</span>new<span class="op">(</span><span class="str">&quot;user://save_data&quot;</span><span class="op">)</span>
+<span class="ln">17</span> 
+<span class="ln">18</span> 	<span class="comment"># Si ya hay sesión activa, saltar directamente a donde corresponde</span>
+<span class="ln">19</span> 	<span class="kw">if</span> GameManager<span class="op">.</span>hay_sesion_activa<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">20</span> 		<span class="kw">var</span> usuario<span class="op">:</span> <span class="type">String</span> <span class="op">=</span> GameManager<span class="op">.</span>get_usuario_activo<span class="op">(</span><span class="op">)</span>
+<span class="ln">21</span> 		_ir_siguiente<span class="op">(</span>usuario<span class="op">)</span>
+<span class="ln">22</span> 		<span class="kw">return</span>
+<span class="ln">23</span> 
+<span class="ln">24</span> 	login_button<span class="op">.</span>pressed<span class="op">.</span>connect<span class="op">(</span>_on_login_pressed<span class="op">)</span>
+<span class="ln">25</span> 	register_button<span class="op">.</span>pressed<span class="op">.</span>connect<span class="op">(</span>_on_register_pressed<span class="op">)</span>
+<span class="ln">26</span> 
+<span class="ln">27</span> <span class="kw">func</span> _on_login_pressed<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span> <span class="comment"># proceso de inicio</span>
+<span class="ln">28</span> 	<span class="kw">var</span> username<span class="op">:</span> <span class="type">String</span> <span class="op">=</span> username_input<span class="op">.</span>text<span class="op">.</span>strip_edges<span class="op">(</span><span class="op">)</span>
+<span class="ln">29</span> 	<span class="kw">var</span> password<span class="op">:</span> <span class="type">String</span> <span class="op">=</span> password_input<span class="op">.</span>text
+<span class="ln">30</span> 	<span class="kw">if</span> username<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span> <span class="kw">or</span> password<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span> <span class="comment"># valida campos vacíos</span></code></pre></div>
+</div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><section class="slide bg-grid ">
+<div class="glow"></div>
+<header><div class="kicker">systems · entrada</div><h1>LoginRegister: registro e inicio de sesión</h1></header>
+<main><div class="two">
+<aside class="explain"><h2>LoginRegister.gd</h2><p>Usa StorageEngine para crear usuarios o autenticar credenciales. Si todo sale bien, inicia sesión y cambia de escena.</p></aside>
+<div class="codecard small"><div class="bar"><b></b><b></b><b></b><span>LoginRegister.gd</span></div><pre class="code"><code><span class="ln">01</span> 		_show_message<span class="op">(</span><span class="str">&quot;Completa todos los campos.&quot;</span><span class="op">)</span>
+<span class="ln">02</span> 		<span class="kw">return</span>
+<span class="ln">03</span> 	<span class="kw">if</span> engine<span class="op">.</span>authenticate_user<span class="op">(</span>username<span class="op">,</span> password<span class="op">)</span><span class="op">:</span> <span class="comment"># valida credenciales</span>
+<span class="ln">04</span> 		GameManager<span class="op">.</span>iniciar_sesion<span class="op">(</span>username<span class="op">)</span> <span class="comment"># guarda sesión global</span>
+<span class="ln">05</span> 		_show_welcome_transition<span class="op">(</span>username<span class="op">)</span>
+<span class="ln">06</span> 	<span class="kw">else</span><span class="op">:</span>
+<span class="ln">07</span> 		_show_message<span class="op">(</span><span class="str">&quot;Usuario o contraseña incorrectos.&quot;</span><span class="op">)</span>
+<span class="ln">08</span> 	password_input<span class="op">.</span>text <span class="op">=</span> <span class="str">&quot;&quot;</span>
+<span class="ln">09</span> 
+<span class="ln">10</span> <span class="kw">func</span> _on_register_pressed<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span> <span class="comment"># proceso de registro</span>
+<span class="ln">11</span> 	<span class="kw">var</span> username<span class="op">:</span> <span class="type">String</span> <span class="op">=</span> username_input<span class="op">.</span>text<span class="op">.</span>strip_edges<span class="op">(</span><span class="op">)</span>
+<span class="ln">12</span> 	<span class="kw">var</span> password<span class="op">:</span> <span class="type">String</span> <span class="op">=</span> password_input<span class="op">.</span>text
+<span class="ln">13</span> 	<span class="kw">if</span> username<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span> <span class="kw">or</span> password<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span> <span class="comment"># valida campos vacíos</span>
+<span class="ln">14</span> 		_show_message<span class="op">(</span><span class="str">&quot;Completa todos los campos.&quot;</span><span class="op">)</span>
+<span class="ln">15</span> 		<span class="kw">return</span>
+<span class="ln">16</span> 	<span class="kw">if</span> engine<span class="op">.</span>register_user<span class="op">(</span>username<span class="op">,</span> password<span class="op">)</span><span class="op">:</span> <span class="comment"># intenta crear usuario</span>
+<span class="ln">17</span> 		engine<span class="op">.</span>save<span class="op">(</span><span class="str">&quot;progress&quot;</span><span class="op">,</span> <span class="str">&quot;progress:%s:fase&quot;</span> <span class="op">%</span> username<span class="op">,</span> <span class="num">0</span><span class="op">)</span> <span class="comment"># inicializa progreso</span>
+<span class="ln">18</span> 		_show_message<span class="op">(</span><span class="str">&quot;Registro exitoso. Ya puedes iniciar sesión.&quot;</span><span class="op">)</span>
+<span class="ln">19</span> 	<span class="kw">else</span><span class="op">:</span>
+<span class="ln">20</span> 		_show_message<span class="op">(</span><span class="str">&quot;El usuario ya existe o hay datos inválidos.&quot;</span><span class="op">)</span>
+<span class="ln">21</span> 	password_input<span class="op">.</span>text <span class="op">=</span> <span class="str">&quot;&quot;</span>
+<span class="ln">22</span> 
+<span class="ln">23</span> <span class="kw">func</span> _show_message<span class="op">(</span>text<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">24</span> 	message_label<span class="op">.</span>text <span class="op">=</span> text
+<span class="ln">25</span> 
+<span class="ln">26</span> <span class="kw">func</span> _show_welcome_transition<span class="op">(</span>username<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">27</span> 	welcome_label<span class="op">.</span>text <span class="op">=</span> <span class="str">&quot;Bienvenido, %s!&quot;</span> <span class="op">%</span> username
+<span class="ln">28</span> 	welcome_label<span class="op">.</span>visible <span class="op">=</span> <span class="kw">true</span>
+<span class="ln">29</span> 	welcome_label<span class="op">.</span>modulate <span class="op">=</span> <span class="type">Color</span><span class="op">(</span><span class="num">1</span><span class="op">,</span> <span class="num">1</span><span class="op">,</span> <span class="num">1</span><span class="op">,</span> <span class="num">0</span><span class="op">)</span>
+<span class="ln">30</span> 	login_button<span class="op">.</span>disabled    <span class="op">=</span> <span class="kw">true</span>
+<span class="ln">31</span> 	register_button<span class="op">.</span>disabled <span class="op">=</span> <span class="kw">true</span>
+<span class="ln">32</span> 	<span class="kw">var</span> tween <span class="op">:=</span> create_tween<span class="op">(</span><span class="op">)</span>
+<span class="ln">33</span> 	tween<span class="op">.</span>tween_property<span class="op">(</span>welcome_label<span class="op">,</span> <span class="str">&quot;modulate:a&quot;</span><span class="op">,</span> <span class="num">1.0</span><span class="op">,</span> <span class="num">0.4</span><span class="op">)</span>
+<span class="ln">34</span> 	tween<span class="op">.</span>tween_interval<span class="op">(</span><span class="num">0.6</span><span class="op">)</span>
+<span class="ln">35</span> 	tween<span class="op">.</span>tween_property<span class="op">(</span>welcome_label<span class="op">,</span> <span class="str">&quot;modulate:a&quot;</span><span class="op">,</span> <span class="num">0.0</span><span class="op">,</span> <span class="num">0.3</span><span class="op">)</span>
+<span class="ln">36</span> 	await tween<span class="op">.</span>finished
+<span class="ln">37</span> 	_ir_siguiente<span class="op">(</span>username<span class="op">)</span>
+<span class="ln">38</span> 
+<span class="ln">39</span> <span class="kw">func</span> _ir_siguiente<span class="op">(</span>username<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">40</span> 	<span class="kw">if</span> GameManager<span class="op">.</span>is_pin_resuelto<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">41</span> 		get_tree<span class="op">(</span><span class="op">)</span><span class="op">.</span>change_scene_to_file<span class="op">.</span>call_deferred<span class="op">(</span><span class="consttok">MENU_PATH</span><span class="op">)</span>
+<span class="ln">42</span> 	<span class="kw">else</span><span class="op">:</span>
+<span class="ln">43</span> 		get_tree<span class="op">(</span><span class="op">)</span><span class="op">.</span>change_scene_to_file<span class="op">.</span>call_deferred<span class="op">(</span><span class="consttok">CARTA_PATH</span><span class="op">)</span></code></pre></div>
+</div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><section class="slide bg-grid ">
+<div class="glow"></div>
+<header><div class="kicker">systems · menú</div><h1>MenuPrincipal: apps y desbloqueos</h1></header>
+<main><div class="two">
+<aside class="explain"><h2>MenuPrincipal.gd</h2><p>Asocia cada botón con una app y bloquea o desbloquea acceso consultando el estado persistente desde GameManager.</p></aside>
+<div class="codecard small"><div class="bar"><b></b><b></b><b></b><span>MenuPrincipal.gd</span></div><pre class="code"><code><span class="ln">01</span> <span class="kw">extends</span> <span class="type">Control</span> <span class="comment"># escena del menú de apps</span>
+<span class="ln">02</span> 
+<span class="ln">03</span> <span class="kw">const</span> <span class="consttok">LOGIN_PATH</span> <span class="op">:=</span> <span class="str">&quot;res://game/scenes/menu/Scenes.tscn&quot;</span>
+<span class="ln">04</span> 
+<span class="ln">05</span> <span class="kw">const</span> <span class="consttok">ESCENAS</span><span class="op">:</span> <span class="type">Dictionary</span> <span class="op">=</span> <span class="op">{</span> <span class="comment"># rutas de las apps</span>
+<span class="ln">06</span> 	<span class="str">&quot;mensajes&quot;</span><span class="op">:</span>  <span class="str">&quot;res://game/scenes/apps/AppMensajes.tscn&quot;</span><span class="op">,</span>
+<span class="ln">07</span> 	<span class="str">&quot;redsocial&quot;</span><span class="op">:</span> <span class="str">&quot;res://game/scenes/apps/AppRedSocial.tscn&quot;</span><span class="op">,</span>
+<span class="ln">08</span> 	<span class="str">&quot;notas&quot;</span><span class="op">:</span>     <span class="str">&quot;res://game/scenes/apps/AppNotas.tscn&quot;</span><span class="op">,</span>
+<span class="ln">09</span> 	<span class="str">&quot;buscador&quot;</span><span class="op">:</span>  <span class="str">&quot;res://game/scenes/apps/AppBuscador.tscn&quot;</span><span class="op">,</span>
+<span class="ln">10</span> 	<span class="str">&quot;archivos&quot;</span><span class="op">:</span>  <span class="str">&quot;res://game/scenes/apps/AppArchivos.tscn&quot;</span><span class="op">,</span>
+<span class="ln">11</span> 	<span class="str">&quot;galeria&quot;</span><span class="op">:</span>   <span class="str">&quot;res://game/scenes/apps/AppGaleria.tscn&quot;</span><span class="op">,</span>
+<span class="ln">12</span> 	<span class="str">&quot;diario&quot;</span><span class="op">:</span>    <span class="str">&quot;res://game/scenes/apps/AppDiario.tscn&quot;</span><span class="op">,</span>
+<span class="ln">13</span> <span class="op">}</span>
+<span class="ln">14</span> 
+<span class="ln">15</span> <span class="kw">var</span> _botones<span class="op">:</span> <span class="type">Dictionary</span> <span class="op">=</span> <span class="op">{</span><span class="op">}</span>
+<span class="ln">16</span> 
+<span class="ln">17</span> @onready <span class="kw">var</span> btn_salir      <span class="op">:=</span> $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>NavBar<span class="op">/</span>BtnSalir
+<span class="ln">18</span> @onready <span class="kw">var</span> label_usuario  <span class="op">:=</span> $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>NavBar<span class="op">/</span>LabelUsuario
+<span class="ln">19</span> 
+<span class="ln">20</span> <span class="kw">func</span> _ready<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span> <span class="comment"># configura menú al iniciar</span>
+<span class="ln">21</span> 	_botones <span class="op">=</span> <span class="op">{</span>
+<span class="ln">22</span> 		<span class="str">&quot;mensajes&quot;</span><span class="op">:</span>  $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>AppsScroll<span class="op">/</span>AppsList<span class="op">/</span>BtnMensajes<span class="op">,</span>
+<span class="ln">23</span> 		<span class="str">&quot;redsocial&quot;</span><span class="op">:</span> $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>AppsScroll<span class="op">/</span>AppsList<span class="op">/</span>BtnRedSocial<span class="op">,</span>
+<span class="ln">24</span> 		<span class="str">&quot;notas&quot;</span><span class="op">:</span>     $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>AppsScroll<span class="op">/</span>AppsList<span class="op">/</span>BtnNotas<span class="op">,</span>
+<span class="ln">25</span> 		<span class="str">&quot;buscador&quot;</span><span class="op">:</span>  $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>AppsScroll<span class="op">/</span>AppsList<span class="op">/</span>BtnBuscador<span class="op">,</span>
+<span class="ln">26</span> 		<span class="str">&quot;archivos&quot;</span><span class="op">:</span>  $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>AppsScroll<span class="op">/</span>AppsList<span class="op">/</span>BtnArchivos<span class="op">,</span>
+<span class="ln">27</span> 		<span class="str">&quot;galeria&quot;</span><span class="op">:</span>   $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>AppsScroll<span class="op">/</span>AppsList<span class="op">/</span>BtnGaleria<span class="op">,</span>
+<span class="ln">28</span> 		<span class="str">&quot;diario&quot;</span><span class="op">:</span>    $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>AppsScroll<span class="op">/</span>AppsList<span class="op">/</span>BtnDiario<span class="op">,</span>
+<span class="ln">29</span> 	<span class="op">}</span>
+<span class="ln">30</span> 
+<span class="ln">31</span> 	<span class="comment"># Mostrar nombre del usuario activo</span>
+<span class="ln">32</span> 	<span class="kw">var</span> usuario<span class="op">:</span> <span class="type">String</span> <span class="op">=</span> GameManager<span class="op">.</span>get_usuario_activo<span class="op">(</span><span class="op">)</span>
+<span class="ln">33</span> 	<span class="kw">if</span> usuario <span class="op">!=</span> <span class="str">&quot;&quot;</span><span class="op">:</span>
+<span class="ln">34</span> 		label_usuario<span class="op">.</span>text <span class="op">=</span> <span class="str">&quot;@&quot;</span> <span class="op">+</span> usuario
+<span class="ln">35</span> 
+<span class="ln">36</span> 	<span class="comment"># Botón de cerrar sesión</span>
+<span class="ln">37</span> 	btn_salir<span class="op">.</span>pressed<span class="op">.</span>connect<span class="op">(</span>_cerrar_sesion<span class="op">)</span>
+<span class="ln">38</span> 
+<span class="ln">39</span> 	<span class="comment"># Conectar señal de fase</span>
+<span class="ln">40</span> 	GameManager<span class="op">.</span>fase_cambiada<span class="op">.</span>connect<span class="op">(</span>_refrescar_apps<span class="op">)</span>
+<span class="ln">41</span> 	_refrescar_apps<span class="op">(</span>GameManager<span class="op">.</span>get_fase<span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="ln">42</span> 
+<span class="ln">43</span> 	<span class="comment"># Conectar apps</span>
+<span class="ln">44</span> 	<span class="kw">for</span> app_id <span class="kw">in</span> _botones<span class="op">.</span>keys<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">45</span> 		<span class="kw">var</span> btn<span class="op">:</span> <span class="type">Button</span> <span class="op">=</span> _botones<span class="op">[</span>app_id<span class="op">]</span>
+<span class="ln">46</span> 		btn<span class="op">.</span>pressed<span class="op">.</span>connect<span class="op">(</span>_abrir_app<span class="op">.</span>bind<span class="op">(</span>app_id<span class="op">)</span><span class="op">)</span> <span class="comment"># envía id de app al presionar</span>
+<span class="ln">47</span> 
+<span class="ln">48</span> <span class="kw">func</span> _refrescar_apps<span class="op">(</span>fase<span class="op">:</span> <span class="type">int</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">49</span> 	<span class="kw">for</span> app_id <span class="kw">in</span> _botones<span class="op">.</span>keys<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">50</span> 		<span class="kw">var</span> btn<span class="op">:</span> <span class="type">Button</span>        <span class="op">=</span> _botones<span class="op">[</span>app_id<span class="op">]</span>
+<span class="ln">51</span> 		<span class="kw">var</span> desbloqueada<span class="op">:</span> <span class="type">bool</span> <span class="op">=</span> GameManager<span class="op">.</span>is_app_desbloqueada<span class="op">(</span>app_id<span class="op">)</span> <span class="comment"># consulta GameManager</span>
+<span class="ln">52</span> 		btn<span class="op">.</span>disabled <span class="op">=</span> <span class="kw">not</span> desbloqueada <span class="comment"># bloquea botón si no está disponible</span>
+<span class="ln">53</span> 		<span class="kw">if</span> btn<span class="op">.</span>has_node<span class="op">(</span><span class="str">&quot;OverlayLock&quot;</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">54</span> 			btn<span class="op">.</span>get_node<span class="op">(</span><span class="str">&quot;OverlayLock&quot;</span><span class="op">)</span><span class="op">.</span>visible <span class="op">=</span> <span class="kw">not</span> desbloqueada
+<span class="ln">55</span> 
+<span class="ln">56</span> <span class="kw">func</span> _abrir_app<span class="op">(</span>app_id<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span> <span class="comment"># abre app seleccionada</span>
+<span class="ln">57</span> 	<span class="kw">if</span> <span class="kw">not</span> GameManager<span class="op">.</span>is_app_desbloqueada<span class="op">(</span>app_id<span class="op">)</span><span class="op">:</span>
+<span class="ln">58</span> 		<span class="kw">return</span>
+<span class="ln">59</span> 	<span class="kw">var</span> path<span class="op">:</span> <span class="type">String</span> <span class="op">=</span> <span class="consttok">ESCENAS</span><span class="op">.</span>get<span class="op">(</span>app_id<span class="op">,</span> <span class="str">&quot;&quot;</span><span class="op">)</span>
+<span class="ln">60</span> 	<span class="kw">if</span> path<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">61</span> 		<span class="kw">return</span>
+<span class="ln">62</span> 	<span class="kw">if</span> get_tree<span class="op">(</span><span class="op">)</span><span class="op">.</span>change_scene_to_file<span class="op">(</span>path<span class="op">)</span> <span class="op">!=</span> <span class="consttok">OK</span><span class="op">:</span>
+<span class="ln">63</span> 		push_error<span class="op">(</span><span class="str">&quot;No se pudo cargar: &quot;</span> <span class="op">+</span> path<span class="op">)</span>
+<span class="ln">64</span> 
+<span class="ln">65</span> <span class="kw">func</span> _cerrar_sesion<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">66</span> 	GameManager<span class="op">.</span>cerrar_sesion<span class="op">(</span><span class="op">)</span>
+<span class="ln">67</span> 	get_tree<span class="op">(</span><span class="op">)</span><span class="op">.</span>change_scene_to_file<span class="op">.</span>call_deferred<span class="op">(</span><span class="consttok">LOGIN_PATH</span><span class="op">)</span></code></pre></div>
+</div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><section class="slide bg-grid ">
+<div class="glow"></div>
+<header><div class="kicker">systems · PIN</div><h1>PantallaCarta: carta, PIN y acceso</h1></header>
+<main><div class="two">
+<aside class="explain"><h2>PantallaCarta.gd</h2><p>Controla el teclado del teléfono. Al ingresar el PIN correcto, guarda el estado resuelto y permite entrar al menú.</p></aside>
+<div class="codecard small"><div class="bar"><b></b><b></b><b></b><span>PantallaCarta.gd</span></div><pre class="code"><code><span class="ln">01</span> <span class="kw">extends</span> <span class="type">Control</span> <span class="comment"># escena de carta/PIN</span>
+<span class="ln">02</span> 
+<span class="ln">03</span> <span class="kw">const</span> <span class="consttok">PIN_CORRECTO</span> <span class="op">:=</span> <span class="str">&quot;2011&quot;</span> <span class="comment"># PIN válido</span>
+<span class="ln">04</span> <span class="kw">const</span> <span class="consttok">MENU_PATH</span>    <span class="op">:=</span> <span class="str">&quot;res://game/scenes/menu/MenuPrincipal.tscn&quot;</span>
+<span class="ln">05</span> <span class="kw">const</span> <span class="consttok">MAX_INTENTOS</span> <span class="op">:=</span> <span class="num">5</span>
+<span class="ln">06</span> 
+<span class="ln">07</span> @onready <span class="kw">var</span> carta_panel   <span class="op">:=</span> $CartaPanel
+<span class="ln">08</span> @onready <span class="kw">var</span> phone_root    <span class="op">:=</span> $PhoneRoot
+<span class="ln">09</span> @onready <span class="kw">var</span> btn_continuar <span class="op">:=</span> $CartaPanel<span class="op">/</span>CartaContent<span class="op">/</span>BtnContinuar
+<span class="ln">10</span> @onready <span class="kw">var</span> feedback      <span class="op">:=</span> $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>FeedbackLabel
+<span class="ln">11</span> @onready <span class="kw">var</span> numpad        <span class="op">:=</span> $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>NumPad
+<span class="ln">12</span> @onready <span class="kw">var</span> pin_row       <span class="op">:=</span> $PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>PinRow
+<span class="ln">13</span> 
+<span class="ln">14</span> <span class="kw">var</span> digits<span class="op">:</span> <span class="type">Array</span> <span class="op">=</span> <span class="op">[</span><span class="op">]</span>
+<span class="ln">15</span> <span class="kw">var</span> pin_actual   <span class="op">:=</span> <span class="str">&quot;&quot;</span>
+<span class="ln">16</span> <span class="kw">var</span> intentos     <span class="op">:=</span> <span class="num">0</span>
+<span class="ln">17</span> <span class="kw">var</span> pin_aceptado <span class="op">:=</span> <span class="kw">false</span>
+<span class="ln">18</span> 
+<span class="ln">19</span> <span class="kw">func</span> _ready<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span> <span class="comment"># prepara la escena</span>
+<span class="ln">20</span> 	digits <span class="op">=</span> <span class="op">[</span>
+<span class="ln">21</span> 		$PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>PinRow<span class="op">/</span>Digit0<span class="op">/</span><span class="type">Label</span><span class="op">,</span>
+<span class="ln">22</span> 		$PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>PinRow<span class="op">/</span>Digit1<span class="op">/</span><span class="type">Label</span><span class="op">,</span>
+<span class="ln">23</span> 		$PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>PinRow<span class="op">/</span>Digit2<span class="op">/</span><span class="type">Label</span><span class="op">,</span>
+<span class="ln">24</span> 		$PhoneRoot<span class="op">/</span>ScreenArea<span class="op">/</span>PinRow<span class="op">/</span>Digit3<span class="op">/</span><span class="type">Label</span><span class="op">,</span>
+<span class="ln">25</span> 	<span class="op">]</span>
+<span class="ln">26</span> 
+<span class="ln">27</span> 	phone_root<span class="op">.</span>visible <span class="op">=</span> <span class="kw">false</span>
+<span class="ln">28</span> 	btn_continuar<span class="op">.</span>pressed<span class="op">.</span>connect<span class="op">(</span>_mostrar_telefono<span class="op">)</span>
+<span class="ln">29</span> 
+<span class="ln">30</span> 	<span class="comment"># Conectar por nombre de nodo — más fiable que comparar texto/emoji</span>
+<span class="ln">31</span> 	<span class="kw">for</span> btn <span class="kw">in</span> numpad<span class="op">.</span>get_children<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">32</span> 		<span class="kw">if</span> <span class="kw">not</span> btn is <span class="type">Button</span><span class="op">:</span>
+<span class="ln">33</span> 			<span class="kw">continue</span>
+<span class="ln">34</span> 		<span class="kw">var</span> n <span class="op">:=</span> btn<span class="op">.</span>name
+<span class="ln">35</span> 		<span class="kw">if</span> n <span class="op">==</span> <span class="str">&quot;BtnDel&quot;</span><span class="op">:</span>
+<span class="ln">36</span> 			btn<span class="op">.</span>pressed<span class="op">.</span>connect<span class="op">(</span>_borrar<span class="op">)</span>
+<span class="ln">37</span> 		<span class="kw">elif</span> n <span class="op">==</span> <span class="str">&quot;BtnVacio&quot;</span><span class="op">:</span>
+<span class="ln">38</span> 			<span class="kw">pass</span>  <span class="comment"># espacio vacío, no hacer nada</span>
+<span class="ln">39</span> 		<span class="kw">else</span><span class="op">:</span> <span class="comment"># caso incorrecto</span>
+<span class="ln">40</span> 			<span class="comment"># Btn0, Btn1 … Btn9 — extraer el dígito del nombre</span>
+<span class="ln">41</span> 			<span class="kw">var</span> digit <span class="op">:=</span> n<span class="op">.</span>replace<span class="op">(</span><span class="str">&quot;Btn&quot;</span><span class="op">,</span> <span class="str">&quot;&quot;</span><span class="op">)</span>
+<span class="ln">42</span> 			btn<span class="op">.</span>pressed<span class="op">.</span>connect<span class="op">(</span>_presionar_numero<span class="op">.</span>bind<span class="op">(</span>digit<span class="op">)</span><span class="op">)</span>
+<span class="ln">43</span> 
+<span class="ln">44</span> <span class="kw">func</span> _mostrar_telefono<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">45</span> 	phone_root<span class="op">.</span>visible <span class="op">=</span> <span class="kw">true</span>
+<span class="ln">46</span> 	phone_root<span class="op">.</span>modulate <span class="op">=</span> <span class="type">Color</span><span class="op">(</span><span class="num">1</span><span class="op">,</span> <span class="num">1</span><span class="op">,</span> <span class="num">1</span><span class="op">,</span> <span class="num">0</span><span class="op">)</span>
+<span class="ln">47</span> 	btn_continuar<span class="op">.</span>visible <span class="op">=</span> <span class="kw">false</span>
+<span class="ln">48</span> 	<span class="kw">var</span> tween <span class="op">:=</span> create_tween<span class="op">(</span><span class="op">)</span><span class="op">.</span>set_parallel<span class="op">(</span><span class="kw">true</span><span class="op">)</span>
+<span class="ln">49</span> 	tween<span class="op">.</span>tween_property<span class="op">(</span>phone_root<span class="op">,</span>  <span class="str">&quot;modulate:a&quot;</span><span class="op">,</span> <span class="num">1.0</span><span class="op">,</span> <span class="num">0.5</span><span class="op">)</span>
+<span class="ln">50</span> 	tween<span class="op">.</span>tween_property<span class="op">(</span>carta_panel<span class="op">,</span> <span class="str">&quot;modulate:a&quot;</span><span class="op">,</span> <span class="num">0.4</span><span class="op">,</span> <span class="num">0.5</span><span class="op">)</span>
+<span class="ln">51</span> 
+<span class="ln">52</span> <span class="kw">func</span> _presionar_numero<span class="op">(</span>numero<span class="op">:</span> <span class="type">String</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">53</span> 	<span class="kw">if</span> pin_aceptado <span class="kw">or</span> pin_actual<span class="op">.</span>length<span class="op">(</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="num">4</span><span class="op">:</span>
+<span class="ln">54</span> 		<span class="kw">return</span>
+<span class="ln">55</span> 	pin_actual <span class="op">+</span><span class="op">=</span> numero <span class="comment"># acumula dígitos</span>
+<span class="ln">56</span> 	_actualizar_display<span class="op">(</span><span class="op">)</span>
+<span class="ln">57</span> 	<span class="kw">if</span> pin_actual<span class="op">.</span>length<span class="op">(</span><span class="op">)</span> <span class="op">==</span> <span class="num">4</span><span class="op">:</span>
+<span class="ln">58</span> 		_verificar_pin<span class="op">(</span><span class="op">)</span> <span class="comment"># valida el PIN</span>
+<span class="ln">59</span> 
+<span class="ln">60</span> <span class="kw">func</span> _borrar<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">61</span> 	<span class="kw">if</span> pin_aceptado <span class="kw">or</span> pin_actual<span class="op">.</span>is_empty<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">62</span> 		<span class="kw">return</span>
+<span class="ln">63</span> 	pin_actual <span class="op">=</span> pin_actual<span class="op">.</span>left<span class="op">(</span>pin_actual<span class="op">.</span>length<span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="num">1</span><span class="op">)</span>
+<span class="ln">64</span> 	_actualizar_display<span class="op">(</span><span class="op">)</span>
+<span class="ln">65</span> 	feedback<span class="op">.</span>text <span class="op">=</span> <span class="str">&quot;&quot;</span>
+<span class="ln">66</span> 
+<span class="ln">67</span> <span class="kw">func</span> _actualizar_display<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">68</span> 	<span class="kw">for</span> i <span class="kw">in</span> <span class="num">4</span><span class="op">:</span>
+<span class="ln">69</span> 		<span class="kw">var</span> lbl<span class="op">:</span> <span class="type">Label</span> <span class="op">=</span> digits<span class="op">[</span>i<span class="op">]</span>
+<span class="ln">70</span> 		<span class="kw">if</span> i <span class="op">&lt;</span> pin_actual<span class="op">.</span>length<span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">71</span> 			lbl<span class="op">.</span>text <span class="op">=</span> <span class="str">&quot;●&quot;</span>
+<span class="ln">72</span> 			lbl<span class="op">.</span>add_theme_color_override<span class="op">(</span><span class="str">&quot;font_color&quot;</span><span class="op">,</span> <span class="type">Color</span><span class="op">(</span><span class="num">0.85</span><span class="op">,</span> <span class="num">0.88</span><span class="op">,</span> <span class="num">1.0</span><span class="op">,</span> <span class="num">1.0</span><span class="op">)</span><span class="op">)</span>
+<span class="ln">73</span> 		<span class="kw">else</span><span class="op">:</span> <span class="comment"># caso incorrecto</span>
+<span class="ln">74</span> 			lbl<span class="op">.</span>text <span class="op">=</span> <span class="str">&quot;·&quot;</span>
+<span class="ln">75</span> 			lbl<span class="op">.</span>add_theme_color_override<span class="op">(</span><span class="str">&quot;font_color&quot;</span><span class="op">,</span> <span class="type">Color</span><span class="op">(</span><span class="num">0.50</span><span class="op">,</span> <span class="num">0.55</span><span class="op">,</span> <span class="num">0.70</span><span class="op">,</span> <span class="num">1.0</span><span class="op">)</span><span class="op">)</span>
+<span class="ln">76</span> 
+<span class="ln">77</span> <span class="kw">func</span> _verificar_pin<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span> <span class="comment"># compara PIN ingresado</span>
+<span class="ln">78</span> 	<span class="kw">if</span> pin_actual <span class="op">==</span> <span class="consttok">PIN_CORRECTO</span><span class="op">:</span> <span class="comment"># caso correcto</span>
+<span class="ln">79</span> 		_pin_correcto<span class="op">(</span><span class="op">)</span>
+<span class="ln">80</span> 	<span class="kw">else</span><span class="op">:</span> <span class="comment"># caso incorrecto</span>
+<span class="ln">81</span> 		_pin_incorrecto<span class="op">(</span><span class="op">)</span>
+<span class="ln">82</span> 
+<span class="ln">83</span> <span class="kw">func</span> _pin_correcto<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">84</span> 	pin_aceptado <span class="op">=</span> <span class="kw">true</span>
+<span class="ln">85</span> 	<span class="kw">for</span> lbl <span class="kw">in</span> digits<span class="op">:</span>
+<span class="ln">86</span> 		lbl<span class="op">.</span>add_theme_color_override<span class="op">(</span><span class="str">&quot;font_color&quot;</span><span class="op">,</span> <span class="type">Color</span><span class="op">(</span><span class="num">0.40</span><span class="op">,</span> <span class="num">1.0</span><span class="op">,</span> <span class="num">0.55</span><span class="op">,</span> <span class="num">1.0</span><span class="op">)</span><span class="op">)</span>
+<span class="ln">87</span> 	feedback<span class="op">.</span>text <span class="op">=</span> <span class="str">&quot;Acceso concedido.&quot;</span>
+<span class="ln">88</span> 	feedback<span class="op">.</span>add_theme_color_override<span class="op">(</span><span class="str">&quot;font_color&quot;</span><span class="op">,</span> <span class="type">Color</span><span class="op">(</span><span class="num">0.40</span><span class="op">,</span> <span class="num">1.0</span><span class="op">,</span> <span class="num">0.55</span><span class="op">,</span> <span class="num">1.0</span><span class="op">)</span><span class="op">)</span>
+<span class="ln">89</span> 	GameManager<span class="op">.</span>set_pin_resuelto<span class="op">(</span><span class="op">)</span> <span class="comment"># guarda PIN resuelto</span>
+<span class="ln">90</span> 	<span class="kw">var</span> tween <span class="op">:=</span> create_tween<span class="op">(</span><span class="op">)</span>
+<span class="ln">91</span> 	tween<span class="op">.</span>tween_interval<span class="op">(</span><span class="num">1.2</span><span class="op">)</span>
+<span class="ln">92</span> 	tween<span class="op">.</span>tween_callback<span class="op">(</span>_ir_al_menu<span class="op">)</span>
+<span class="ln">93</span> 
+<span class="ln">94</span> <span class="kw">func</span> _pin_incorrecto<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">95</span> 	intentos <span class="op">+</span><span class="op">=</span> <span class="num">1</span>
+<span class="ln">96</span> 	<span class="kw">for</span> lbl <span class="kw">in</span> digits<span class="op">:</span>
+<span class="ln">97</span> 		lbl<span class="op">.</span>add_theme_color_override<span class="op">(</span><span class="str">&quot;font_color&quot;</span><span class="op">,</span> <span class="type">Color</span><span class="op">(</span><span class="num">1.0</span><span class="op">,</span> <span class="num">0.40</span><span class="op">,</span> <span class="num">0.40</span><span class="op">,</span> <span class="num">1.0</span><span class="op">)</span><span class="op">)</span>
+<span class="ln">98</span> 
+<span class="ln">99</span> 	<span class="kw">if</span> intentos <span class="op">&gt;=</span> <span class="consttok">MAX_INTENTOS</span><span class="op">:</span>
+<span class="ln">100</span> 		feedback<span class="op">.</span>text <span class="op">=</span> <span class="str">&quot;Demasiados intentos. Relee la carta.&quot;</span>
+<span class="ln">101</span> 	<span class="kw">else</span><span class="op">:</span> <span class="comment"># caso incorrecto</span>
+<span class="ln">102</span> 		feedback<span class="op">.</span>text <span class="op">=</span> <span class="str">&quot;PIN incorrecto. Quedan %d intentos.&quot;</span> <span class="op">%</span> <span class="op">(</span><span class="consttok">MAX_INTENTOS</span> <span class="op">-</span> intentos<span class="op">)</span>
+<span class="ln">103</span> 
+<span class="ln">104</span> 	<span class="kw">var</span> orig<span class="op">:</span> Vector2 <span class="op">=</span> pin_row<span class="op">.</span>position
+<span class="ln">105</span> 	<span class="kw">var</span> tween <span class="op">:=</span> create_tween<span class="op">(</span><span class="op">)</span>
+<span class="ln">106</span> 	tween<span class="op">.</span>tween_property<span class="op">(</span>pin_row<span class="op">,</span> <span class="str">&quot;position&quot;</span><span class="op">,</span> orig <span class="op">+</span> Vector2<span class="op">(</span><span class="num">6</span><span class="op">,</span> <span class="num">0</span><span class="op">)</span><span class="op">,</span>  <span class="num">0.05</span><span class="op">)</span>
+<span class="ln">107</span> 	tween<span class="op">.</span>tween_property<span class="op">(</span>pin_row<span class="op">,</span> <span class="str">&quot;position&quot;</span><span class="op">,</span> orig <span class="op">-</span> Vector2<span class="op">(</span><span class="num">6</span><span class="op">,</span> <span class="num">0</span><span class="op">)</span><span class="op">,</span>  <span class="num">0.05</span><span class="op">)</span>
+<span class="ln">108</span> 	tween<span class="op">.</span>tween_property<span class="op">(</span>pin_row<span class="op">,</span> <span class="str">&quot;position&quot;</span><span class="op">,</span> orig <span class="op">+</span> Vector2<span class="op">(</span><span class="num">4</span><span class="op">,</span> <span class="num">0</span><span class="op">)</span><span class="op">,</span>  <span class="num">0.04</span><span class="op">)</span>
+<span class="ln">109</span> 	tween<span class="op">.</span>tween_property<span class="op">(</span>pin_row<span class="op">,</span> <span class="str">&quot;position&quot;</span><span class="op">,</span> orig<span class="op">,</span>                  <span class="num">0.04</span><span class="op">)</span>
+<span class="ln">110</span> 	tween<span class="op">.</span>tween_interval<span class="op">(</span><span class="num">0.3</span><span class="op">)</span>
+<span class="ln">111</span> 	tween<span class="op">.</span>tween_callback<span class="op">(</span><span class="kw">func</span><span class="op">(</span><span class="op">)</span><span class="op">:</span>
+<span class="ln">112</span> 		pin_actual <span class="op">=</span> <span class="str">&quot;&quot;</span> <span class="comment"># reinicia intento</span>
+<span class="ln">113</span> 		_actualizar_display<span class="op">(</span><span class="op">)</span>
+<span class="ln">114</span> 	<span class="op">)</span>
+<span class="ln">115</span> 
+<span class="ln">116</span> <span class="kw">func</span> _ir_al_menu<span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> void<span class="op">:</span>
+<span class="ln">117</span> 	<span class="kw">if</span> get_tree<span class="op">(</span><span class="op">)</span><span class="op">.</span>change_scene_to_file<span class="op">(</span><span class="consttok">MENU_PATH</span><span class="op">)</span> <span class="op">!=</span> <span class="consttok">OK</span><span class="op">:</span>
+<span class="ln">118</span> 		push_error<span class="op">(</span><span class="str">&quot;No se pudo cargar: &quot;</span> <span class="op">+</span> <span class="consttok">MENU_PATH</span><span class="op">)</span></code></pre></div>
+</div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><section class="slide bg-grid ">
+<div class="glow"></div>
+<header>
+<section class="slide bg-grid ">
+<div class="glow"></div>
+<header><div class="kicker">optimización</div><h1>Rehash automático</h1></header>
+<main>
+<div class="grid3">
+<div>
+<h3>Problema</h3>
+<p>Con demasiadas claves y pocos buckets aumentan las colisiones y las búsquedas se vuelven más lentas.</p>
+</div>
+<div>
+<h3>Solución</h3>
+<p>Cuando el load factor supera 0.7 la tabla duplica la cantidad de buckets y redistribuye todas las claves.</p>
+</div>
+<div>
+<h3>Resultado</h3>
+<p>Las operaciones put() y get_offset() mantienen complejidad promedio cercana a O(1).</p>
+</div>
+</div>
+
+<div class="terminal"><em>$</em> load_factor = size / bucket_count → if load_factor &gt; 0.7 → _rehash(bucket_count * 2)</div>
+</main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section>
+<div class="kicker">cierre técnico</div><h1>Resumen del funcionamiento</h1></header>
+<main><div class="summary">
+<h3>Idea central</h3>
+<p>El proyecto no depende de una base de datos externa. Implementa su propio sistema de persistencia usando un log append-only, una tabla hash en memoria, un índice persistente y recuperación automática.</p>
+<div class="terminal"><em>$</em> save(key, data) → data.log → offset → HashTable → index.bin</div>
+<div class="terminal"><em>$</em> get_data(key) → HashTable → offset → read_at(offset) → data</div>
+</div></main>
+<footer><span>← → navegar · P imprimir</span><div class="progress"><i></i></div><span class="count"></span></footer>
+</section><script>
+const slides=[...document.querySelectorAll('.slide')];let idx=0;function show(i){idx=(i+slides.length)%slides.length;slides.forEach((s,j)=>s.classList.toggle('active',j===idx));document.querySelectorAll('.count').forEach(c=>c.textContent=`${idx+1}/${slides.length}`);document.querySelectorAll('.progress i').forEach(p=>p.style.width=((idx+1)/slides.length*100)+'%')}document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key))show(idx+1);if(['ArrowLeft','PageUp','Backspace'].includes(e.key))show(idx-1);if(e.key.toLowerCase()==='p')print()});show(0);
+</script></body></html>
