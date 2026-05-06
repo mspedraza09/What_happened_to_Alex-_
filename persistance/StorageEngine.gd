@@ -30,13 +30,21 @@ func get_data(key: String) -> Variant:
 
 func delete(key: String) -> bool:
 	var offset: int = hash_table.get_offset(key)
-	if offset != -1:
-		record_store.append("delete", key, null)
-		var removed: bool = hash_table.delete(key)
-		if removed:
-			index_store.save(hash_table)
-		return removed
-	return false
+
+	# la clave no existe
+	if offset == -1:
+		return false
+
+	# agregar tombstone al log
+	record_store.append("delete", key, null)
+
+	# eliminar del índice en memoria
+	hash_table.delete(key)
+
+	# guardar índice actualizado
+	index_store.save(hash_table)
+
+	return true
 
 func stats() -> Dictionary:
 	return hash_table.stats()
