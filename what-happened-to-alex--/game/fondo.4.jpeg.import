@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8dirl274lo6y"
-path="res://.godot/imported/icon.svg-006eb72229063faa6483282563260153.ctex"
+uid="uid://it6ux0ixs1f1"
+path="res://.godot/imported/fondo.4.jpeg-f316626ef8a266a1c93e124813a4e7c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/icon.svg"
-dest_files=["res://.godot/imported/icon.svg-006eb72229063faa6483282563260153.ctex"]
+source_file="res://fondo.4.jpeg"
+dest_files=["res://.godot/imported/fondo.4.jpeg-f316626ef8a266a1c93e124813a4e7c6.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
