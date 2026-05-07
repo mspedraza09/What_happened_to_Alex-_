@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://btkm5lg7tp7bu"]
+
+[ext_resource type="Script" uid="uid://c10x5hxxg3o1c" path="res://auth.gd" id="1_7psoh"]
+[ext_resource type="Texture2D" uid="uid://d1h3m2n3npa84" path="res://fondoauth.jpg" id="2_u5rge"]
+
+[node name="Control" type="Control" unique_id=238764423]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7psoh")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=188468248]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_u5rge")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=730883178]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.02, 0.02, 0.02, 0.48235294)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=135859752]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 15
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer" unique_id=335554397]
+layout_mode = 2
+placeholder_text = "username"
+
+[node name="LineEdit2" type="LineEdit" parent="VBoxContainer" unique_id=131637753]
+layout_mode = 2
+secret = true
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=130368648]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "CONTINAR"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

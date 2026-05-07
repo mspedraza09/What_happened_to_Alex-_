@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://dj72dsf45wh5o"]
+
+[ext_resource type="Script" uid="uid://bupq4pfgjhi4s" path="res://pre_game.gd" id="1_gp8je"]
+[ext_resource type="Texture2D" uid="uid://uan8lem1sqbo" path="res://Fondo0.3.jpg" id="1_vcq7f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vcq7f"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.05490196, 0.2509804, 0.35686275, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0.79607844)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 5
+
+[node name="Control" type="Control" unique_id=1162396027]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gp8je")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=837834539]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_vcq7f")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=296693395]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=877304020]
+custom_minimum_size = Vector2(80, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -471.0
+offset_top = -219.0
+offset_right = 484.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 200
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=139595921]
+custom_minimum_size = Vector2(50, 35)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9529412)
+theme_override_constants/line_spacing = 8
+theme_override_constants/paragraph_spacing = 20
+theme_override_constants/shadow_offset_x = 4
+theme_override_font_sizes/font_size = 50
+text = "Algo no está bien… ¿Qué le pasó a Alex?"
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer" unique_id=1225748866]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/CenterContainer" unique_id=1403180552]
+custom_minimum_size = Vector2(300, 120)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.41641974, 0.9723038, 0.9906909, 1)
+theme_override_colors/font_focus_color = Color(0.9490196, 0.08627451, 0.9490196, 1)
+theme_override_colors/font_disabled_color = Color(0.05882353, 0.09019608, 0.13333334, 1)
+theme_override_colors/icon_disabled_color = Color(0.05490196, 0.08235294, 0.1254902, 1)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_vcq7f")
+text = "PLAY"
+
+[node name="Button2" type="Button" parent="VBoxContainer/CenterContainer/Button" unique_id=542948616]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 447.0
+offset_top = 69.5
+offset_right = 380.0
+offset_bottom = 146.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.41641974, 0.9723038, 0.9906909, 1)
+theme_override_colors/font_focus_color = Color(0.9490196, 0.08627451, 0.9490196, 1)
+theme_override_colors/font_disabled_color = Color(0.05882353, 0.09019608, 0.13333334, 1)
+theme_override_colors/icon_disabled_color = Color(0.05490196, 0.08235294, 0.1254902, 1)
+theme_override_font_sizes/font_size = 30
+text = "SETTINGS"
+
+[connection signal="pressed" from="VBoxContainer/CenterContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/Button/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/Button/Button2" to="." method="_on_button_pressed"]

@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://duc2rs3b6h5i"]
+
+[ext_resource type="Script" uid="uid://cewdfmp87ekoj" path="res://main_menu.gd" id="1_eiy7p"]
+[ext_resource type="Texture2D" uid="uid://3ojyl6b6xtx6" path="res://fondoMenu.jpg" id="1_i26rj"]
+
+[node name="Control" type="Control" unique_id=585081484]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eiy7p")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=135389062]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_i26rj")
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect" unique_id=288419189]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07058824, 0.07058824, 0.07058824, 0.3019608)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1486436031]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -82.0
+offset_right = 200.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1187432850]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer" unique_id=27888033]
+custom_minimum_size = Vector2(400, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "INICIAR SESIÓN"
+
+[node name="Button2" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1760101976]
+custom_minimum_size = Vector2(400, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "REGISTRARSE"
+
+[node name="Label" type="Label" parent="." unique_id=681709488]
+modulate = Color(0.91, 0.91, 0.91, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -285.0
+offset_top = 91.0
+offset_right = 302.0
+offset_bottom = 160.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
+theme_override_colors/font_shadow_color = Color(0.09, 0.0486, 0.0486, 1)
+theme_override_constants/shadow_offset_x = 9
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 27
+theme_override_font_sizes/font_size = 50
+text = "What Happened To Alex?"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
