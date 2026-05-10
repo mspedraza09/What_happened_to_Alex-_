@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://btjoad77h0wqw"]
+
+[ext_resource type="Script" uid="uid://bc7njwcjodfwu" path="res://game/scenes/apps_2/AppMensaje/panel_container.gd" id="1_smgpd"]
+
+[node name="MensajeBurbuja" type="PanelContainer" unique_id=326317730]
+custom_minimum_size = Vector2(200, 30)
+layout_direction = 2
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_smgpd")
+
+[node name="Label" type="Label" parent="." unique_id=2137326115]
+layout_mode = 2

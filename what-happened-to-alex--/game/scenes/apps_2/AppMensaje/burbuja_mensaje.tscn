@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://do8o6py63ql8h"]
+
+[ext_resource type="PackedScene" uid="uid://btjoad77h0wqw" path="res://game/scenes/apps_2/AppMensaje/panel_container.tscn" id="1_aouf1"]
+
+[node name="BurbujaMensaje" type="Control" unique_id=847105807]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelContainer" parent="." unique_id=326317730 instance=ExtResource("1_aouf1")]
+layout_mode = 0
+offset_right = 200.0

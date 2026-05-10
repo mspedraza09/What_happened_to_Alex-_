@@ -1,4 +1,0 @@
-[gd_scene format=3 uid="uid://cfhor4vec1ig4"]
-
-[node name="MensajeBurbuja" type="Label" unique_id=611278308]
-text = "Este es un texto de prueba"

@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dvqfh0536hyr7"]
+
+[ext_resource type="Script" uid="uid://lyv4ni1qsiss" path="res://game/scenes/apps_2/AppMensaje/pantalla_chat.gd" id="1_h2h80"]
+
+[node name="PantallaChat" type="Control" unique_id=184564036]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h2h80")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2001493055]
+layout_mode = 0
+offset_right = 365.0
+offset_bottom = 591.0
+
+[node name="Header" type="HBoxContainer" parent="VBoxContainer" unique_id=804824644]
+layout_mode = 2
+
+[node name="BotonVolver" type="Button" parent="VBoxContainer/Header" unique_id=1149382876]
+layout_mode = 2
+text = "🡰"
+
+[node name="NombreUsuario" type="Label" parent="VBoxContainer/Header" unique_id=1962797656]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=1001106366]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="ListaMensajes" type="VBoxContainer" parent="VBoxContainer/ScrollContainer" unique_id=794153711]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="VBoxContainer/Header/BotonVolver" to="." method="_on_boton_volver_pressed"]

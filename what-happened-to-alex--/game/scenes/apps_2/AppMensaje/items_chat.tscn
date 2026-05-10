@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cf651eml0hbf"]
+
+[ext_resource type="Texture2D" uid="uid://c8dirl274lo6y" path="res://game/assets/icon.svg" id="1_3a5v3"]
+[ext_resource type="Script" uid="uid://ctb5l8xbtyt3q" path="res://game/scenes/apps_2/AppMensaje/items_chat.gd" id="1_m2ijy"]
+
+[node name="items_chat" type="Control" unique_id=187554616]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("1_m2ijy")
+
+[node name="Button" type="Button" parent="." unique_id=911746667]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 430.0
+offset_bottom = 73.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Button" unique_id=1181110089]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="foto_usuario" type="TextureRect" parent="Button/HBoxContainer" unique_id=350680611]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("1_3a5v3")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Button/HBoxContainer" unique_id=1757357416]
+layout_mode = 2
+
+[node name="usuario_chat" type="Label" parent="Button/HBoxContainer/VBoxContainer" unique_id=962462022]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+
+[node name="mensaje_ultimo" type="Label" parent="Button/HBoxContainer/VBoxContainer" unique_id=1842482738]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
