@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://br6svnwoijnnq"]
+
+[ext_resource type="Script" uid="uid://dxw33tq0baqxs" path="res://game/scenes/apps_2/AppArchivos/files_app.gd" id="1_jp6pc"]
+
+[node name="FilesApp" type="Control" unique_id=1531858643]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jp6pc")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1025518299]
+layout_mode = 0
+offset_right = 364.0
+offset_bottom = 603.0
+
+[node name="TopBar" type="Panel" parent="." unique_id=418942241]
+layout_mode = 0
+offset_right = 365.0
+offset_bottom = 44.0
+
+[node name="LabelTitulo" type="Label" parent="TopBar" unique_id=1303150923]
+modulate = Color(1, 0.9308333, 0.17000002, 1)
+layout_mode = 0
+offset_left = 62.0
+offset_top = 2.0
+offset_right = 179.0
+offset_bottom = 44.0
+text = "Mis archivos"
+
+[node name="BtnBack" type="Button" parent="TopBar" unique_id=592802499]
+modulate = Color(1, 0.96900004, 0.06999999, 1)
+layout_mode = 0
+offset_right = 55.0
+offset_bottom = 44.0
+text = "🢀"
+
+[node name="MainContainer" type="MarginContainer" parent="." unique_id=654498060]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.316
+anchor_bottom = 0.929
+offset_top = 50.0
+offset_right = 2.967987
+offset_bottom = 0.0079956055
+
+[node name="ListLayout" type="ScrollContainer" parent="MainContainer" unique_id=1771707445]
+layout_mode = 2
+scroll_horizontal_custom_step = 0.0
+scroll_vertical_custom_step = 0.0
+
+[node name="VBoxArchivos" type="VBoxContainer" parent="MainContainer/ListLayout" unique_id=2029433537]
+layout_mode = 2
+
+[node name="FileContent" type="Control" parent="MainContainer" unique_id=781724633]
+visible = false
+layout_mode = 2
+
+[node name="TextDisplay" type="RichTextLabel" parent="MainContainer/FileContent" unique_id=832147337]
+modulate = Color(1, 0.060000002, 0.060000002, 1)
+layout_mode = 0
+offset_left = 3.0
+offset_top = 46.0
+offset_right = 364.0
+offset_bottom = 118.0
+
+[connection signal="pressed" from="TopBar/BtnBack" to="." method="_on_btn_back_pressed"]

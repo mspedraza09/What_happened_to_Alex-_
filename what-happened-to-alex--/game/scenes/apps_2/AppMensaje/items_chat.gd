@@ -20,3 +20,4 @@ func _process(delta: float) -> void:
 func _on_button_pressed() -> void:
 	print("1. El botón fue presionado en el item de: ", usuario_chat)
 	chat_seleccionado.emit(usuario_chat)
+	

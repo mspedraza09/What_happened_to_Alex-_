@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bhj52isjhr4qr"]
+
+[ext_resource type="Script" uid="uid://ddojim7bqu3uf" path="res://game/scenes/apps_2/AppArchivos/file_item.gd" id="1_pxebp"]
+
+[node name="FileItem" type="Button" unique_id=1795581926]
+custom_minimum_size = Vector2(360, 70)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_pxebp")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1612487332]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icono" type="TextureRect" parent="HBoxContainer" unique_id=1862195138]
+layout_mode = 2
+
+[node name="InfoContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1543663648]
+layout_mode = 2
+
+[node name="NombreLabel" type="Label" parent="HBoxContainer/InfoContainer" unique_id=1114259589]
+layout_mode = 2
+
+[node name="FechaLabel" type="Label" parent="HBoxContainer/InfoContainer" unique_id=299333153]
+layout_mode = 2
