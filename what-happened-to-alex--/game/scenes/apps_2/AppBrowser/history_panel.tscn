@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://nt25dntsf64j"]
+
+[ext_resource type="Script" uid="uid://cdnq4iabym6oe" path="res://game/scenes/apps_2/AppBrowser/history_panel.gd" id="1_d705s"]
+
+[node name="HistoryPanel" type="ColorRect" unique_id=870908486]
+offset_left = 414.0
+offset_top = 15.0
+offset_right = 777.0
+offset_bottom = 633.0
+color = Color(0.78039217, 0.78039217, 0.78039217, 1)
+script = ExtResource("1_d705s")
+
+[node name="TopTitle" type="Panel" parent="." unique_id=1874843644]
+layout_mode = 0
+offset_top = -2.0
+offset_right = 365.0
+offset_bottom = 50.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopTitle" unique_id=1357440076]
+layout_mode = 0
+offset_right = 361.0
+offset_bottom = 54.0
+
+[node name="ButtonBack" type="Button" parent="TopTitle/HBoxContainer" unique_id=349287439]
+custom_minimum_size = Vector2(87, 0)
+layout_mode = 2
+text = "🢀"
+
+[node name="Title" type="Label" parent="TopTitle/HBoxContainer" unique_id=1505006436]
+layout_mode = 2
+text = "Historial de busquedad"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=506691416]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 64.0
+offset_right = 360.0
+offset_bottom = 560.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=541931380]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1274140726]
+layout_mode = 2
+
+[node name="Time" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=609051317]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="." unique_id=1607250900]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 574.0
+offset_right = 236.0
+offset_bottom = 612.0
+text = "Cargar más"

@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://c5ej835ubkxex"]
+
+[ext_resource type="Texture2D" uid="uid://djqixn278obdb" path="res://game/assets/paisaje.jpeg" id="1_bke1k"]
+[ext_resource type="PackedScene" uid="uid://nt25dntsf64j" path="res://game/scenes/apps_2/AppBrowser/history_panel.tscn" id="2_48xet"]
+
+[node name="BrowserScreen" type="Control" unique_id=1326252284]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=450409253]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 19.0
+offset_right = 772.0
+offset_bottom = 631.0
+color = Color(0.78, 0.78, 0.78, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1468683623]
+layout_mode = 0
+offset_left = 425.0
+offset_top = 30.0
+offset_right = 770.0
+offset_bottom = 70.0
+
+[node name="SearchBar" type="ColorRect" parent="HBoxContainer" unique_id=10995580]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+color = Color(0.46, 0.46, 0.46, 1)
+
+[node name="TextSearchBar" type="Label" parent="HBoxContainer/SearchBar" unique_id=864745811]
+layout_mode = 0
+offset_right = 143.0
+offset_bottom = 32.0
+text = "Busque en oogle"
+
+[node name="Searching" type="Label" parent="HBoxContainer" unique_id=689876199]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🔍"
+
+[node name="MarginImagen" type="MarginContainer" parent="." unique_id=1690956869]
+layout_mode = 0
+offset_left = 417.0
+offset_top = 81.0
+offset_right = 771.0
+offset_bottom = 553.0
+
+[node name="ImageBackground" type="TextureRect" parent="MarginImagen" unique_id=1393486228]
+layout_mode = 2
+texture = ExtResource("1_bke1k")
+expand_mode = 1
+
+[node name="MarginContaineMenu" type="MarginContainer" parent="." unique_id=425294453]
+layout_mode = 0
+offset_left = 415.0
+offset_top = 562.0
+offset_right = 772.0
+offset_bottom = 633.0
+
+[node name="ColorMenu" type="ColorRect" parent="MarginContaineMenu" unique_id=1107389623]
+layout_mode = 2
+color = Color(0.45882353, 0.45882353, 0.45882353, 1)
+
+[node name="Menu" type="HBoxContainer" parent="MarginContaineMenu/ColorMenu" unique_id=281696305]
+layout_mode = 0
+offset_right = 358.0
+offset_bottom = 70.0
+
+[node name="House" type="Label" parent="MarginContaineMenu/ColorMenu/Menu" unique_id=1886877928]
+custom_minimum_size = Vector2(87.5, 40)
+layout_mode = 2
+text = "🏠︎"
+
+[node name="Guard" type="Label" parent="MarginContaineMenu/ColorMenu/Menu" unique_id=632327]
+custom_minimum_size = Vector2(87.5, 40)
+layout_mode = 2
+text = "📥"
+
+[node name="Search" type="Label" parent="MarginContaineMenu/ColorMenu/Menu" unique_id=56417587]
+custom_minimum_size = Vector2(87.5, 40)
+layout_mode = 2
+text = "🔎"
+
+[node name="Setting" type="MenuButton" parent="MarginContaineMenu/ColorMenu/Menu" unique_id=863466200]
+custom_minimum_size = Vector2(86, 40)
+layout_mode = 2
+text = "⚙️"
+
+[node name="HistoryPanel" parent="." unique_id=870908486 instance=ExtResource("2_48xet")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 363.0
+offset_bottom = 618.0
