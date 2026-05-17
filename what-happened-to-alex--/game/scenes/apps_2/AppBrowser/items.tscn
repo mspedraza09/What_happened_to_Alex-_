@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://e7xr8mnqibx7"]
+
+[ext_resource type="Script" uid="uid://dsydrblqnldvo" path="res://game/scenes/apps_2/AppBrowser/items.gd" id="1_7mpv1"]
+
+[node name="items" type="Button" unique_id=1618449721]
+custom_minimum_size = Vector2(350, 70)
+anchors_preset = -1
+anchor_right = 0.37500003
+anchor_bottom = 0.11000001
+offset_right = -3.0517578e-05
+offset_bottom = -0.2800064
+script = ExtResource("1_7mpv1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1114037823]
+layout_mode = 0
+offset_right = 433.0
+offset_bottom = 66.0
+
+[node name="Name" type="Label" parent="HBoxContainer" unique_id=1469600572]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Time" type="Label" parent="HBoxContainer" unique_id=1333282449]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="pressed" from="." to="." method="_pressed"]

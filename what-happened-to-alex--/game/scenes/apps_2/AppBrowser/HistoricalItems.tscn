@@ -1,20 +1,50 @@
 [gd_scene format=3 uid="uid://bf1jaixjp76us"]
 
-[ext_resource type="Script" uid="uid://dtceopvuifbc1" path="res://game/scenes/apps_2/AppBrowser/historical_items.gd" id="1_meqgm"]
+[sub_resource type="GDScript" id="GDScript_1n53c"]
+script/source = "extends Button
+@export var name_search: String = \"Nombre busquedad\"
+@export var time_search: String = \"Fecha\"
+var action_type: String = \"Active/None\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+	
+func configurar_item(titulo: String, hora: String, tipo: String) -> void:
+	name_search = titulo
+	time_search = hora
+	action_type = tipo
+	%Name.text = name_search
+	%Time.text = time_search	
+	
+func _pressed() -> void:
+	if action_type == \"active\":
+		print(\"¡Clic en ítem Activo! Abriendo la web...\")
+		# Buscamos a BrowserScreen en la raíz para ejecutar el cambio de pantalla
+		var browser = get_tree().current_scene
+		if browser.has_method(\"abrir_pantalla_web\"):
+			browser.abrir_pantalla_web()
+	else:
+		print(\"Clic en ítem de relleno. No pasa nada.\")
+"
 
 [node name="HistorialItems" type="Button" unique_id=762179161]
-offset_right = 381.0
-offset_bottom = 59.0
-script = ExtResource("1_meqgm")
+custom_minimum_size = Vector2(350, 70)
+offset_right = 392.0
+offset_bottom = 74.0
+size_flags_horizontal = 3
+script = SubResource("GDScript_1n53c")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1455596633]
 layout_mode = 0
-offset_right = 381.0
-offset_bottom = 63.0
+offset_right = 394.0
+offset_bottom = 72.0
 
 [node name="Name" type="Label" parent="HBoxContainer" unique_id=1185922397]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(260, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "María"
@@ -22,4 +52,5 @@ text = "María"
 [node name="Time" type="Label" parent="HBoxContainer" unique_id=548253225]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "14-08-26"

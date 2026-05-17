@@ -1,5 +1,5 @@
 extends Control
-@onready var vbox: Button = $ScrollContainer/VBoxContainer/HistoricalItems
+@onready var vbox: VBoxContainer = $ScrollContainer/VBoxContainer
 @onready var btn_back: Button = $TopTitle/HBoxContainer/ButtonBack
 
 # Exportamos una variable para asignarle la escena del botón desde el inspector
@@ -10,7 +10,7 @@ func _ready() -> void:
 	if btn_back:
 		btn_back.pressed.connect(hide)
 
-func cargar_historial(lista_busquedas: Array) -> void:
+func load_history(search_list: Array) -> void:
 	# Verificación de seguridad por si olvidaste asignar la escena en el inspector
 	if not item_escena:
 		push_error("¡Error! No has asignado la escena 'HistorialItems' en el Inspector de HistoryPanel01.")
@@ -21,10 +21,9 @@ func cargar_historial(lista_busquedas: Array) -> void:
 		hijo.queue_free()
 	
 	# 2. Instanciamos los nuevos ítems basados en el diccionario
-	for datos in lista_busquedas:
+	for datos in search_list:
 		# Creamos una copia nueva de la escena guardada
 		var nuevo_item = item_escena.instantiate()
-		
 		# Lo agregamos al contenedor vertical
 		vbox.add_child(nuevo_item)
 		

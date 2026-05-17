@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://vbefr0fc80f4"]
+
+[ext_resource type="Script" uid="uid://r54s0eiom8h4" path="res://game/scenes/apps_2/AppBrowser/web_screen.gd" id="1_j6jbw"]
+[ext_resource type="PackedScene" uid="uid://dg55fjgfxjfjd" path="res://game/scenes/apps_2/AppBrowser/PsychologistItem.tscn" id="2_6noyi"]
+
+[node name="WebScreen" type="Control" unique_id=746974188]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 317.0
+offset_top = 21.0
+offset_right = -268.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j6jbw")
+psychologist_item_scene = ExtResource("2_6noyi")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1069225653]
+layout_direction = 1
+layout_mode = 0
+offset_right = 565.0
+offset_bottom = 662.0
+color = Color(0.7990171, 0.8117478, 0.948217, 1)
+
+[node name="TopBar" type="Panel" parent="." unique_id=1313594309]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.492
+anchor_bottom = 0.054
+offset_top = 1.0
+offset_right = 286.03598
+offset_bottom = 11.007999
+
+[node name="UrlLabel" type="Label" parent="TopBar" unique_id=397588567]
+custom_minimum_size = Vector2(560, 0)
+layout_mode = 0
+offset_left = 56.0
+offset_right = 550.0
+offset_bottom = 32.0
+text = "www.psychology-directory.com/co/barranquilla"
+
+[node name="BackButton" type="Button" parent="TopBar" unique_id=1400758826]
+layout_mode = 0
+offset_right = 54.0
+offset_bottom = 35.0
+text = "🢀"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=278756523]
+layout_mode = 0
+offset_top = 60.0
+offset_right = 563.0
+offset_bottom = 626.0
+
+[node name="ProfileList" type="VBoxContainer" parent="ScrollContainer" unique_id=486007986]
+layout_mode = 2

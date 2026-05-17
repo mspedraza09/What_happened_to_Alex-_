@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cjv61xtv1awnn"]
 
 [ext_resource type="Script" uid="uid://b5kgiv3p01eya" path="res://game/scenes/apps_2/AppBrowser/history_panel_01.gd" id="1_uclwr"]
-[ext_resource type="PackedScene" uid="uid://bf1jaixjp76us" path="res://game/scenes/apps_2/AppBrowser/HistoricalItems.tscn" id="3_whk1n"]
+[ext_resource type="PackedScene" uid="uid://e7xr8mnqibx7" path="res://game/scenes/apps_2/AppBrowser/items.tscn" id="3_uclwr"]
 
 [node name="HistoryPanel01" type="Control" unique_id=1636176363]
 layout_mode = 3
@@ -11,7 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_uclwr")
-item_escena = ExtResource("3_whk1n")
+item_escena = ExtResource("3_uclwr")
 
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=440610010]
 layout_mode = 0
@@ -50,19 +50,20 @@ text = "🢀"
 layout_mode = 2
 text = "Historial de busquedad"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1826853710]
-layout_mode = 0
-offset_left = 419.0
-offset_top = 79.0
-offset_right = 768.0
-offset_bottom = 574.0
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=411394317]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.36400002
+anchor_top = 0.136
+anchor_right = 0.66800004
+anchor_bottom = 0.864
+offset_left = -0.32803345
+offset_top = -0.12800598
+offset_right = -0.5360718
+offset_bottom = 0.12799072
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=1915000270]
-custom_minimum_size = Vector2(200, 760)
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=1158605817]
 layout_mode = 2
-
-[node name="HistoricalItems" parent="ScrollContainer/VBoxContainer" unique_id=762179161 instance=ExtResource("3_whk1n")]
-custom_minimum_size = Vector2(270, 70)
-layout_mode = 2
-
-[connection signal="pressed" from="ScrollContainer/VBoxContainer/HistoricalItems" to="ScrollContainer/VBoxContainer/HistoricalItems" method="_pressed"]

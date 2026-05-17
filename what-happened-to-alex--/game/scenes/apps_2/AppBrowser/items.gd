@@ -5,7 +5,9 @@ var action_type: String = "Active/None"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	pass # Replace with function body.
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -19,10 +21,11 @@ func configurar_item(titulo: String, hora: String, tipo: String) -> void:
 	
 func _pressed() -> void:
 	if action_type == "active":
-		print("¡Clic en ítem Activo! Abriendo la web...")
-		# Buscamos a BrowserScreen en la raíz para ejecutar el cambio de pantalla
+		print("Click on active item! Opening web...")
 		var browser = get_tree().current_scene
-		if browser.has_method("abrir_pantalla_web"):
-			browser.abrir_pantalla_web()
+		print("Hola")
+		# Buscamos y ejecutamos la función con su NUEVO nombre en inglés
+		if browser.has_method("open_web_screen"):
+			browser.open_web_screen()
 	else:
-		print("Clic en ítem de relleno. No pasa nada.")
+		print("Regular item clicked. Nothing happens.")

@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dg55fjgfxjfjd"]
+
+[ext_resource type="Script" uid="uid://b8sskrganmba8" path="res://game/scenes/apps_2/AppBrowser/psychologist_item.gd" id="1_p2qyt"]
+
+[node name="PsychologistItem" type="PanelContainer" unique_id=1995100835]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_p2qyt")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=408698300]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=748493039]
+layout_mode = 2
+
+[node name="ProfilePhoto" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=861043127]
+layout_mode = 2
+
+[node name="TextContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1217886342]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer/TextContainer" unique_id=118691859]
+layout_mode = 2
+
+[node name="PhoneLabel" type="Label" parent="MarginContainer/HBoxContainer/TextContainer" unique_id=1796491659]
+layout_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/HBoxContainer/TextContainer" unique_id=2062738651]
+layout_mode = 2
+size_flags_vertical = 3
+autowrap_mode = 3

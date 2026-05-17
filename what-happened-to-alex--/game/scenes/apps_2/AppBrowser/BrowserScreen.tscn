@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://djqixn278obdb" path="res://game/assets/paisaje.jpeg" id="1_bke1k"]
 [ext_resource type="Script" uid="uid://c4vxoledao4mb" path="res://game/scenes/apps_2/AppBrowser/browser_screen.gd" id="1_gfohv"]
 [ext_resource type="PackedScene" uid="uid://cjv61xtv1awnn" path="res://game/scenes/apps_2/AppBrowser/history_panel01.tscn" id="3_gfohv"]
+[ext_resource type="PackedScene" uid="uid://vbefr0fc80f4" path="res://game/scenes/apps_2/AppBrowser/WebScreen.tscn" id="4_k7ksn"]
 
 [node name="BrowserScreen" type="Control" unique_id=1326252284]
 layout_mode = 3
@@ -70,28 +71,39 @@ color = Color(0.45882353, 0.45882353, 0.45882353, 1)
 [node name="Menu" type="HBoxContainer" parent="MarginContaineMenu" unique_id=281696305]
 layout_mode = 2
 
-[node name="House" type="Label" parent="MarginContaineMenu/Menu" unique_id=1886877928]
+[node name="House" type="Button" parent="MarginContaineMenu/Menu" unique_id=1386922382]
 custom_minimum_size = Vector2(87.5, 40)
 layout_mode = 2
 text = "🏠︎"
 
-[node name="Guard" type="Label" parent="MarginContaineMenu/Menu" unique_id=632327]
+[node name="Guard" type="Button" parent="MarginContaineMenu/Menu" unique_id=402398674]
 custom_minimum_size = Vector2(87.5, 40)
 layout_mode = 2
 text = "📥"
 
-[node name="Search" type="Label" parent="MarginContaineMenu/Menu" unique_id=56417587]
+[node name="Search" type="Button" parent="MarginContaineMenu/Menu" unique_id=948392966]
 custom_minimum_size = Vector2(87.5, 40)
 layout_mode = 2
 text = "🔎"
 
-[node name="Setting" type="MenuButton" parent="MarginContaineMenu/Menu" unique_id=863466200]
-custom_minimum_size = Vector2(86, 40)
+[node name="Setting" type="Button" parent="MarginContaineMenu/Menu" unique_id=1743946589]
+custom_minimum_size = Vector2(86, 50)
 layout_mode = 2
-text = "⚙️"
+text = "📋"
 
 [node name="HistoryPanel01" parent="." unique_id=1636176363 instance=ExtResource("3_gfohv")]
 visible = false
 layout_mode = 1
+
+[node name="WebScreen" parent="." unique_id=746974188 instance=ExtResource("4_k7ksn")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.27600002
+anchor_right = 0.77300006
+anchor_bottom = 0.93600005
+offset_left = 0.047973633
+offset_top = -4.0
+offset_right = 0.50390625
+offset_bottom = 37.471985
 
 [connection signal="pressed" from="MarginContaineMenu/Menu/Setting" to="." method="_on_search_menu_pressed"]
