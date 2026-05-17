@@ -1,14 +1,54 @@
 [gd_scene format=3 uid="uid://nt25dntsf64j"]
 
-[ext_resource type="Script" uid="uid://cdnq4iabym6oe" path="res://game/scenes/apps_2/AppBrowser/history_panel.gd" id="1_d705s"]
+[ext_resource type="PackedScene" uid="uid://bf1jaixjp76us" path="res://game/scenes/apps_2/AppBrowser/HistoricalItems.tscn" id="1_d705s"]
+
+[sub_resource type="GDScript" id="GDScript_arhvg"]
+script/source = "extends ColorRect
+@onready var vbox: VBoxContainer = $VBoxContainer
+@onready var btn_back: Button = $TopTitle/HBoxContainer/ButtonBack
+@onready var item_molde: ColorRect = $VBoxContainer/HistorialItems
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	item_molde.hide() # Escondemos el molde para que no aparezca vacío
+	btn_back.pressed.connect(hide)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+func cargar_historial(lista_busquedas: Array) -> void:
+	# 1. Limpiamos clones viejos
+	for hijo in vbox.get_children():
+		if hijo != item_molde and hijo.name != \"Button\": 
+			hijo.queue_free()
+	
+	# 2. Creamos los nuevos ítems basados en el diccionario
+	for datos in lista_busquedas:
+		var nuevo_item = item_molde.duplicate()
+		nuevo_item.show()
+		
+		# Lo agregamos justo antes del botón \"Cargar más\" para mantener el orden
+		vbox.add_child(nuevo_item)
+		vbox.move_child(nuevo_item, vbox.get_child_count() - 2) 
+		
+		# Configuramos sus datos y su tipo (active / none)
+		nuevo_item.configurar_item(datos[\"titulo\"], datos[\"hora\"], datos[\"tipo\"])
+"
 
 [node name="HistoryPanel" type="ColorRect" unique_id=870908486]
-offset_left = 414.0
-offset_top = 15.0
-offset_right = 777.0
-offset_bottom = 633.0
+anchors_preset = -1
+anchor_left = 0.003
+anchor_top = 0.002
+anchor_right = 0.003
+anchor_bottom = 0.002
+offset_left = -3.456
+offset_top = -0.296
+offset_right = 359.544
+offset_bottom = 626.704
 color = Color(0.78039217, 0.78039217, 0.78039217, 1)
-script = ExtResource("1_d705s")
+script = SubResource("GDScript_arhvg")
 
 [node name="TopTitle" type="Panel" parent="." unique_id=1874843644]
 layout_mode = 0
@@ -30,26 +70,23 @@ text = "🢀"
 layout_mode = 2
 text = "Historial de busquedad"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=506691416]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 64.0
-offset_right = 360.0
-offset_bottom = 560.0
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2000094187]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 60.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=541931380]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1274140726]
-layout_mode = 2
-
-[node name="Time" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=609051317]
+[node name="HistoricalItems" parent="VBoxContainer" unique_id=762179161 instance=ExtResource("1_d705s")]
+custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 
 [node name="Button" type="Button" parent="." unique_id=1607250900]
 layout_mode = 0
-offset_left = 140.0
-offset_top = 574.0
-offset_right = 236.0
-offset_bottom = 612.0
+offset_left = 142.0
+offset_top = 579.0
+offset_right = 238.0
+offset_bottom = 617.0
 text = "Cargar más"

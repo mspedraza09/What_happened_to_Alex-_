@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://c5ej835ubkxex"]
 
 [ext_resource type="Texture2D" uid="uid://djqixn278obdb" path="res://game/assets/paisaje.jpeg" id="1_bke1k"]
-[ext_resource type="PackedScene" uid="uid://nt25dntsf64j" path="res://game/scenes/apps_2/AppBrowser/history_panel.tscn" id="2_48xet"]
+[ext_resource type="Script" uid="uid://c4vxoledao4mb" path="res://game/scenes/apps_2/AppBrowser/browser_screen.gd" id="1_gfohv"]
+[ext_resource type="PackedScene" uid="uid://cjv61xtv1awnn" path="res://game/scenes/apps_2/AppBrowser/history_panel01.tscn" id="3_gfohv"]
 
 [node name="BrowserScreen" type="Control" unique_id=1326252284]
 layout_mode = 3
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_gfohv")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=450409253]
 layout_mode = 0
@@ -65,34 +67,31 @@ offset_bottom = 633.0
 layout_mode = 2
 color = Color(0.45882353, 0.45882353, 0.45882353, 1)
 
-[node name="Menu" type="HBoxContainer" parent="MarginContaineMenu/ColorMenu" unique_id=281696305]
-layout_mode = 0
-offset_right = 358.0
-offset_bottom = 70.0
+[node name="Menu" type="HBoxContainer" parent="MarginContaineMenu" unique_id=281696305]
+layout_mode = 2
 
-[node name="House" type="Label" parent="MarginContaineMenu/ColorMenu/Menu" unique_id=1886877928]
+[node name="House" type="Label" parent="MarginContaineMenu/Menu" unique_id=1886877928]
 custom_minimum_size = Vector2(87.5, 40)
 layout_mode = 2
 text = "🏠︎"
 
-[node name="Guard" type="Label" parent="MarginContaineMenu/ColorMenu/Menu" unique_id=632327]
+[node name="Guard" type="Label" parent="MarginContaineMenu/Menu" unique_id=632327]
 custom_minimum_size = Vector2(87.5, 40)
 layout_mode = 2
 text = "📥"
 
-[node name="Search" type="Label" parent="MarginContaineMenu/ColorMenu/Menu" unique_id=56417587]
+[node name="Search" type="Label" parent="MarginContaineMenu/Menu" unique_id=56417587]
 custom_minimum_size = Vector2(87.5, 40)
 layout_mode = 2
 text = "🔎"
 
-[node name="Setting" type="MenuButton" parent="MarginContaineMenu/ColorMenu/Menu" unique_id=863466200]
+[node name="Setting" type="MenuButton" parent="MarginContaineMenu/Menu" unique_id=863466200]
 custom_minimum_size = Vector2(86, 40)
 layout_mode = 2
 text = "⚙️"
 
-[node name="HistoryPanel" parent="." unique_id=870908486 instance=ExtResource("2_48xet")]
-layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 363.0
-offset_bottom = 618.0
+[node name="HistoryPanel01" parent="." unique_id=1636176363 instance=ExtResource("3_gfohv")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="MarginContaineMenu/Menu/Setting" to="." method="_on_search_menu_pressed"]
