@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cf651eml0hbf"]
 
-[ext_resource type="Texture2D" uid="uid://c8dirl274lo6y" path="res://game/assets/icon.svg" id="1_3a5v3"]
 [ext_resource type="Script" uid="uid://ctb5l8xbtyt3q" path="res://game/scenes/apps_2/AppMensaje/items_chat.gd" id="1_m2ijy"]
+[ext_resource type="Texture2D" uid="uid://ut4hivg5b0y3" path="res://game/assets/iconoc chat.jpeg" id="2_m2ijy"]
 
 [node name="items_chat" type="Control" unique_id=187554616]
 custom_minimum_size = Vector2(0, 80)
@@ -24,8 +24,9 @@ offset_bottom = 40.0
 
 [node name="foto_usuario" type="TextureRect" parent="Button/HBoxContainer" unique_id=350680611]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 70.5)
 layout_mode = 2
-texture = ExtResource("1_3a5v3")
+texture = ExtResource("2_m2ijy")
 expand_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Button/HBoxContainer" unique_id=1757357416]

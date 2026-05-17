@@ -32,3 +32,6 @@ func cargar_conversacion(nombre_contacto: String):
 func _on_boton_volver_pressed():
 	self.hide()
 	get_parent().get_node("Container").show()
+	get_parent().get_node("Background").show()
+	get_parent().get_node("ColorRect").show()
+	

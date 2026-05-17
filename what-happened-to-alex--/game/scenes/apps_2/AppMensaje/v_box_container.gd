@@ -8,7 +8,7 @@ func _ready() -> void:
 func renderizar_lista_chats():
 	# Limpiamos la lista por si acaso
 	for child in %VBoxContainer.get_children():
-		if child is not Label: # Para no borrar el nombre de la app si está dentro
+		if child.name != "nombre_app": 
 			child.queue_free()
 	
 	# Recorremos la base de datos que creamos en Global

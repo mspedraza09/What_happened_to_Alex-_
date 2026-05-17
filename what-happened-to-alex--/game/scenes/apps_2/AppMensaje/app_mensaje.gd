@@ -5,6 +5,8 @@ extends Control
 func _ready() -> void:
 	# Aseguramos que al empezar se vea la lista y no el chat
 	$Container.show()
+	$Background.show()
+	$ColorRect.show()
 	$PantallaChat.hide()
 	renderizar_lista_chats()
 
@@ -30,7 +32,8 @@ func _on_chat_abierto(usuario: String):
 	
 	# 1. Escondemos la lista
 	$Container.hide()
-	
+	$Background.hide()
+	$ColorRect.hide()
 	# 2. Mostramos la pantalla de chat y le pasamos los datos
 	$PantallaChat.show()
 	$PantallaChat.cargar_conversacion(usuario)
