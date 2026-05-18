@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://bufv1d10hq1xk"]
+
+[ext_resource type="FontFile" uid="uid://cjphtqokq8l5a" path="res://game/assets/Birds of Paradise © PERSONAL USE ONLY.ttf" id="1_gncvg"]
+
+[node name="ItemsDiary" type="Button" unique_id=1068774071]
+custom_minimum_size = Vector2(390, 80)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -504.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1949691596]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DateContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1335699994]
+custom_minimum_size = Vector2(126.66, 30)
+layout_mode = 2
+
+[node name="Num" type="Label" parent="HBoxContainer/DateContainer" unique_id=663675237]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "𝟏𝟕"
+
+[node name="Month" type="Label" parent="HBoxContainer/DateContainer" unique_id=1749846856]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_gncvg")
+theme_override_font_sizes/font_size = 22
+text = "Month"
+
+[node name="Year" type="Label" parent="HBoxContainer/DateContainer" unique_id=393008914]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "𝟐𝟎𝟐𝟔"
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=971630125]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_fonts/font = ExtResource("1_gncvg")
+theme_override_font_sizes/font_size = 20
+text = "Día uno"

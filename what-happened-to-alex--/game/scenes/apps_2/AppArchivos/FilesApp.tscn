@@ -15,6 +15,7 @@ script = ExtResource("1_jp6pc")
 layout_mode = 0
 offset_right = 364.0
 offset_bottom = 603.0
+color = Color(0.956961, 0.9684244, 0.9970555, 1)
 
 [node name="TopBar" type="Panel" parent="." unique_id=418942241]
 layout_mode = 0
@@ -22,7 +23,6 @@ offset_right = 365.0
 offset_bottom = 44.0
 
 [node name="LabelTitulo" type="Label" parent="TopBar" unique_id=1303150923]
-modulate = Color(1, 0.9308333, 0.17000002, 1)
 layout_mode = 0
 offset_left = 62.0
 offset_top = 2.0
@@ -31,7 +31,6 @@ offset_bottom = 44.0
 text = "Mis archivos"
 
 [node name="BtnBack" type="Button" parent="TopBar" unique_id=592802499]
-modulate = Color(1, 0.96900004, 0.06999999, 1)
 layout_mode = 0
 offset_right = 55.0
 offset_bottom = 44.0
@@ -59,7 +58,7 @@ visible = false
 layout_mode = 2
 
 [node name="TextDisplay" type="RichTextLabel" parent="MainContainer/FileContent" unique_id=832147337]
-modulate = Color(1, 0.060000002, 0.060000002, 1)
+modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = 3.0
 offset_top = 46.0

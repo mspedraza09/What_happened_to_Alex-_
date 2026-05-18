@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://r54s0eiom8h4" path="res://game/scenes/apps_2/AppBrowser/web_screen.gd" id="1_j6jbw"]
 [ext_resource type="PackedScene" uid="uid://dg55fjgfxjfjd" path="res://game/scenes/apps_2/AppBrowser/PsychologistItem.tscn" id="2_6noyi"]
+[ext_resource type="FontFile" uid="uid://dgw8hg6xdxktn" path="res://game/assets/Energy.ttf" id="3_6noyi"]
 
 [node name="WebScreen" type="Control" unique_id=746974188]
 layout_mode = 3
@@ -11,7 +12,7 @@ anchor_bottom = 1.0
 offset_left = 317.0
 offset_top = 21.0
 offset_right = -268.0
-offset_bottom = 23.0
+offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_j6jbw")
@@ -21,15 +22,45 @@ psychologist_item_scene = ExtResource("2_6noyi")
 layout_direction = 1
 layout_mode = 0
 offset_right = 565.0
-offset_bottom = 662.0
-color = Color(0.7990171, 0.8117478, 0.948217, 1)
+offset_bottom = 614.0
+color = Color(0.92, 0.96133333, 1, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Background" unique_id=1527416125]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 121.0
+grow_horizontal = 2
+color = Color(0.76156455, 0.86877656, 0.99951595, 1)
+
+[node name="Label" type="Label" parent="Background/ColorRect" unique_id=1848211464]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 53.0
+offset_right = 475.0
+offset_bottom = 104.0
+theme_override_colors/font_color = Color(0.1679559, 0.69647807, 0.99999994, 1)
+theme_override_fonts/font = ExtResource("3_6noyi")
+theme_override_font_sizes/font_size = 38
+text = "PSYCHOLY FOR YOU"
+
+[node name="Label2" type="Label" parent="Background/ColorRect" unique_id=1050544125]
+layout_mode = 0
+offset_left = 177.0
+offset_top = 95.0
+offset_right = 380.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("3_6noyi")
+theme_override_font_sizes/font_size = 20
+text = "Tu salud importa"
 
 [node name="TopBar" type="Panel" parent="." unique_id=1313594309]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.492
 anchor_bottom = 0.054
-offset_top = 1.0
+offset_top = -1.0
 offset_right = 286.03598
 offset_bottom = 11.007999
 
@@ -37,19 +68,19 @@ offset_bottom = 11.007999
 custom_minimum_size = Vector2(560, 0)
 layout_mode = 0
 offset_left = 56.0
-offset_right = 550.0
+offset_right = 616.0
 offset_bottom = 32.0
 text = "www.psychology-directory.com/co/barranquilla"
 
 [node name="BackButton" type="Button" parent="TopBar" unique_id=1400758826]
 layout_mode = 0
 offset_right = 54.0
-offset_bottom = 35.0
+offset_bottom = 44.0
 text = "🢀"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=278756523]
 layout_mode = 0
-offset_top = 60.0
+offset_top = 141.0
 offset_right = 563.0
 offset_bottom = 626.0
 

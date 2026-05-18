@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://lj2kcs2n0s4r"]
 
+[ext_resource type="Script" uid="uid://dmsv4aep8l8lj" path="res://game/scenes/apps_2/AppDiary/app_diary.gd" id="1_5r6tj"]
+[ext_resource type="Texture2D" uid="uid://dscn0405gr8ax" path="res://game/assets/paisaje azul.jpeg" id="1_wga3q"]
+
 [node name="AppDiary" type="Control" unique_id=954544574]
 layout_mode = 3
 anchors_preset = 15
@@ -7,3 +10,50 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_5r6tj")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=733494819]
+layout_mode = 0
+offset_left = 394.0
+offset_top = -2.0
+offset_right = 810.0
+offset_bottom = 652.0
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer" unique_id=1544677800]
+layout_mode = 2
+color = Color(0.105882354, 0.17254902, 0.49019608, 1)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1456745692]
+layout_mode = 0
+offset_left = 396.0
+offset_right = 812.0
+offset_bottom = 51.0
+color = Color(0.05490196, 0.105882354, 0.3647059, 1)
+
+[node name="Label" type="Label" parent="." unique_id=2137268089]
+layout_mode = 0
+offset_left = 397.0
+offset_top = 4.0
+offset_right = 810.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 20
+text = "My Diary"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=356186059]
+layout_mode = 0
+offset_left = 402.0
+offset_top = 62.0
+offset_right = 799.0
+offset_bottom = 272.0
+texture = ExtResource("1_wga3q")
+expand_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=379690903]
+layout_mode = 0
+offset_left = 406.0
+offset_top = 291.0
+offset_right = 796.0
+offset_bottom = 639.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=1467250945]
+layout_mode = 2

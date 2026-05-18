@@ -26,6 +26,7 @@ func _on_search_menu_pressed() -> void:
 # Función que se ejecuta al clickear el historial correcto de Alex
 func open_web_screen() -> void:
 	history_panel.hide()
+	
 	print("Trigger successful! Opening the web screen...")
 	web_screen.show() # Mostramos la página de los psicólogos
 

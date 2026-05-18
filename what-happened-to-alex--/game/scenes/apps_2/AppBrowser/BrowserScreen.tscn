@@ -96,14 +96,8 @@ visible = false
 layout_mode = 1
 
 [node name="WebScreen" parent="." unique_id=746974188 instance=ExtResource("4_k7ksn")]
+visible = false
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.27600002
-anchor_right = 0.77300006
-anchor_bottom = 0.93600005
-offset_left = 0.047973633
-offset_top = -4.0
-offset_right = 0.50390625
-offset_bottom = 37.471985
+offset_bottom = -1.1119995
 
 [connection signal="pressed" from="MarginContaineMenu/Menu/Setting" to="." method="_on_search_menu_pressed"]
