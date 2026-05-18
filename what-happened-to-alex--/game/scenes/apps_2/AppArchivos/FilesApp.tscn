@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://br6svnwoijnnq"]
 
 [ext_resource type="Script" uid="uid://dxw33tq0baqxs" path="res://game/scenes/apps_2/AppArchivos/files_app.gd" id="1_jp6pc"]
+[ext_resource type="FontFile" uid="uid://boah3hdghiemp" path="res://game/assets/OPTITimes-Roman.otf" id="2_sqedx"]
 
 [node name="FilesApp" type="Control" unique_id=1531858643]
 layout_mode = 3
@@ -54,15 +55,30 @@ scroll_vertical_custom_step = 0.0
 layout_mode = 2
 
 [node name="FileContent" type="Control" parent="MainContainer" unique_id=781724633]
-visible = false
 layout_mode = 2
 
-[node name="TextDisplay" type="RichTextLabel" parent="MainContainer/FileContent" unique_id=832147337]
-modulate = Color(0, 0, 0, 1)
+[node name="DocScroll" type="ScrollContainer" parent="MainContainer/FileContent" unique_id=1787863279]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 46.0
-offset_right = 364.0
-offset_bottom = 118.0
+offset_right = 362.0
+offset_bottom = 520.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/FileContent/DocScroll" unique_id=461224036]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TitleDisplay" type="Label" parent="MainContainer/FileContent/DocScroll/VBoxContainer" unique_id=567240840]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_sqedx")
+theme_override_font_sizes/font_size = 20
+text = "Marúa"
+horizontal_alignment = 1
+
+[node name="TextDisplay" type="RichTextLabel" parent="MainContainer/FileContent/DocScroll/VBoxContainer" unique_id=832147337]
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+size_flags_vertical = 3
 
 [connection signal="pressed" from="TopBar/BtnBack" to="." method="_on_btn_back_pressed"]

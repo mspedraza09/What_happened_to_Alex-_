@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bufv1d10hq1xk"]
 
 [ext_resource type="FontFile" uid="uid://cjphtqokq8l5a" path="res://game/assets/Birds of Paradise © PERSONAL USE ONLY.ttf" id="1_gncvg"]
+[ext_resource type="Script" uid="uid://ch177ef6xbvld" path="res://game/scenes/apps_2/AppDiary/items_diary.gd" id="1_mnmcb"]
 
 [node name="ItemsDiary" type="Button" unique_id=1068774071]
 custom_minimum_size = Vector2(390, 80)
@@ -10,6 +11,7 @@ anchor_bottom = 1.0
 offset_bottom = -504.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_mnmcb")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1949691596]
 layout_mode = 1
@@ -46,3 +48,5 @@ size_flags_horizontal = 2
 theme_override_fonts/font = ExtResource("1_gncvg")
 theme_override_font_sizes/font_size = 20
 text = "Día uno"
+
+[connection signal="pressed" from="." to="." method="_on_click_button_pressed"]

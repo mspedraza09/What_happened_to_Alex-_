@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dmsv4aep8l8lj" path="res://game/scenes/apps_2/AppDiary/app_diary.gd" id="1_5r6tj"]
 [ext_resource type="Texture2D" uid="uid://dscn0405gr8ax" path="res://game/assets/paisaje azul.jpeg" id="1_wga3q"]
+[ext_resource type="FontFile" uid="uid://bta1g2kpuapwc" path="res://game/assets/Sephora & Hayden.ttf" id="3_1lp25"]
 
 [node name="AppDiary" type="Control" unique_id=954544574]
 layout_mode = 3
@@ -57,3 +58,46 @@ offset_bottom = 639.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=1467250945]
 layout_mode = 2
+
+[node name="ReadingPage" type="ColorRect" parent="." unique_id=1819057175]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 322.0
+offset_right = -267.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.96, 0.96, 0.7584, 1)
+
+[node name="PageTitle" type="Label" parent="ReadingPage" unique_id=1508037558]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 51.0
+offset_right = 380.0
+offset_bottom = 99.0
+theme_override_colors/font_color = Color(0.05490196, 0.105882354, 0.3647059, 1)
+theme_override_fonts/font = ExtResource("3_1lp25")
+theme_override_font_sizes/font_size = 40
+text = "María "
+
+[node name="PageContent" type="RichTextLabel" parent="ReadingPage" unique_id=404828390]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 94.0
+offset_right = 2.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+
+[node name="BackButton" type="Button" parent="ReadingPage" unique_id=188334909]
+layout_mode = 0
+offset_right = 66.0
+offset_bottom = 42.0
+text = "🢀"
+
+[connection signal="pressed" from="ReadingPage/BackButton" to="." method="_on_back_button_pressed"]

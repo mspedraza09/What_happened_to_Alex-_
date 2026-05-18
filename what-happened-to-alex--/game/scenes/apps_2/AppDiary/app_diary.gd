@@ -5,21 +5,29 @@ var item_scene = preload("res://game/scenes/apps_2/AppDiary/ItemsDiary.tscn")
 # We connect to the VBoxContainer where all items will be stacked
 @onready var list_container = $ScrollContainer/VBoxContainer
 
+# Variables for the reading page
+@onready var reading_page = $ReadingPage
+@onready var page_title = $ReadingPage/PageTitle
+@onready var page_content = $ReadingPage/PageContent
+
 var entries_data = [
-	{"num": "17", "month": "Apr", "year": "2026", "title": "Día uno"},
-	{"num": "18", "month": "Apr", "year": "2026", "title": "Todo se complica"},
-	{"num": "19", "month": "Apr", "year": "2026", "title": "El mensaje extraño"},
-	{"num": "20", "month": "Apr", "year": "2026", "title": "Sombras en la ventana"},
-	{"num": "21", "month": "Apr", "year": "2026", "title": "Ya no confío en nadie"},
-	{"num": "22", "month": "Apr", "year": "2026", "title": "La caja de madera"},
-	{"num": "23", "month": "Apr", "year": "2026", "title": "Un viejo mapa"},
-	{"num": "24", "month": "Apr", "year": "2026", "title": "Siguiendo las pistas"},
-	{"num": "25", "month": "Apr", "year": "2026", "title": "El encuentro en el muelle"},
-	{"num": "26", "month": "Apr", "year": "2026", "title": "La verdad oculta"}
+	{
+		"num": "17", "month": "Apr", "year": "2026", "title": "Día uno", 
+		"content": "Hoy encontré este diario viejo. Decidí empezar a escribir porque las cosas se sienten extrañas últimamente."
+	},
+	{
+		"num": "18", "month": "Apr", "year": "2026", "title": "Todo se complica", 
+		"content": "Alguien movió mis cosas en la habitación. Estoy seguro de que dejé la llave sobre la mesa, pero apareció en el suelo."
+	},
+	{
+		"num": "19", "month": "Apr", "year": "2026", "title": "El mensaje extraño", 
+		"content": "Recibí un texto de un número desconocido. Solo decía: 'No vayas al muelle esta noche'. ¿Cómo sabían que planeaba ir?"
+	}
 ]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	reading_page.visible = false
 	create_diary_list()
 
 
@@ -28,16 +36,29 @@ func _process(delta: float) -> void:
 	pass
 
 func create_diary_list():
-	# We use a 'for' loop to go through each entry in our data list
 	for entry in entries_data:
-		# 1. We create a new physical copy (instance) of the item scene
 		var new_item = item_scene.instantiate()
 		
-		# 2. We search inside this new item for the specific labels and change their text
+		# Set the texts in the list item
 		new_item.get_node("HBoxContainer/DateContainer/Num").text = entry["num"]
 		new_item.get_node("HBoxContainer/DateContainer/Month").text = entry["month"]
 		new_item.get_node("HBoxContainer/DateContainer/Year").text = entry["year"]
 		new_item.get_node("HBoxContainer/Label").text = entry["title"]
 		
-		# 3. We add this configured item into the VBoxContainer so it shows on screen
+		# --- NEW: We pass the data to the item and connect the signal ---
+		new_item.entry_data = entry
+		new_item.item_opened.connect(_on_item_opened)
+		
 		list_container.add_child(new_item)
+# This function runs when any diary item is clicked
+func _on_item_opened(data):
+	page_title.text = data["title"]
+	page_content.text = data["content"]
+	# We show the reading overlay
+	reading_page.visible = true
+
+
+
+func _on_back_button_pressed() -> void:
+	# We hide the reading overlay to see the list again
+	reading_page.visible = false
